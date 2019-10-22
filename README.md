@@ -1,1 +1,1 @@
-Projeto para gestão de projetos da USJ.
+Projeto para gestão de estágios para USJ (Centro Universitário de São José).
