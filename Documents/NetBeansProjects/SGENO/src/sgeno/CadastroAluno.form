@@ -63,11 +63,9 @@
                               <Component id="faseAluno" min="-2" pref="41" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                              <Component id="sexoAluno" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="sexoF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="sexoM" min="-2" max="-2" attributes="0"/>
+                              <Component id="sexoAlunoCombo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
@@ -115,12 +113,11 @@
                   <Component id="faseAluno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="sexoF" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="sexoM" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="sexoAluno" min="-2" max="-2" attributes="0"/>
+                  <Component id="sexoAlunoCombo" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="6" max="32767" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
               <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -292,17 +289,6 @@
         <Property name="text" type="java.lang.String" value="*Fase:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="sexoF">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroup1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="F"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sexoFActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JComboBox" name="cursoAluno">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -315,6 +301,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cursoAlunoActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -386,24 +375,13 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
+    <Component class="javax.swing.JLabel" name="sexoAluno">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="*Sexo:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="sexoM">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroup1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="M"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sexoMActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel17">
       <Properties>
@@ -412,6 +390,19 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Contatos:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="sexoAlunoCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="M"/>
+            <StringItem index="1" value="F"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

@@ -4,8 +4,15 @@
  * and open the template in the editor.
  */
 package sgeno;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import sgeno.Classes.Aluno;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static sgeno.Classes.TodosArrays.listaAluno;
 
@@ -20,10 +27,8 @@ public class CadastroAluno extends javax.swing.JFrame {
      */
     public CadastroAluno() {
         initComponents();
-        
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +52,6 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         faseAluno = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        sexoF = new javax.swing.JRadioButton();
         cursoAluno = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         emailAluno = new javax.swing.JTextField();
@@ -57,9 +61,9 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         telefoneAluno = new javax.swing.JFormattedTextField();
         celularAluno = new javax.swing.JFormattedTextField();
-        jLabel16 = new javax.swing.JLabel();
-        sexoM = new javax.swing.JRadioButton();
+        sexoAluno = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        sexoAlunoCombo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(565, 468));
@@ -139,15 +143,12 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("*Fase:");
 
-        buttonGroup1.add(sexoF);
-        sexoF.setText("F");
-        sexoF.addActionListener(new java.awt.event.ActionListener() {
+        cursoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
+        cursoAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoFActionPerformed(evt);
+                cursoAlunoActionPerformed(evt);
             }
         });
-
-        cursoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("E-mail:");
@@ -188,19 +189,13 @@ public class CadastroAluno extends javax.swing.JFrame {
         }
         celularAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("*Sexo:");
-
-        buttonGroup1.add(sexoM);
-        sexoM.setText("M");
-        sexoM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoMActionPerformed(evt);
-            }
-        });
+        sexoAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        sexoAluno.setText("*Sexo:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel17.setText("Contatos:");
+
+        sexoAlunoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,11 +230,9 @@ public class CadastroAluno extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(faseAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
+                                .addComponent(sexoAluno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sexoF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sexoM))
+                                .addComponent(sexoAlunoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -276,11 +269,10 @@ public class CadastroAluno extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(faseAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(sexoF)
-                    .addComponent(sexoM))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sexoAluno)
+                    .addComponent(sexoAlunoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel17)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,10 +295,6 @@ public class CadastroAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sexoFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoFActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new Alunos().setVisible(true);
@@ -318,95 +306,50 @@ public class CadastroAluno extends javax.swing.JFrame {
         faseAluno.setText("");
         emailAluno.setText("");
         cursoAluno.setSelectedIndex(0);
-        sexoF.setSelected(false);
-        sexoM.setSelected(false);
         telefoneAluno.setText("");
         celularAluno.setText("");
         emailAluno.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Aluno aluno = new Aluno();
-        String[] camposObrig = new String[6];
-                
-        if(matriculaAluno.getText().isEmpty()){
-            camposObrig[0] = "Matrícula";
-        }else{
-            camposObrig[0] = "...";
-        }
-        if(nomeAluno.getText().isEmpty()){
-            camposObrig[1] = "Nome";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(cursoAluno.getSelectedIndex()<1){
-            camposObrig[2] = "Curso";
-        }else{
-            camposObrig[2] = "...";
-        }
-        if(faseAluno.getText().isEmpty()){
-            camposObrig[3] = "Fase";
-        }else{
-            camposObrig[3] = "...";
-        }
-        if(sexoF.isSelected() || sexoM.isSelected()){
-            camposObrig[4] = "...";
-        }else{
-            camposObrig[4] = "Sexo";
-        }
-        if(telefoneAluno.getText().equals("(  )        ")){
-            camposObrig[5] = "Telefone";
-        }else{
-            camposObrig[5] = "...";
-        }
-        
-        if(matriculaAluno.getText().isEmpty() | (nomeAluno.getText().isEmpty() | cursoAluno.getSelectedItem().equals(0) | faseAluno.getText().isEmpty() | telefoneAluno.getText().isEmpty())){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        aluno.setMatrícula(matriculaAluno.getText());
-        aluno.setNome(nomeAluno.getText());
-        aluno.setCurso(cursoAluno.getSelectedItem().toString());
-        aluno.setFase(Integer.parseInt(faseAluno.getText()));
-        
-        if(sexoF.isSelected()){
-            aluno.setSexo("F");
-            
-        }if(sexoM.isSelected()){
-            aluno.setSexo("M");
-            
-        }
-       
-        aluno.setEmail(emailAluno.getText());
-        aluno.setTelefone(telefoneAluno.getText());
-        aluno.setCelular(celularAluno.getText());
-        
-        Object[] options = { "Sim", "Não" };
-        int cadastrar = JOptionPane.showOptionDialog(null, "Confirma o cadastro?\n\nMatrícula: "+matriculaAluno.getText()+"\nNome: "+nomeAluno.getText()+"\nCurso: "+cursoAluno.getSelectedItem().toString()+" / Fase: "+faseAluno.getText()+"\n\nContato:\nTelefone: "+telefoneAluno.getText()+"\nCelular: "+celularAluno.getText()+"\nE-Mail: "+emailAluno.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(cadastrar){
-                case 0:
-                listaAluno.add(aluno);
-                this.dispose();
-                new Alunos().setVisible(true);
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-             
-        }
-            
+
+        try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Cria uma variável do tipo conexão
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            //Seta os valores na query
+            stmt.setString(1, matriculaAluno.getText());
+            stmt.setString(2, nomeAluno.getText());
+            stmt.setString(3, sexoAlunoCombo.getSelectedItem().toString());
+            stmt.setInt(4, Integer.valueOf(faseAluno.getText()));
+            stmt.setString(5, sexoAlunoCombo.getSelectedItem().toString());
+            stmt.setString(6, telefoneAluno.getText());
+            stmt.setString(7, celularAluno.getText());
+            stmt.setString(8, emailAluno.getText());
+            //executa o comando
+            stmt.executeUpdate();
+            //Encerra o comando e a conexão
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Classe não localizada");
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro de SQL");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void sexoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoMActionPerformed
+    private void cursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoAlunoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sexoMActionPerformed
+    }//GEN-LAST:event_cursoAlunoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,7 +399,6 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -467,8 +409,8 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField matriculaAluno;
     private javax.swing.JTextField nomeAluno;
-    private javax.swing.JRadioButton sexoF;
-    private javax.swing.JRadioButton sexoM;
+    private javax.swing.JLabel sexoAluno;
+    private javax.swing.JComboBox<String> sexoAlunoCombo;
     private javax.swing.JFormattedTextField telefoneAluno;
     // End of variables declaration//GEN-END:variables
 }
