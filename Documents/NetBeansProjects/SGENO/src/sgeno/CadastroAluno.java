@@ -317,8 +317,9 @@ public class CadastroAluno extends javax.swing.JFrame {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.cj.jdbc.Driver");
-            //Cria uma variável do tipo conexão
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -345,6 +346,15 @@ public class CadastroAluno extends javax.swing.JFrame {
             Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Erro de SQL");
         }
+        
+        matriculaAluno.setText("");
+        nomeAluno.setText("");
+        faseAluno.setText("");
+        emailAluno.setText("");
+        cursoAluno.setSelectedIndex(0);
+        telefoneAluno.setText("");
+        celularAluno.setText("");
+        emailAluno.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoAlunoActionPerformed
