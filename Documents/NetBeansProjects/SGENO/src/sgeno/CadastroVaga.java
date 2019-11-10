@@ -4,9 +4,20 @@
  * and open the template in the editor.
  */
 package sgeno;
+
+import java.awt.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import sgeno.Classes.Aluno;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import sgeno.Classes.Contrato;
 import sgeno.Classes.Empresa;
@@ -16,37 +27,12 @@ import static sgeno.Classes.TodosArrays.listaEmpresa;
 import static sgeno.Classes.TodosArrays.listaVaga;
 import sgeno.Classes.Vaga;
 
-
-/**
- *
- * @author VJM
- */
 public class CadastroVaga extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadastroAluno
-     */
     public CadastroVaga() {
         initComponents();
-        organizaBoxEmpresa();
-        
+
     }
-    
-    
-    
-    public void organizaBoxEmpresa(){
-        boxEmpresa.removeAllItems();
-        
-        boxEmpresa.addItem("Selecionar...");
-        
-        for (Empresa e: listaEmpresa){
-        boxEmpresa.addItem(e.getNome()+" - "+e.getEndereco());
-        }
-    }
-    
-   
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,6 +76,11 @@ public class CadastroVaga extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(734, 472));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -139,7 +130,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,8 +173,6 @@ public class CadastroVaga extends javax.swing.JFrame {
 
         chVaga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("*Valor (R$):");
 
@@ -198,7 +187,6 @@ public class CadastroVaga extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Curso:");
 
-        cursoVaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
         cursoVaga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cursoVagaActionPerformed(evt);
@@ -223,20 +211,23 @@ public class CadastroVaga extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(chVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel18))
+                                                .addGap(20, 20, 20)
+                                                .addComponent(jLabel18))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +301,11 @@ public class CadastroVaga extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -329,8 +324,6 @@ public class CadastroVaga extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
                                     .addComponent(faseVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -360,70 +353,60 @@ public class CadastroVaga extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Vaga vaga = new Vaga();
-        int index;
-        String[] camposObrig = new String[3];
-        
-        if(tituloVaga.getText().isEmpty()){
-            camposObrig[0] = "Título da Vaga";
-        }else{
-            camposObrig[0] = "...";
-        }
-        if(boxEmpresa.getSelectedIndex()<1){
-            camposObrig[1] = "Empresa";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(valorVaga.getText().isEmpty()){
-            camposObrig[2] = "Valor";
-        }else{
-            camposObrig[2] = "...";
-        }
-        
-        if(boxEmpresa.getSelectedItem().equals(0) | valorVaga.getText().isEmpty() | tituloVaga.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        
-        index = boxEmpresa.getSelectedIndex();
-        
-        vaga.setTitulo(tituloVaga.getText());
-        vaga.setEmpresa(listaEmpresa.get(index-1));
-        vaga.setCurso(cursoVaga.getSelectedItem().toString());
-        vaga.setFase(faseVaga.getText());
-        vaga.setTurno(turnoVaga.getText());
-        vaga.setCh(chVaga.getText());
-        vaga.setHoraDe(horaDeVaga.getText());
-        vaga.setHoraAte(horaAteVaga.getText());
-        vaga.setObs(obsVaga.getText());
-        vaga.setValor(Float.parseFloat(valorVaga.getText()));
-        
-        Object[] options = { "Sim", "Não" };
-        int cadastrar = JOptionPane.showOptionDialog(null, "Confirma o cadastro?\n\nTítulo da Vaga: "+tituloVaga.getText()+"\nEmpresa: "+boxEmpresa.getSelectedItem().toString()+"\nValor: "+valorVaga.getText()+"\nHorário:\nDe: "+horaDeVaga.getText()+" Até: "+horaAteVaga.getText()+"\nTurno: "+turnoVaga.getText()+"\nCarga horária: "+chVaga.getText()+"\nCurso: "+cursoVaga.getSelectedItem().toString()+" / A partir da fase: "+faseVaga.getText()+"\n\nObservação:\n"+obsVaga.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(cadastrar){
-                case 0:
-                listaVaga.add(vaga);
-                this.dispose();
-                new BancoVagas().setVisible(true);
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-             
-        }
-            
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cursoVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoVagaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cursoVagaActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        boxEmpresa.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = null;
+            stmt = con.prepareStatement("SELECT NOME FROM empresa");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxEmpresa.addItem(rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxEmpresa.updateUI();
+        cursoVaga.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = null;
+            stmt = con.prepareStatement("SELECT DESC_CURSO FROM curso");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                cursoVaga.addItem(rs.getString("DESC_CURSO"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        cursoVaga.updateUI();
+
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
