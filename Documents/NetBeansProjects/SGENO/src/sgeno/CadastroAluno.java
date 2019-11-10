@@ -312,11 +312,10 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         try {
 
             //procura a classe do Driver jdbc
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
@@ -346,7 +345,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Erro de SQL");
         }
-        
+
         matriculaAluno.setText("");
         nomeAluno.setText("");
         faseAluno.setText("");

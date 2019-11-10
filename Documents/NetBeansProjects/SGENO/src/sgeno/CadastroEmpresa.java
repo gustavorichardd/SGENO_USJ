@@ -4,8 +4,15 @@
  * and open the template in the editor.
  */
 package sgeno;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import sgeno.Classes.Aluno;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import sgeno.*;
@@ -24,10 +31,8 @@ public class CadastroEmpresa extends javax.swing.JFrame {
      */
     public CadastroEmpresa() {
         initComponents();
-        
+
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -255,57 +260,43 @@ public class CadastroEmpresa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Empresa empresa = new Empresa();
-        String[] camposObrig = new String[3];
-                
-        
-        if(nomeEmpresa.getText().isEmpty()){
-            camposObrig[0] = "Nome da Empresa";
-        }else{
-            camposObrig[0] = "...";
+        try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "INSERT INTO empresa (NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL) VALUES (?,?,?,?,?)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            //Seta os valores na query
+            stmt.setString(1, nomeEmpresa.getText());
+            stmt.setString(2, enderecoEmpresa.getText());
+            stmt.setString(3, responsavelEmpresa.getText());
+            stmt.setString(4, telefoneEmpresa.getText());
+            stmt.setString(5, emailEmpresa.getText());
+            //executa o comando
+            stmt.executeUpdate();
+            //Encerra o comando e a conexão
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Classe não localizada");
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro de SQL");
         }
-        if(enderecoEmpresa.getText().isEmpty()){
-            camposObrig[1] = "Endereço";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(telefoneEmpresa.getText().equals("(  )        ")){
-            camposObrig[2] = "Telefone";
-        }else{
-            camposObrig[2] = "...";
-        }
-        
-        if((nomeEmpresa.getText().isEmpty() | enderecoEmpresa.getText().isEmpty() | telefoneEmpresa.getText().isEmpty())){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        empresa.setNome(nomeEmpresa.getText());
-        empresa.setEndereco(enderecoEmpresa.getText());
-        empresa.setTelefone(telefoneEmpresa.getText());
-        empresa.setEmail(emailEmpresa.getText());
-        empresa.setResponsavel(responsavelEmpresa.getText());
-        
-        Object[] options = { "Sim", "Não" };
-        int cadastrar = JOptionPane.showOptionDialog(null, "Confirma o cadastro?\n\nNome da Empresa: "+nomeEmpresa.getText()+"\n\nEndereço:\n"+enderecoEmpresa.getText()+"\nResponsável: "+responsavelEmpresa.getText()+"\n\nContato:\nTelefone: "+telefoneEmpresa.getText()+"\nE-mail: "+emailEmpresa.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(cadastrar){
-                case 0:
-                listaEmpresa.add(empresa);
-                this.dispose();
-                new Empresas().setVisible(true);
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-             
-        }
-            
-        }
+
+        nomeEmpresa.setText("");
+        enderecoEmpresa.setText("");
+        responsavelEmpresa.setText("");
+        telefoneEmpresa.setText("");
+        emailEmpresa.setText("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
