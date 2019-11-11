@@ -9,12 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import sgeno.Classes.Aluno;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import static sgeno.Classes.TodosArrays.listaAluno;
 
 /**
  *
@@ -318,7 +314,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco

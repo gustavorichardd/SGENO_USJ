@@ -11,6 +11,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import sgeno.Classes.Aluno;
 import java.util.Arrays;
@@ -58,17 +63,29 @@ public class CadastroVaga extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         chVaga = new javax.swing.JTextField();
-        boxEmpresa = new javax.swing.JComboBox<>();
+        boxEmpresa = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         obsVaga = new javax.swing.JTextArea();
         valorVaga = new javax.swing.JTextField();
         horaDeVaga = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter horaDeVga= new javax.swing.text.MaskFormatter("##:##:##");
+            horaDeVaga = new javax.swing.JFormattedTextField(horaDeVga);
+        }
+        catch (Exception e){
+        }
         horaAteVaga = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter horaAteVga= new javax.swing.text.MaskFormatter("##:##:##");
+            horaAteVaga = new javax.swing.JFormattedTextField(horaAteVga);
+        }
+        catch (Exception e){
+        }
         tituloVaga = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        cursoVaga = new javax.swing.JComboBox<>();
+        cursoVaga = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         faseVaga = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -130,7 +147,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +370,80 @@ public class CadastroVaga extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "INSERT INTO vaga (DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR, TURNO, HORADE, HORAATE, CARGAHORARIA,OBSERVVAGA) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            //Seta os valores na query
+            stmt.setString(1, tituloVaga.getText());
+            
+            //Pegar o COD_EMPRESA
+            int codEmp = 0;
+            PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
+            boxE.setString(1, boxEmpresa.getSelectedItem().toString());
+            ResultSet boxERs = boxE.executeQuery();            
+            while (boxERs.next()) {
+                codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
+            }
+            stmt.setInt(2, codEmp);
+            
+            boxERs.close();
+            boxE.close();
+            
+            // Pegar o COD_CURSO
+            int codCur = 0;
+            PreparedStatement boxC = con.prepareStatement("SELECT COD_CURSO FROM curso WHERE DESC_CURSO = (?)");
+            boxC.setString(1, cursoVaga.getSelectedItem().toString());
+            ResultSet boxCRs = boxC.executeQuery();         
+            while (boxCRs.next()) {
+                codCur = Integer.parseInt(boxCRs.getString("COD_CURSO"));
+            }
+            stmt.setInt(3, codCur);
+            
+            boxCRs.close();
+            boxC.close();
+            
+            
+            stmt.setInt(4, Integer.valueOf(faseVaga.getText()));
+            stmt.setInt(5, Integer.valueOf(valorVaga.getText()));
+            stmt.setInt(6, Integer.valueOf(turnoVaga.getText()));
+            
+            //Converter hora para inserir no banco
+            String horaDeVg = horaDeVaga.getText();
+            SimpleDateFormat formHoraDeVg = new SimpleDateFormat("HH:mm:ss");
+            Date dataDeVg = formHoraDeVg.parse(horaDeVg);
+            Time timeDeVg = new Time(dataDeVg.getTime());
+            stmt.setTime(7, timeDeVg);
+            
+            //Converter hora para inserir no banco
+            String horaAteVg = horaAteVaga.getText();
+            SimpleDateFormat formHoraAteVg = new SimpleDateFormat("HH:mm:ss");
+            Date dataAteVg = formHoraAteVg.parse(horaAteVg);
+            Time timeAteVg = new Time(dataAteVg.getTime());
+            stmt.setTime(8, timeAteVg);
+            
+            stmt.setInt(9, Integer.valueOf(chVaga.getText()));
+            stmt.setString(10, obsVaga.getText());
+            
+            //executa o comando
+            stmt.executeUpdate();
+            //Encerra o comando e a conexão
+            stmt.close();
+            con.close();
 
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cursoVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoVagaActionPerformed
@@ -361,6 +451,7 @@ public class CadastroVaga extends javax.swing.JFrame {
     }//GEN-LAST:event_cursoVagaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        //Carregar combobox das Empresas cadastradas
         boxEmpresa.removeAllItems();
         try {
             try {
@@ -368,9 +459,9 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
-            PreparedStatement stmt = null;
-            stmt = con.prepareStatement("SELECT NOME FROM empresa");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa");
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 boxEmpresa.addItem(rs.getString("NOME"));
@@ -383,6 +474,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         boxEmpresa.updateUI();
+        //Carregar combobox dos Cursos para as vagas
         cursoVaga.removeAllItems();
         try {
             try {
@@ -390,7 +482,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = null;
             stmt = con.prepareStatement("SELECT DESC_CURSO FROM curso");
             ResultSet rs = stmt.executeQuery();
@@ -401,7 +493,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             stmt.close();
             con.close();
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            JOptionPane.showMessageDialog(null, "Falha ao logar no servidor.");
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         cursoVaga.updateUI();
@@ -447,10 +539,10 @@ public class CadastroVaga extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> boxEmpresa;
+    private javax.swing.JComboBox boxEmpresa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField chVaga;
-    private javax.swing.JComboBox<String> cursoVaga;
+    private javax.swing.JComboBox cursoVaga;
     private javax.swing.JTextField faseVaga;
     private javax.swing.JTextField horaAteVaga;
     private javax.swing.JTextField horaDeVaga;

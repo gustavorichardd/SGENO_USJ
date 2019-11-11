@@ -270,7 +270,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="295" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -372,7 +372,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
@@ -412,8 +412,14 @@
     <Component class="javax.swing.JTextField" name="valorVaga">
     </Component>
     <Component class="javax.swing.JTextField" name="horaDeVaga">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;javax.swing.text.MaskFormatter horaDeVga= new javax.swing.text.MaskFormatter(&quot;##:##:##&quot;);&#xd;&#xa;horaDeVaga = new javax.swing.JFormattedTextField(horaDeVga);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="horaAteVaga">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;javax.swing.text.MaskFormatter horaAteVga= new javax.swing.text.MaskFormatter(&quot;##:##:##&quot;);&#xd;&#xa;horaAteVaga = new javax.swing.JFormattedTextField(horaAteVga);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tituloVaga">
     </Component>
@@ -435,7 +441,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cursoVagaActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
