@@ -7,7 +7,6 @@ package sgeno;
 
 import sgeno.Classes.Aluno;
 import sgeno.Classes.TodosArrays;
-import java.util.ArrayList;
 import sgeno.Classes.Empresa;
 
 /**

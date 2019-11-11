@@ -279,18 +279,39 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione um aluno na tabela.");
-        } else {
-            int index = jTable1.getSelectedRow();
-            this.dispose();
-            new EditarAluno(index).setVisible(true);
 
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    // Botão Excluir
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
 
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = (?)";
+            PreparedStatement stmt = con.prepareStatement(query);
+            /*
+            int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
+            setText(jTable1.getValueAt(linha,0).toString());
+             */
+            int linha = jTable1.getSelectedRow();
+            //Seta os valores na query
+            stmt.setInt(1, Integer.valueOf(jTable1.getValueAt(linha,0).toString()));
+            //Cria o comando para inserir no banco
+
+            //executa o comando
+            stmt.executeUpdate();
+            //Encerra o comando e a conexão
+            stmt.close();
+            con.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Botão Visualizar
@@ -303,7 +324,7 @@ public class Alunos extends javax.swing.JFrame {
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO";
+            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
@@ -323,10 +344,7 @@ public class Alunos extends javax.swing.JFrame {
                     resultado.getString("SEXO"),
                     resultado.getString("TELEFONE"),
                     resultado.getString("CELULAR"),
-                    resultado.getString("EMAIL"),
-                    
-                        
-                });
+                    resultado.getString("EMAIL"),});
             }
             stmt.close();
             con.close();
