@@ -20,9 +20,6 @@ public class EditarAluno extends javax.swing.JFrame {
 int sobrepor;    
     
     public EditarAluno(int index) {
-        initComponents();
-        editarAluno(index);
-        sobrepor = index;
                 
     }
 
@@ -368,80 +365,7 @@ int sobrepor;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Aluno aluno = new Aluno();
-        String[] camposObrig = new String[6];
-                
-        if(matriculaAluno.getText().isEmpty()){
-            camposObrig[0] = "Matrícula";
-        }else{
-            camposObrig[0] = "...";
-        }
-        if(nomeAluno.getText().isEmpty()){
-            camposObrig[1] = "Nome";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(cursoAluno.getSelectedIndex()<1){
-            camposObrig[2] = "Curso";
-        }else{
-            camposObrig[2] = "...";
-        }
-        if(faseAluno.getText().isEmpty()){
-            camposObrig[3] = "Fase";
-        }else{
-            camposObrig[3] = "...";
-        }
-        if(sexoF.isSelected() || sexoM.isSelected()){
-            camposObrig[4] = "...";
-        }else{
-            camposObrig[4] = "Sexo";
-        }
-        if(telefoneAluno.getText().equals("(  )        ")){
-            camposObrig[5] = "Telefone";
-        }else{
-            camposObrig[5] = "...";
-        }
-        
-        if(matriculaAluno.getText().isEmpty() | (nomeAluno.getText().isEmpty() | cursoAluno.getSelectedItem().equals(0) | faseAluno.getText().isEmpty() | telefoneAluno.getText().isEmpty())){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        aluno.setMatrícula(matriculaAluno.getText());
-        aluno.setNome(nomeAluno.getText());
-        aluno.setCurso(cursoAluno.getSelectedItem().toString());
-        aluno.setFase(Integer.parseInt(faseAluno.getText()));
-        
-        if(sexoF.isSelected()){
-            aluno.setSexo("F");
-            
-        }if(sexoM.isSelected()){
-            aluno.setSexo("M");
-            
-        }
-       
-        aluno.setEmail(emailAluno.getText());
-        aluno.setTelefone(telefoneAluno.getText());
-        aluno.setCelular(celularAluno.getText());
-        
-        Object[] options = { "Sim", "Não" };
-        int editar = JOptionPane.showOptionDialog(null, "Confirma a edição do cadastro?\n\nMatrícula: "+matriculaAluno.getText()+"\nNome: "+nomeAluno.getText()+"\nCurso: "+cursoAluno.getSelectedItem().toString()+" / Fase: "+faseAluno.getText()+"\n\nContato:\nTelefone: "+telefoneAluno.getText()+"\nCelular: "+celularAluno.getText()+"\nE-Mail: "+emailAluno.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(editar){
-                case 0:
-                listaAluno.set(sobrepor, aluno);
-                this.dispose();
-                new Alunos().setVisible(true);
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-            }
-        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void sexoFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoFActionPerformed

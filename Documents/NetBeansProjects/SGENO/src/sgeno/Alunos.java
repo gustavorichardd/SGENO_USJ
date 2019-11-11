@@ -5,42 +5,34 @@
  */
 package sgeno;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sgeno.Classes.Aluno;
-import java.time.Clock;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import static sgeno.Classes.TodosArrays.listaAluno;
 
-
-/**
- *
- * @author VJM
- */
 public class Alunos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Aluno
-     */
     public Alunos() {
         initComponents();
-        organizaTabelaAluno();
     }
-    
-    public void organizaTabelaAluno(){
-        
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel() ;
+
+    public void organizaTabelaAluno() {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.getDataVector().clear();
-        
-        for(Aluno a: listaAluno){
-            modelo.addRow(new Object[]{a.getMatrícula(),a.getNome(),a.getCurso(),a.getFase(),a.getSexo(),a.getTelefone(),a.getCelular(),a.getEmail()});
-                    
+
+        for (Aluno a : listaAluno) {
+            modelo.addRow(new Object[]{a.getMatrícula(), a.getNome(), a.getCurso(), a.getFase(), a.getSexo(), a.getTelefone(), a.getCelular(), a.getEmail()});
+
         }
-        }
-        
-    
- 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,65 +279,71 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if (jTable1.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para editar, selecione um aluno na tabela.");
-        }else{
+        } else {
             int index = jTable1.getSelectedRow();
             this.dispose();
             new EditarAluno(index).setVisible(true);
-              
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Para excluir, selecione um aluno na tabela.");
+
     }//GEN-LAST:event_jButton2ActionPerformed
-        else{
-            int indexExcluir = jTable1.getSelectedRow();
-            
-            
-            Object[] options = { "Sim", "Não" };
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir este aluno?\nNome: "+listaAluno.get(indexExcluir).getNome()+"\nMatrícula: "+listaAluno.get(indexExcluir).getMatrícula(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
-            
-            
-            switch(excluir){
-                case 0:
-                listaAluno.remove(indexExcluir);  
-                
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-            }
-            
-            
-    }
-        organizaTabelaAluno();
-    }
+
+    // Botão Visualizar
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    if(jTable1.getSelectionModel().isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Para visualizar, selecione um aluno na tabela.");
-            
-    }                                        
-        else{
-            int row = jTable1.getSelectedRow();
-            JOptionPane.showMessageDialog(null, "Matrícula: "+jTable1.getValueAt(row, 0)+"\nNome: "+jTable1.getValueAt(row, 1).toString()+"\nCurso: "+jTable1.getValueAt(row, 2)+" / Fase: "+jTable1.getValueAt(row, 3)+"\nSexo: "+jTable1.getValueAt(row, 4)+"\n\nTelefone: "+jTable1.getValueAt(row, 5)+"\nCelular: "+jTable1.getValueAt(row, 6)+"\nE-mail: "+jTable1.getValueAt(row, 7));
+        try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+
+            while (resultado.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultado.getString("MATRICULA"),
+                    resultado.getString("NOME"),
+                    resultado.getString("CURSO"),
+                    resultado.getString("FASE"),
+                    resultado.getString("SEXO"),
+                    resultado.getString("TELEFONE"),
+                    resultado.getString("CELULAR"),
+                    resultado.getString("EMAIL"),
+                    
+                        
+                });
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-        
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroAluno().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
