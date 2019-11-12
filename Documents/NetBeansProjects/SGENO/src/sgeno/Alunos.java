@@ -108,7 +108,7 @@ public class Alunos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 153, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel2.setText("USJsgeno");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usj_300x110.png"))); // NOI18N
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,9 +123,9 @@ public class Alunos extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,7 +137,7 @@ public class Alunos extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap(17, Short.MAX_VALUE))))
         );
 
@@ -264,7 +264,7 @@ public class Alunos extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -277,18 +277,39 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione um aluno na tabela.");
-        } else {
-            int index = jTable1.getSelectedRow();
-            this.dispose();
-            new EditarAluno(index).setVisible(true);
 
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    // Botão Excluir
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
 
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = (?)";
+            PreparedStatement stmt = con.prepareStatement(query);
+            /*
+            int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
+            setText(jTable1.getValueAt(linha,0).toString());
+             */
+            int linha = jTable1.getSelectedRow();
+            //Seta os valores na query
+            stmt.setInt(1, Integer.valueOf(jTable1.getValueAt(linha,0).toString()));
+            //Cria o comando para inserir no banco
+
+            //executa o comando
+            stmt.executeUpdate();
+            //Encerra o comando e a conexão
+            stmt.close();
+            con.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Botão Visualizar
@@ -301,7 +322,7 @@ public class Alunos extends javax.swing.JFrame {
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO";
+            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
@@ -321,10 +342,7 @@ public class Alunos extends javax.swing.JFrame {
                     resultado.getString("SEXO"),
                     resultado.getString("TELEFONE"),
                     resultado.getString("CELULAR"),
-                    resultado.getString("EMAIL"),
-                    
-                        
-                });
+                    resultado.getString("EMAIL"),});
             }
             stmt.close();
             con.close();
