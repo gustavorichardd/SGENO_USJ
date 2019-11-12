@@ -5,12 +5,16 @@
  */
 package sgeno;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +27,7 @@ public class CadastroAluno extends javax.swing.JFrame {
      */
     public CadastroAluno() {
         initComponents();
-
+        
     }
 
     /**
@@ -125,16 +129,31 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel3.setText("*Matrícula:");
 
         matriculaAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        matriculaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                matriculaAlunoMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("*Nome Completo:");
 
         nomeAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nomeAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nomeAlunoMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("*Curso:");
 
         faseAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        faseAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                faseAlunoMouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("*Fase:");
@@ -150,6 +169,11 @@ public class CadastroAluno extends javax.swing.JFrame {
         jLabel10.setText("E-mail:");
 
         emailAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emailAlunoMouseClicked(evt);
+            }
+        });
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +201,11 @@ public class CadastroAluno extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         telefoneAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telefoneAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                telefoneAlunoMouseClicked(evt);
+            }
+        });
 
         try {
             celularAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#########")));
@@ -184,6 +213,11 @@ public class CadastroAluno extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         celularAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        celularAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                celularAlunoMouseClicked(evt);
+            }
+        });
 
         sexoAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         sexoAluno.setText("*Sexo:");
@@ -314,12 +348,29 @@ public class CadastroAluno extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = con.prepareStatement(query);
             //Seta os valores na query
+            if(matriculaAluno.getText().trim().equals("")){
+                matriculaAluno.setBackground(Color.orange);
+                
+            } else{
+                if(nomeAluno.getText().trim().equals("")){
+                    nomeAluno.setBackground(Color.orange);
+                                 } else{
+                    if(faseAluno.getText().trim().equals("")){
+                     faseAluno.setBackground(Color.orange);
+                    } else{
+                        if(telefoneAluno.getText().equals("") || celularAluno.getText().equals("")){
+                           telefoneAluno.setBackground(Color.orange);
+                           celularAluno.setBackground(Color.orange);
+                        } else{
+                            if(emailAluno.getText().trim().equals("")){
+                            emailAluno.setBackground(Color.orange);
+                            } else{
             stmt.setString(1, matriculaAluno.getText());
             stmt.setString(2, nomeAluno.getText());
             stmt.setString(3, sexoAlunoCombo.getSelectedItem().toString());
@@ -333,7 +384,12 @@ public class CadastroAluno extends javax.swing.JFrame {
             //Encerra o comando e a conexão
             stmt.close();
             con.close();
-
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            }
+                        }
+                    }
+                }
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroAluno.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Classe não localizada");
@@ -355,6 +411,32 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void cursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoAlunoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cursoAlunoActionPerformed
+
+    private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
+       matriculaAluno.setBackground(Color.white);
+       
+     
+    }//GEN-LAST:event_matriculaAlunoMouseClicked
+
+    private void nomeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nomeAlunoMouseClicked
+       nomeAluno.setBackground(Color.white);
+    }//GEN-LAST:event_nomeAlunoMouseClicked
+
+    private void faseAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_faseAlunoMouseClicked
+       faseAluno.setBackground(Color.white);
+    }//GEN-LAST:event_faseAlunoMouseClicked
+
+    private void telefoneAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telefoneAlunoMouseClicked
+       telefoneAluno.setBackground(Color.white);
+    }//GEN-LAST:event_telefoneAlunoMouseClicked
+
+    private void celularAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_celularAlunoMouseClicked
+       celularAluno.setBackground(Color.white);
+    }//GEN-LAST:event_celularAlunoMouseClicked
+
+    private void emailAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailAlunoMouseClicked
+       emailAluno.setBackground(Color.white);
+    }//GEN-LAST:event_emailAlunoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -418,4 +500,6 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sexoAlunoCombo;
     private javax.swing.JFormattedTextField telefoneAluno;
     // End of variables declaration//GEN-END:variables
+
+    
 }
