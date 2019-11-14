@@ -188,7 +188,7 @@ public class EditarVaga extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(40, 132, 194));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Centro Universitário Municipal de São José (USJ)");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/i_Rodape.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
