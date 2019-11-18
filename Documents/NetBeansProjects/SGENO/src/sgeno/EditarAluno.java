@@ -178,30 +178,32 @@ int sobrepor;
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("*Matrícula:");
 
-        matriculaAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        matriculaAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("*Nome Completo:");
 
-        nomeAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nomeAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("*Curso:");
 
+        cursoAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cursoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
 
-        faseAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        faseAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("*Fase:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel16.setText("*Sexo:");
 
         buttonGroup1.add(sexoF);
+        sexoF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         sexoF.setText("F");
         sexoF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +212,7 @@ int sobrepor;
         });
 
         buttonGroup1.add(sexoM);
+        sexoM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         sexoM.setText("M");
         sexoM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,10 +220,10 @@ int sobrepor;
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel17.setText("Contatos:");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel14.setText("*Telefone:");
 
         try {
@@ -228,9 +231,9 @@ int sobrepor;
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        telefoneAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telefoneAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Celular:");
 
         try {
@@ -238,11 +241,11 @@ int sobrepor;
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        celularAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        celularAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        emailAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setText("E-mail:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
