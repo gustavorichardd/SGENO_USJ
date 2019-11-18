@@ -493,6 +493,8 @@ public class CadastroVaga extends javax.swing.JFrame {
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         cursoVaga.updateUI();
+        
+        //Teste
 
     }//GEN-LAST:event_formWindowActivated
 
