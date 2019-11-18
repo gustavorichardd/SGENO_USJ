@@ -10,16 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import sgeno.Classes.Aluno;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import sgeno.Classes.Contrato;
-import sgeno.Classes.Empresa;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaContrato;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
 
 /**
  *
@@ -32,41 +25,9 @@ public class CadastroContrato extends javax.swing.JFrame {
      */
     public CadastroContrato() {
         initComponents();
-        organizaBoxAluno();
-        organizaBoxEmpresa();
-        organizaBoxMotivo();
 
     }
 
-    public void organizaBoxAluno() {
-        boxAluno.removeAllItems();
-
-        boxAluno.addItem("Selecionar...");
-
-        for (Aluno a : listaAluno) {
-            boxAluno.addItem(a.getMatrícula() + " - " + a.getNome());
-        }
-    }
-
-    public void organizaBoxEmpresa() {
-        boxEmpresa.removeAllItems();
-
-        boxEmpresa.addItem("Selecionar...");
-
-        for (Empresa e : listaEmpresa) {
-            boxEmpresa.addItem(e.getNome() + " - " + e.getEndereco());
-        }
-    }
-
-    public void organizaBoxMotivo() {
-        boxMotivo.removeAllItems();
-
-        boxMotivo.addItem("Nenhum");
-        boxMotivo.addItem("Alteração Salário");
-        boxMotivo.addItem("Recisão");
-        boxMotivo.addItem("Alteração Carga Horária");
-        boxMotivo.addItem("Alteração Contrato");
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
