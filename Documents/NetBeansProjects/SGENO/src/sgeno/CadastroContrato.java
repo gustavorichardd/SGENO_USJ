@@ -4,19 +4,22 @@
  * and open the template in the editor.
  */
 package sgeno;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import sgeno.Classes.Aluno;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import sgeno.Classes.Contrato;
 import sgeno.Classes.Empresa;
 import static sgeno.Classes.TodosArrays.listaAluno;
 import static sgeno.Classes.TodosArrays.listaContrato;
 import static sgeno.Classes.TodosArrays.listaEmpresa;
-import static sgeno.Classes.TodosArrays.listaVaga;
-import sgeno.Classes.Vaga;
-
 
 /**
  *
@@ -32,43 +35,38 @@ public class CadastroContrato extends javax.swing.JFrame {
         organizaBoxAluno();
         organizaBoxEmpresa();
         organizaBoxMotivo();
-       
-        
+
     }
-    
-    
-    
-    public void organizaBoxAluno(){
+
+    public void organizaBoxAluno() {
         boxAluno.removeAllItems();
-        
+
         boxAluno.addItem("Selecionar...");
-        
-        for (Aluno a: listaAluno){
-        boxAluno.addItem(a.getMatrícula()+" - "+a.getNome());
+
+        for (Aluno a : listaAluno) {
+            boxAluno.addItem(a.getMatrícula() + " - " + a.getNome());
         }
     }
-    
-    public void organizaBoxEmpresa(){
+
+    public void organizaBoxEmpresa() {
         boxEmpresa.removeAllItems();
-        
+
         boxEmpresa.addItem("Selecionar...");
-        
-        for (Empresa e: listaEmpresa){
-        boxEmpresa.addItem(e.getNome()+" - "+e.getEndereco());
+
+        for (Empresa e : listaEmpresa) {
+            boxEmpresa.addItem(e.getNome() + " - " + e.getEndereco());
         }
     }
-    
-    public void organizaBoxMotivo(){
+
+    public void organizaBoxMotivo() {
         boxMotivo.removeAllItems();
-        
+
         boxMotivo.addItem("Nenhum");
         boxMotivo.addItem("Alteração Salário");
         boxMotivo.addItem("Recisão");
         boxMotivo.addItem("Alteração Carga Horária");
         boxMotivo.addItem("Alteração Contrato");
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,7 +95,6 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         chContrato = new javax.swing.JTextField();
-        agenciaContrato = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         boxAluno = new javax.swing.JComboBox<>();
         boxEmpresa = new javax.swing.JComboBox<>();
@@ -117,9 +114,15 @@ public class CadastroContrato extends javax.swing.JFrame {
         horaAteContrato = new javax.swing.JTextField();
         dataContrato = new javax.swing.JTextField();
         data2Contrato = new javax.swing.JTextField();
+        boxAgencia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(734, 472));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -221,16 +224,12 @@ public class CadastroContrato extends javax.swing.JFrame {
 
         chContrato.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        agenciaContrato.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Agência:");
 
         boxAluno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        boxAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         boxEmpresa.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel19.setText("Aditivo:");
@@ -239,7 +238,6 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel14.setText("*Valor (R$):");
 
         boxMotivo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        boxMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Motivo:");
@@ -296,8 +294,8 @@ public class CadastroContrato extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(agenciaContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(boxAgencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,7 +406,7 @@ public class CadastroContrato extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(agenciaContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(boxAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -459,94 +457,107 @@ public class CadastroContrato extends javax.swing.JFrame {
         dataContrato.setText("");
         obsContrato.setText("");
         chContrato.setText("");
-        agenciaContrato.setText("");
+        boxAgencia.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Contrato contrato = new Contrato();
-        int indexAluno, indexEmpresa;
-        String[] camposObrig = new String[7];
-                
-        
-        if(boxAluno.getSelectedIndex()==0){
-            camposObrig[0] = "Aluno";
-        }else{
-            camposObrig[0] = "...";
-        }
-        if(boxEmpresa.getSelectedIndex()==0){
-            camposObrig[1] = "Empresa";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(valorContrato.getText().isEmpty()){
-            camposObrig[2] = "Valor";
-        }else{
-            camposObrig[2] = "...";
-        if(periodoDeContrato.getText().isEmpty()){
-            camposObrig[3] = "Período De";
-        }else{
-            camposObrig[3] = "...";
-        }    
-        if(periodoAteContrato.getText().isEmpty()){
-            camposObrig[4] = "Período Até";
-        }else{
-            camposObrig[4] = "...";
-        }
-        if(horaDeContrato.getText().isEmpty()){
-            camposObrig[5] = "Hora De";
-        }else{
-            camposObrig[5] = "...";
-        }
-        if(horaAteContrato.getText().isEmpty()){
-            camposObrig[6] = "Hora Até";
-        }else{
-            camposObrig[6] = "...";
-        }
-        
-        if(boxAluno.getSelectedItem().equals(0) | boxEmpresa.getSelectedItem().equals(0) | valorContrato.getText().isEmpty() | periodoDeContrato.getText().isEmpty() | periodoAteContrato.getText().isEmpty() | horaDeContrato.getText().isEmpty() | horaAteContrato.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        
-        indexAluno = boxAluno.getSelectedIndex();
-        indexEmpresa = boxEmpresa.getSelectedIndex();
-            
-        contrato.setAluno(listaAluno.get(indexAluno-1));
-        contrato.setEmpresa(listaEmpresa.get(indexEmpresa-1));
-        contrato.setPeriodode(periodoDeContrato.getText());
-        contrato.setPeriodoate(periodoAteContrato.getText());
-        contrato.setHorariode(horaDeContrato.getText());
-        contrato.setHorarioate(horaAteContrato.getText());
-        contrato.setValor(Float.parseFloat(valorContrato.getText()));
-        contrato.setCh(Integer.parseInt(chContrato.getText()));
-        contrato.setAgencia(agenciaContrato.getText());
-        contrato.setData(dataContrato.getText());
-        contrato.setData2(data2Contrato.getText());
-        contrato.setObs(obsContrato.getText());
-        contrato.setAditivo(boxMotivo.getSelectedItem().toString());
-        
-        Object[] options = { "Sim", "Não" };
-        int cadastrar = JOptionPane.showOptionDialog(null, "Confirma o cadastro?\n\nAluno: "+boxAluno.getSelectedItem().toString()+"\nEmpresa: "+boxEmpresa.getSelectedItem().toString()+"\nValor: "+valorContrato.getText()+"\nPeríodo:\nDe: "+periodoDeContrato.getText()+" Até: "+periodoDeContrato.getText()+"\nHorário:\nDe: "+horaDeContrato.getText()+" Até: "+horaAteContrato.getText()+"\nCarga horária: "+chContrato.getText()+"\n\nAditivo:\nMotivo:"+boxMotivo.getSelectedItem().toString()+"\nData:\nDe: "+dataContrato.getText()+" Até: "+data2Contrato.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(cadastrar){
-                case 0:
-                listaContrato.add(contrato);
-                this.dispose();
-                new Contratos().setVisible(true);
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-             
-        }
-            
-        }}
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+//Carregar combobox dos ALUNOS
+        boxAluno.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM aluno");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxAluno.addItem(rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxAluno.updateUI();
+//Carregar combobox das Empresas cadastradas
+        boxEmpresa.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxEmpresa.addItem(rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxEmpresa.updateUI();
+//Carregar combobox das AGENCIAS
+        boxAgencia.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_AGENCIA FROM agencia");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxAgencia.addItem(rs.getString("DESC_AGENCIA"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxAgencia.updateUI();
+//Carregar combobox dos MOTIVOS
+        boxMotivo.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_MOTIVO FROM aditivo");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxMotivo.addItem(rs.getString("DESC_MOTIVO"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxMotivo.updateUI();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -585,7 +596,7 @@ public class CadastroContrato extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField agenciaContrato;
+    private javax.swing.JComboBox<String> boxAgencia;
     private javax.swing.JComboBox<String> boxAluno;
     private javax.swing.JComboBox<String> boxEmpresa;
     private javax.swing.JComboBox<String> boxMotivo;
