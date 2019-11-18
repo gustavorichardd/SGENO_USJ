@@ -206,10 +206,10 @@ public class EditarVaga extends javax.swing.JFrame {
                 .addGap(0, 46, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("*Título da Vaga:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("*Empresa:");
 
         jButton1.setText("Salvar");
@@ -226,36 +226,47 @@ public class EditarVaga extends javax.swing.JFrame {
             }
         });
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Hora:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("De:");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Até:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Carga Horária (Semanal):");
 
-        chVaga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
+        boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel14.setText("*Valor (R$):");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Observação:");
 
         obsVaga.setColumns(20);
+        obsVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         obsVaga.setRows(5);
         obsVaga.setMaximumSize(new java.awt.Dimension(164, 94));
         jScrollPane1.setViewportView(obsVaga);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        valorVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        horaDeVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        horaAteVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        tituloVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("Curso:");
 
+        cursoVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cursoVaga.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
         cursoVaga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,13 +274,15 @@ public class EditarVaga extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("A partida da fase:");
 
-        faseVaga.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        faseVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Turno:");
+
+        turnoVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

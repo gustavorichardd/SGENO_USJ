@@ -263,13 +263,13 @@ public class EditarContrato extends javax.swing.JFrame {
                 .addGap(0, 46, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setText("*Aluno:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("*Empresa:");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setText("*De:");
 
         jButton1.setText("Salvar");
@@ -286,59 +286,76 @@ public class EditarContrato extends javax.swing.JFrame {
             }
         });
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel17.setText("Período:");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setText("*Até:");
 
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel18.setText("Hora:");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("*De:");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("*Até:");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("*Carga Horária (Semanal):");
 
-        chContrato.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        chContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        agenciaContrato.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        agenciaContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Agência:");
 
+        boxAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         boxAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel19.setText("Aditivo:");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel14.setText("*Valor (R$):");
 
         boxMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Motivo:");
 
-        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel16.setText("Data:");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel20.setText("Data 2:");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Observação:");
 
         obsContrato.setColumns(20);
+        obsContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         obsContrato.setRows(5);
         obsContrato.setMaximumSize(new java.awt.Dimension(164, 94));
         jScrollPane1.setViewportView(obsContrato);
+
+        valorContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        periodoDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        periodoAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        horaDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        horaAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        dataContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        data2Contrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

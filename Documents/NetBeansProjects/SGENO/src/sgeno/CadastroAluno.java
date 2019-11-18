@@ -208,10 +208,15 @@ public class CadastroAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        telefoneAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        telefoneAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         telefoneAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 telefoneAlunoMouseClicked(evt);
+            }
+        });
+        telefoneAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefoneAlunoActionPerformed(evt);
             }
         });
 
@@ -220,7 +225,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        celularAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        celularAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         celularAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 celularAlunoMouseClicked(evt);
@@ -230,7 +235,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         sexoAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         sexoAluno.setText("Sexo:");
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel17.setText("Contatos:");
 
         sexoAlunoCombo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -462,6 +467,10 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void telefoneAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneAlunoActionPerformed
 
     /**
      * @param args the command line arguments
