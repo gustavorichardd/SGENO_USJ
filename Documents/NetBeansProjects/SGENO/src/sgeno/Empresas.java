@@ -110,6 +110,7 @@ public class Empresas extends javax.swing.JFrame {
         jLabel3.setText("Centro Universitário Municipal de São José (USJ)");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EMPRESAS");
         setMinimumSize(new java.awt.Dimension(705, 535));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
