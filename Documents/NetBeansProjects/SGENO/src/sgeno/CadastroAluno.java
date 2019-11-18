@@ -27,7 +27,7 @@ public class CadastroAluno extends javax.swing.JFrame {
      */
     public CadastroAluno() {
         initComponents();
-        
+
     }
 
     /**
@@ -64,9 +64,15 @@ public class CadastroAluno extends javax.swing.JFrame {
         sexoAluno = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         sexoAlunoCombo = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(565, 468));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -125,28 +131,28 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGap(0, 46, Short.MAX_VALUE))
         );
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("*Matrícula:");
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setText("Matrícula:");
 
-        matriculaAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        matriculaAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         matriculaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 matriculaAlunoMouseClicked(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("*Nome Completo:");
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setText("Nome Completo:");
 
-        nomeAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nomeAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         nomeAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 nomeAlunoMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("*Curso:");
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Curso:");
 
         faseAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         faseAluno.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,9 +161,10 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("*Fase:");
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setText("Fase:");
 
+        cursoAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cursoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
         cursoAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,10 +172,10 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setText("E-mail:");
 
-        emailAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         emailAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 emailAlunoMouseClicked(evt);
@@ -189,10 +196,10 @@ public class CadastroAluno extends javax.swing.JFrame {
             }
         });
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("*Telefone:");
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel14.setText("Telefone:");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Celular:");
 
         try {
@@ -200,7 +207,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        telefoneAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        telefoneAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         telefoneAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 telefoneAlunoMouseClicked(evt);
@@ -212,20 +219,24 @@ public class CadastroAluno extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        celularAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        celularAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         celularAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 celularAlunoMouseClicked(evt);
             }
         });
 
-        sexoAluno.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        sexoAluno.setText("*Sexo:");
+        sexoAluno.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        sexoAluno.setText("Sexo:");
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel17.setText("Contatos:");
 
+        sexoAlunoCombo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         sexoAlunoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel7.setText("Ou");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,7 +257,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -263,20 +274,21 @@ public class CadastroAluno extends javax.swing.JFrame {
                                 .addComponent(sexoAluno)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(sexoAlunoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel17)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(telefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(celularAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel17))
+                                .addComponent(emailAluno)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -307,9 +319,10 @@ public class CadastroAluno extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel15)
                     .addComponent(telefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(celularAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(celularAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -354,38 +367,53 @@ public class CadastroAluno extends javax.swing.JFrame {
             //Cria o comando para inserir no banco
             PreparedStatement stmt = con.prepareStatement(query);
             //Seta os valores na query
-            if(matriculaAluno.getText().trim().equals("")){
-                matriculaAluno.setBackground(Color.orange);
-                
-            } else{
-                if(nomeAluno.getText().trim().equals("")){
-                    nomeAluno.setBackground(Color.orange);
-                                 } else{
-                    if(faseAluno.getText().trim().equals("")){
-                     faseAluno.setBackground(Color.orange);
-                    } else{
-                        if(telefoneAluno.getText().equals("") || celularAluno.getText().equals("")){
-                           telefoneAluno.setBackground(Color.orange);
-                           celularAluno.setBackground(Color.orange);
-                        } else{
-                            if(emailAluno.getText().trim().equals("")){
-                            emailAluno.setBackground(Color.orange);
-                            } else{
-            stmt.setString(1, matriculaAluno.getText());
-            stmt.setString(2, nomeAluno.getText());
-            stmt.setString(3, sexoAlunoCombo.getSelectedItem().toString());
-            stmt.setInt(4, Integer.valueOf(faseAluno.getText()));
-            stmt.setString(5, sexoAlunoCombo.getSelectedItem().toString());
-            stmt.setString(6, telefoneAluno.getText());
-            stmt.setString(7, celularAluno.getText());
-            stmt.setString(8, emailAluno.getText());
-            //executa o comando
-            stmt.executeUpdate();
-            //Encerra o comando e a conexão
-            stmt.close();
-            con.close();
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-            }
+            if (matriculaAluno.getText().trim().equals("")) {
+
+                JOptionPane.showMessageDialog(null, "Campo de Matrícula vazio");
+                matriculaAluno.requestFocus();
+
+            } else {
+                if (nomeAluno.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Campo do nome do aluno vazio");
+                    nomeAluno.requestFocus();
+                } else {
+                    if (faseAluno.getText().trim().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Campo da fase do aluno vazio");
+                        faseAluno.requestFocus();
+                    } else {
+                        if (telefoneAluno.getText().equals("") || celularAluno.getText().equals("")) {
+                            JOptionPane.showMessageDialog(null, "Campo de telefone vazio");
+                            telefoneAluno.requestFocus();
+                            JOptionPane.showMessageDialog(null, "Campo de celular vazio");
+                            celularAluno.requestFocus();
+                        } else {
+                            if (emailAluno.getText().trim().equals("")) {
+                                JOptionPane.showMessageDialog(null, "Campo de email vazio");
+                                emailAluno.requestFocus();
+                            } else {
+                                stmt.setString(1, matriculaAluno.getText());
+                                stmt.setString(2, nomeAluno.getText());
+                                stmt.setString(3, sexoAlunoCombo.getSelectedItem().toString());
+                                stmt.setInt(4, Integer.valueOf(faseAluno.getText()));
+                                stmt.setString(5, sexoAlunoCombo.getSelectedItem().toString());
+                                stmt.setString(6, telefoneAluno.getText());
+                                stmt.setString(7, celularAluno.getText());
+                                stmt.setString(8, emailAluno.getText());
+                                //executa o comando
+                                stmt.executeUpdate();
+                                //Encerra o comando e a conexão
+                                stmt.close();
+                                con.close();
+                                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                                matriculaAluno.setText("");
+                                nomeAluno.setText("");
+                                faseAluno.setText("");
+                                emailAluno.setText("");
+                                cursoAluno.setSelectedIndex(0);
+                                telefoneAluno.setText("");
+                                celularAluno.setText("");
+                                emailAluno.setText("");
+                            }
                         }
                     }
                 }
@@ -398,14 +426,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             System.out.println("Erro de SQL");
         }
 
-        matriculaAluno.setText("");
-        nomeAluno.setText("");
-        faseAluno.setText("");
-        emailAluno.setText("");
-        cursoAluno.setSelectedIndex(0);
-        telefoneAluno.setText("");
-        celularAluno.setText("");
-        emailAluno.setText("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cursoAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoAlunoActionPerformed
@@ -413,30 +434,33 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_cursoAlunoActionPerformed
 
     private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
-       matriculaAluno.setBackground(Color.white);
-       
-     
+
+
     }//GEN-LAST:event_matriculaAlunoMouseClicked
 
     private void nomeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nomeAlunoMouseClicked
-       nomeAluno.setBackground(Color.white);
+
     }//GEN-LAST:event_nomeAlunoMouseClicked
 
     private void faseAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_faseAlunoMouseClicked
-       faseAluno.setBackground(Color.white);
+
     }//GEN-LAST:event_faseAlunoMouseClicked
 
     private void telefoneAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telefoneAlunoMouseClicked
-       telefoneAluno.setBackground(Color.white);
+        celularAluno.setEnabled(false);
     }//GEN-LAST:event_telefoneAlunoMouseClicked
 
     private void celularAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_celularAlunoMouseClicked
-       celularAluno.setBackground(Color.white);
+      telefoneAluno.setEnabled(false);
     }//GEN-LAST:event_celularAlunoMouseClicked
 
     private void emailAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailAlunoMouseClicked
-       emailAluno.setBackground(Color.white);
+
     }//GEN-LAST:event_emailAlunoMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -492,6 +516,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField matriculaAluno;
@@ -501,5 +526,4 @@ public class CadastroAluno extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField telefoneAluno;
     // End of variables declaration//GEN-END:variables
 
-    
 }
