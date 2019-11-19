@@ -34,18 +34,7 @@ public class BancoVagas extends javax.swing.JFrame {
      */
     public BancoVagas() {
         initComponents();
-        organizaTabelaVaga();
-    }
 
-    public void organizaTabelaVaga() {
-
-        DefaultTableModel modelo = (DefaultTableModel) TabelaVagas.getModel();
-        modelo.getDataVector().clear();
-
-        for (Vaga v : listaVaga) {
-            modelo.addRow(new Object[]{v.getTitulo(), v.getEmpresa().getNome(), v.getCurso(), v.getFase(), v.getTurno(), v.getHoraDe() + " - " + v.getHoraAte(), v.getCh(), v.getEmpresa().getTelefone(), v.getEmpresa().getEmail(), v.getValor(), v.getObs()});
-
-        }
     }
 
     /**
@@ -232,11 +221,6 @@ public class BancoVagas extends javax.swing.JFrame {
         });
 
         jButton5.setText("Visualizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,15 +267,7 @@ public class BancoVagas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (TabelaVagas.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione uma vaga na tabela.");
-        } else {
-            int index = TabelaVagas.getSelectedRow();
-            String nomeEmpresa = (String) TabelaVagas.getValueAt(index, 1);
-            this.dispose();
-            new EditarVaga(index, nomeEmpresa).setVisible(true);
 
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -304,7 +280,7 @@ public class BancoVagas extends javax.swing.JFrame {
                 Class.forName("com.mysql.jdbc.Driver");
                 //Cria uma variável do tipo conexão 
                 // Verificar usuário a senha do banco!!
-                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
                 // Query para inserir os alunos no banco
                 String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
                 //Cria o comando para inserir no banco
@@ -331,36 +307,10 @@ public class BancoVagas extends javax.swing.JFrame {
                 System.out.println("o erro foi " + ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
     }//GEN-LAST:event_jButton2ActionPerformed
-        else {
-            int indexExcluir = TabelaVagas.getSelectedRow();
-
-            Object[] options = {"Sim", "Não"};
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir esta empresa?\nNome: " + listaEmpresa.get(indexExcluir).getNome() + "\nEnredeço: " + listaEmpresa.get(indexExcluir).getEndereco(), "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-            switch (excluir) {
-                case 0:
-                    listaVaga.remove(indexExcluir);
-
-                    break;
-
-                case 1:
-
-                    break;
-
-                default:
-
-                    break;
-            }
-
         }
-        organizaTabelaVaga();
     }
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
@@ -375,7 +325,7 @@ public class BancoVagas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
             //Cria o comando para inserir no banco
