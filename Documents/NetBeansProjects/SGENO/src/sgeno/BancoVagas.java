@@ -5,6 +5,13 @@
  */
 package sgeno;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -33,7 +40,7 @@ public class BancoVagas extends javax.swing.JFrame {
     
     public void organizaTabelaVaga(){
         
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel() ;
+        DefaultTableModel modelo = (DefaultTableModel) TabelaVagas.getModel() ;
         modelo.getDataVector().clear();
         
        for(Vaga v: listaVaga){
@@ -65,7 +72,7 @@ public class BancoVagas extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaVagas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -111,6 +118,11 @@ public class BancoVagas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(705, 535));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -166,19 +178,19 @@ public class BancoVagas extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Título da Vaga", "Empresa", "Curso", "Fase", "Turno", "Horário", "CH", "Telefone", "E-mail", "Valor", "Observação"
+                "Título da Vaga", "Empresa", "Curso", "Fase", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -189,25 +201,18 @@ public class BancoVagas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(35);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setResizable(false);
-            jTable1.getColumnModel().getColumn(10).setResizable(false);
+        TabelaVagas.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(TabelaVagas);
+        if (TabelaVagas.getColumnModel().getColumnCount() > 0) {
+            TabelaVagas.getColumnModel().getColumn(0).setResizable(false);
+            TabelaVagas.getColumnModel().getColumn(0).setPreferredWidth(150);
+            TabelaVagas.getColumnModel().getColumn(1).setResizable(false);
+            TabelaVagas.getColumnModel().getColumn(1).setPreferredWidth(300);
+            TabelaVagas.getColumnModel().getColumn(2).setResizable(false);
+            TabelaVagas.getColumnModel().getColumn(2).setPreferredWidth(50);
+            TabelaVagas.getColumnModel().getColumn(3).setResizable(false);
+            TabelaVagas.getColumnModel().getColumn(3).setPreferredWidth(35);
+            TabelaVagas.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton2.setText("Excluir");
@@ -244,9 +249,9 @@ public class BancoVagas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -283,11 +288,11 @@ public class BancoVagas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if(TabelaVagas.getSelectionModel().isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Para editar, selecione uma vaga na tabela.");
         }else{
-            int index = jTable1.getSelectedRow();
-            String nomeEmpresa = (String) jTable1.getValueAt(index, 1);
+            int index = TabelaVagas.getSelectedRow();
+            String nomeEmpresa = (String) TabelaVagas.getValueAt(index, 1);
             this.dispose();
             new EditarVaga(index, nomeEmpresa).setVisible(true);
               
@@ -295,11 +300,46 @@ public class BancoVagas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if(TabelaVagas.getSelectionModel().isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
+            
+             try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+            DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
+            model.setNumRows(0);
+
+            while (resultado.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultado.getString("DESC_VAGA"),
+                    resultado.getString("COD_EMPRESA"),
+                    resultado.getString("COD_CURSO"),
+                    resultado.getString("FASEMIN"),
+                    resultado.getString("VALOR"),});
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
         else{
-            int indexExcluir = jTable1.getSelectedRow();
+            int indexExcluir = TabelaVagas.getSelectedRow();
             
             
             Object[] options = { "Sim", "Não" };
@@ -326,20 +366,54 @@ public class BancoVagas extends javax.swing.JFrame {
         organizaTabelaVaga();
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Para visualizar, selecione uma vaga na tabela.");
-            
+       
     }//GEN-LAST:event_jButton5ActionPerformed
-        else{
-            int row = jTable1.getSelectedRow();
-            JOptionPane.showMessageDialog(null, "Título da Vaga: "+jTable1.getValueAt(row, 0)+"\nEmpresa: "+jTable1.getValueAt(row, 1).toString()+"\nCurso: "+jTable1.getValueAt(row, 2)+" / A partir da fase: "+jTable1.getValueAt(row, 3)+"\nTurno: "+jTable1.getValueAt(row, 4)+"\n\nHorário:\n "+jTable1.getValueAt(row, 5)+"\nCarga Horária: "+jTable1.getValueAt(row, 6)+"\nTelefone: "+jTable1.getValueAt(row, 7)+"\nE-mail: "+jTable1.getValueAt(row, 8)+"\n\nValor: "+jTable1.getValueAt(row, 9)+"\n\nObservação:\n"+jTable1.getValueAt(row, 10));
-        }
-    }
+       
+    
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroVaga().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+      
+         try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+            DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
+            model.setNumRows(0);
+
+            while (resultado.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultado.getString("DESC_VAGA"),
+                    resultado.getString("COD_EMPRESA"),
+                    resultado.getString("COD_CURSO"),
+                    resultado.getString("FASEMIN"),
+                    resultado.getString("VALOR"),});
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_formWindowActivated
     
     /**
      * @param args the command line arguments
@@ -392,6 +466,7 @@ public class BancoVagas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaVagas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -406,7 +481,6 @@ public class BancoVagas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     

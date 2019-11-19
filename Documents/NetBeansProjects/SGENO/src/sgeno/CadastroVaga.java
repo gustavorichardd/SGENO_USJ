@@ -73,6 +73,7 @@ public class CadastroVaga extends javax.swing.JFrame {
         turnoVaga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CADASTRO DE VAGAS");
         setMinimumSize(new java.awt.Dimension(734, 472));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -375,55 +376,54 @@ public class CadastroVaga extends javax.swing.JFrame {
             PreparedStatement stmt = con.prepareStatement(query);
             //Seta os valores na query
             stmt.setString(1, tituloVaga.getText());
-            
+
             //Pegar o COD_EMPRESA
             int codEmp = 0;
             PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
             boxE.setString(1, boxEmpresa.getSelectedItem().toString());
-            ResultSet boxERs = boxE.executeQuery();            
+            ResultSet boxERs = boxE.executeQuery();
             while (boxERs.next()) {
                 codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
             }
             stmt.setInt(2, codEmp);
-            
+
             boxERs.close();
             boxE.close();
-            
+
             // Pegar o COD_CURSO
             int codCur = 0;
             PreparedStatement boxC = con.prepareStatement("SELECT COD_CURSO FROM curso WHERE DESC_CURSO = (?)");
             boxC.setString(1, cursoVaga.getSelectedItem().toString());
-            ResultSet boxCRs = boxC.executeQuery();         
+            ResultSet boxCRs = boxC.executeQuery();
             while (boxCRs.next()) {
                 codCur = Integer.parseInt(boxCRs.getString("COD_CURSO"));
             }
             stmt.setInt(3, codCur);
-            
+
             boxCRs.close();
             boxC.close();
-            
-            
+
             stmt.setInt(4, Integer.valueOf(faseVaga.getText()));
             stmt.setInt(5, Integer.valueOf(valorVaga.getText()));
             stmt.setInt(6, Integer.valueOf(turnoVaga.getText()));
-            
+
             //Converter hora para inserir no banco
             String horaDeVg = horaDeVaga.getText();
             SimpleDateFormat formHoraDeVg = new SimpleDateFormat("HH:mm:ss");
             Date dataDeVg = formHoraDeVg.parse(horaDeVg);
             Time timeDeVg = new Time(dataDeVg.getTime());
             stmt.setTime(7, timeDeVg);
-            
+
             //Converter hora para inserir no banco
             String horaAteVg = horaAteVaga.getText();
             SimpleDateFormat formHoraAteVg = new SimpleDateFormat("HH:mm:ss");
             Date dataAteVg = formHoraAteVg.parse(horaAteVg);
             Time timeAteVg = new Time(dataAteVg.getTime());
             stmt.setTime(8, timeAteVg);
-            
+
             stmt.setInt(9, Integer.valueOf(chVaga.getText()));
             stmt.setString(10, obsVaga.getText());
-            
+
             //executa o comando
             stmt.executeUpdate();
             //Encerra o comando e a conexão
@@ -490,6 +490,8 @@ public class CadastroVaga extends javax.swing.JFrame {
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         cursoVaga.updateUI();
+        
+        //Teste
 
     }//GEN-LAST:event_formWindowActivated
 
