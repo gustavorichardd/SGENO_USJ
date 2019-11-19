@@ -23,7 +23,6 @@ import static sgeno.Classes.TodosArrays.listaEmpresa;
 import static sgeno.Classes.TodosArrays.listaVaga;
 import sgeno.Classes.Vaga;
 
-
 /**
  *
  * @author VJM
@@ -37,21 +36,17 @@ public class BancoVagas extends javax.swing.JFrame {
         initComponents();
         organizaTabelaVaga();
     }
-    
-    public void organizaTabelaVaga(){
-        
-        DefaultTableModel modelo = (DefaultTableModel) TabelaVagas.getModel() ;
+
+    public void organizaTabelaVaga() {
+
+        DefaultTableModel modelo = (DefaultTableModel) TabelaVagas.getModel();
         modelo.getDataVector().clear();
-        
-       for(Vaga v: listaVaga){
-            modelo.addRow(new Object[]{v.getTitulo(),v.getEmpresa().getNome(),v.getCurso(),v.getFase(),v.getTurno(),v.getHoraDe()+" - "+v.getHoraAte(),v.getCh(),v.getEmpresa().getTelefone(),v.getEmpresa().getEmail(),v.getValor(),v.getObs()});
-                    
+
+        for (Vaga v : listaVaga) {
+            modelo.addRow(new Object[]{v.getTitulo(), v.getEmpresa().getNome(), v.getCurso(), v.getFase(), v.getTurno(), v.getHoraDe() + " - " + v.getHoraAte(), v.getCh(), v.getEmpresa().getTelefone(), v.getEmpresa().getEmail(), v.getValor(), v.getObs()});
+
         }
-        }
-        
-    
- 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -163,22 +158,19 @@ public class BancoVagas extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(40, 132, 194));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/i_Rodape.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/i2_RPvaga.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 58, Short.MAX_VALUE)
+                .addComponent(jLabel4))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
         TabelaVagas.setModel(new javax.swing.table.DefaultTableModel(
@@ -291,97 +283,93 @@ public class BancoVagas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(TabelaVagas.getSelectionModel().isSelectionEmpty()){
+        if (TabelaVagas.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para editar, selecione uma vaga na tabela.");
-        }else{
+        } else {
             int index = TabelaVagas.getSelectedRow();
             String nomeEmpresa = (String) TabelaVagas.getValueAt(index, 1);
             this.dispose();
             new EditarVaga(index, nomeEmpresa).setVisible(true);
-              
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(TabelaVagas.getSelectionModel().isSelectionEmpty()){
+        if (TabelaVagas.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
-            
-             try {
 
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
-            stmt.execute(); // cria o vetor
+            try {
 
-            ResultSet resultado = stmt.executeQuery(query);
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+                stmt.execute(); // cria o vetor
 
-            DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
-            model.setNumRows(0);
+                ResultSet resultado = stmt.executeQuery(query);
 
-            while (resultado.next()) {
-                model.addRow(new Object[]{
-                    //retorna os dados da tabela do BD, cada campo e um coluna.
-                    resultado.getString("DESC_VAGA"),
-                    resultado.getString("COD_EMPRESA"),
-                    resultado.getString("COD_CURSO"),
-                    resultado.getString("FASEMIN"),
-                    resultado.getString("VALOR"),});
+                DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
+                model.setNumRows(0);
+
+                while (resultado.next()) {
+                    model.addRow(new Object[]{
+                        //retorna os dados da tabela do BD, cada campo e um coluna.
+                        resultado.getString("DESC_VAGA"),
+                        resultado.getString("COD_EMPRESA"),
+                        resultado.getString("COD_CURSO"),
+                        resultado.getString("FASEMIN"),
+                        resultado.getString("VALOR"),});
+                }
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("o erro foi " + ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
-        else{
+        else {
             int indexExcluir = TabelaVagas.getSelectedRow();
-            
-            
-            Object[] options = { "Sim", "Não" };
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir esta empresa?\nNome: "+listaEmpresa.get(indexExcluir).getNome()+"\nEnredeço: "+listaEmpresa.get(indexExcluir).getEndereco(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
-            
-            
-            switch(excluir){
+
+            Object[] options = {"Sim", "Não"};
+            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir esta empresa?\nNome: " + listaEmpresa.get(indexExcluir).getNome() + "\nEnredeço: " + listaEmpresa.get(indexExcluir).getEndereco(), "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            switch (excluir) {
                 case 0:
-                listaVaga.remove(indexExcluir);  
-                
+                    listaVaga.remove(indexExcluir);
+
                     break;
-                
+
                 case 1:
-                    
+
                     break;
-                                
+
                 default:
-                    
+
                     break;
             }
-            
-            
-    }
+
+        }
         organizaTabelaVaga();
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       
+
     }//GEN-LAST:event_jButton5ActionPerformed
-       
-    
-    
+
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroVaga().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-      
-         try {
+
+        try {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
@@ -415,9 +403,9 @@ public class BancoVagas extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_formWindowActivated
-    
+
     /**
      * @param args the command line arguments
      */
@@ -486,5 +474,4 @@ public class BancoVagas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    
 }
