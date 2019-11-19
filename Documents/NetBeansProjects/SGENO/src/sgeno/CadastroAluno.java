@@ -370,6 +370,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         telefoneAluno.setText("");
         celularAluno.setText("");
         emailAluno.setText("");
+        
+        //teste
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
