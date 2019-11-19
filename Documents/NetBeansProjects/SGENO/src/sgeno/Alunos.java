@@ -295,7 +295,7 @@ public class Alunos extends javax.swing.JFrame {
              */
             int linha = jTable1.getSelectedRow();
             //Seta os valores na query
-            stmt.setInt(1, Integer.valueOf(jTable1.getValueAt(linha,0).toString()));
+            stmt.setInt(1, Integer.valueOf(jTable1.getValueAt(linha, 0).toString()));
             //Cria o comando para inserir no banco
 
             //executa o comando
@@ -359,8 +359,8 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       
-         try {
+
+        try {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
@@ -388,10 +388,7 @@ public class Alunos extends javax.swing.JFrame {
                     resultado.getString("SEXO"),
                     resultado.getString("TELEFONE"),
                     resultado.getString("CELULAR"),
-                    resultado.getString("EMAIL"),
-                    
-                        
-                });
+                    resultado.getString("EMAIL"),});
             }
             stmt.close();
             con.close();
@@ -400,7 +397,7 @@ public class Alunos extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     /**

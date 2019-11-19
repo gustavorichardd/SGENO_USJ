@@ -16,7 +16,6 @@ import static sgeno.Classes.TodosArrays.listaAluno;
 import static sgeno.Classes.TodosArrays.listaContrato;
 import static sgeno.Classes.TodosArrays.listaEmpresa;
 
-
 /**
  *
  * @author VJM
@@ -30,22 +29,18 @@ public class Contratos extends javax.swing.JFrame {
         initComponents();
         organizaTabelaContrato();
     }
-    
-    public void organizaTabelaContrato(){
-       
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel() ;
+
+    public void organizaTabelaContrato() {
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.getDataVector().clear();
-        
-       for(Contrato c: listaContrato){
-            modelo.addRow(new Object[]{c.getAluno().getMatrícula()+" - "+c.getAluno().getNome(),c.getEmpresa().getNome(),c.getEmpresa().getEndereco(),c.getEmpresa().getTelefone(),c.getEmpresa().getEmail(),c.getPeriodode()+" - "+c.getPeriodoate(),c.getHorariode()+" - "+c.getHorarioate(),c.getCh(),c.getValor(),c.getAgencia(),c.getAditivo()+" "+c.getData()+"-"+c.getData2()+" "+c.getObs()});
-                    
-        } 
-        
+
+        for (Contrato c : listaContrato) {
+            modelo.addRow(new Object[]{c.getAluno().getMatrícula() + " - " + c.getAluno().getNome(), c.getEmpresa().getNome(), c.getEmpresa().getEndereco(), c.getEmpresa().getTelefone(), c.getEmpresa().getEmail(), c.getPeriodode() + " - " + c.getPeriodoate(), c.getHorariode() + " - " + c.getHorarioate(), c.getCh(), c.getValor(), c.getAgencia(), c.getAditivo() + " " + c.getData() + "-" + c.getData2() + " " + c.getObs()});
+
+        }
+
     }
-        
-    
- 
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -283,67 +278,63 @@ public class Contratos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if (jTable1.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para editar, selecione um contrato na tabela.");
-        }else{
+        } else {
             int index = jTable1.getSelectedRow();
             String matriculaAluno = (String) jTable1.getValueAt(index, 0);
             String nomeEmpresa = (String) jTable1.getValueAt(index, 1);
             matriculaAluno = matriculaAluno.substring(0, 8);
             this.dispose();
-            new EditarContrato(index, matriculaAluno,nomeEmpresa).setVisible(true);
-              
+            new EditarContrato(index, matriculaAluno, nomeEmpresa).setVisible(true);
+
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if (jTable1.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para excluir, selecione um contrato na tabela.");
     }//GEN-LAST:event_jButton2ActionPerformed
-        else{
+        else {
             int indexExcluir = jTable1.getSelectedRow();
-            
-            
-            Object[] options = { "Sim", "Não" };
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir este contrato?\nNome: "+listaAluno.get(indexExcluir).getNome()+"\nEmpresa: "+listaEmpresa.get(indexExcluir).getNome()+"\nEnredeço: "+listaEmpresa.get(indexExcluir).getEndereco(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
-            
-            
-            switch(excluir){
+
+            Object[] options = {"Sim", "Não"};
+            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir este contrato?\nNome: " + listaAluno.get(indexExcluir).getNome() + "\nEmpresa: " + listaEmpresa.get(indexExcluir).getNome() + "\nEnredeço: " + listaEmpresa.get(indexExcluir).getEndereco(), "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            switch (excluir) {
                 case 0:
-                listaContrato.remove(indexExcluir);  
-                
+                    listaContrato.remove(indexExcluir);
+
                     break;
-                
+
                 case 1:
-                    
+
                     break;
-                                
+
                 default:
-                    
+
                     break;
             }
-            
-            
-    }
+
+        }
         organizaTabelaContrato();
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(jTable1.getSelectionModel().isSelectionEmpty()){
+        if (jTable1.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para visualizar, selecione um contrato na tabela.");
-            
-    }                                        
-        else{
+
+        } else {
             int row = jTable1.getSelectedRow();
-            JOptionPane.showMessageDialog(null, "Aluno: "+jTable1.getValueAt(row, 0).toString()+"\nEmpresa: "+jTable1.getValueAt(row, 1).toString()+"\nEndereço: "+jTable1.getValueAt(row, 2)+"\n\nTelefone: "+jTable1.getValueAt(row, 3)+"\nE-mail: "+jTable1.getValueAt(row, 4)+"\n\nPeríodo:\n "+jTable1.getValueAt(row, 5)+"\n\nHorário: "+jTable1.getValueAt(row, 6)+"\nCarga Horária: "+jTable1.getValueAt(row, 7)+"\nValor: "+jTable1.getValueAt(row, 8)+"\n\nAgência: "+jTable1.getValueAt(row, 9)+"\n\nAditivo:\n"+jTable1.getValueAt(row, 10));
+            JOptionPane.showMessageDialog(null, "Aluno: " + jTable1.getValueAt(row, 0).toString() + "\nEmpresa: " + jTable1.getValueAt(row, 1).toString() + "\nEndereço: " + jTable1.getValueAt(row, 2) + "\n\nTelefone: " + jTable1.getValueAt(row, 3) + "\nE-mail: " + jTable1.getValueAt(row, 4) + "\n\nPeríodo:\n " + jTable1.getValueAt(row, 5) + "\n\nHorário: " + jTable1.getValueAt(row, 6) + "\nCarga Horária: " + jTable1.getValueAt(row, 7) + "\nValor: " + jTable1.getValueAt(row, 8) + "\n\nAgência: " + jTable1.getValueAt(row, 9) + "\n\nAditivo:\n" + jTable1.getValueAt(row, 10));
         }
-    
+
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroContrato().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */

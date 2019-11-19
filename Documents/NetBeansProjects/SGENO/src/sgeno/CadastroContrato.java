@@ -31,7 +31,6 @@ public class CadastroContrato extends javax.swing.JFrame {
         initComponents();
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -380,7 +379,7 @@ public class CadastroContrato extends javax.swing.JFrame {
 
             boxVga.close();
             boxVg.close();
-           
+
             stmt.setInt(4, 123);
             stmt.setInt(5, 456);
 
@@ -412,13 +411,13 @@ public class CadastroContrato extends javax.swing.JFrame {
             //executa o comando
             stmt.executeUpdate();
             //Encerra o comando e a conexão
-                    boxAluno.setSelectedIndex(0);
-        boxEmpresa.setSelectedIndex(0);
-        boxMotivo.setSelectedIndex(0);
-        periodoAteContrato.setText("");
-        periodoDeContrato.setText("");
-        obsContrato.setText("");
-        boxAgencia.setSelectedIndex(0);
+            boxAluno.setSelectedIndex(0);
+            boxEmpresa.setSelectedIndex(0);
+            boxMotivo.setSelectedIndex(0);
+            periodoAteContrato.setText("");
+            periodoDeContrato.setText("");
+            obsContrato.setText("");
+            boxAgencia.setSelectedIndex(0);
             stmt.close();
             con.close();
 
@@ -522,7 +521,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         boxMotivo.updateUI();
-        
+
         //Carregar combobox dos VAGAS
         boxVaga.removeAllItems();
         try {

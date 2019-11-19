@@ -1,4 +1,3 @@
-
 package sgeno;
 
 import java.sql.Connection;
@@ -15,7 +14,6 @@ import sgeno.*;
 import sgeno.Classes.Empresa;
 import static sgeno.Classes.TodosArrays.listaAluno;
 import static sgeno.Classes.TodosArrays.listaEmpresa;
-
 
 public class CadastroEmpresa extends javax.swing.JFrame {
 
