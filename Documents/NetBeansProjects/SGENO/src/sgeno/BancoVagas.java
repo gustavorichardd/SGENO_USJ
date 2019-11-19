@@ -305,36 +305,8 @@ public class BancoVagas extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if(TabelaVagas.getSelectionModel().isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
-    }//GEN-LAST:event_jButton2ActionPerformed
-        else{
-            int indexExcluir = TabelaVagas.getSelectedRow();
             
-            
-            Object[] options = { "Sim", "Não" };
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir esta empresa?\nNome: "+listaEmpresa.get(indexExcluir).getNome()+"\nEnredeço: "+listaEmpresa.get(indexExcluir).getEndereco(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
-            
-            
-            switch(excluir){
-                case 0:
-                listaVaga.remove(indexExcluir);  
-                
-                    break;
-                
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-            }
-            
-            
-    }
-        organizaTabelaVaga();
-    }
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
+             try {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
@@ -368,6 +340,36 @@ public class BancoVagas extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_jButton2ActionPerformed
+        else{
+            int indexExcluir = TabelaVagas.getSelectedRow();
+            
+            
+            Object[] options = { "Sim", "Não" };
+            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir esta empresa?\nNome: "+listaEmpresa.get(indexExcluir).getNome()+"\nEnredeço: "+listaEmpresa.get(indexExcluir).getEndereco(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,null, options, options[0]);
+            
+            
+            switch(excluir){
+                case 0:
+                listaVaga.remove(indexExcluir);  
+                
+                    break;
+                
+                case 1:
+                    
+                    break;
+                                
+                default:
+                    
+                    break;
+            }
+            
+            
+    }
+        organizaTabelaVaga();
+    }
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       
     }//GEN-LAST:event_jButton5ActionPerformed
        
     
