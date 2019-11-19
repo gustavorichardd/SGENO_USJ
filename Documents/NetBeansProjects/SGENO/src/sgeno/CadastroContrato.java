@@ -58,17 +58,24 @@ public class CadastroContrato extends javax.swing.JFrame {
         boxAluno = new javax.swing.JComboBox<>();
         boxEmpresa = new javax.swing.JComboBox<>();
 <<<<<<< HEAD
+<<<<<<< HEAD
         jLabel14 = new javax.swing.JLabel();
 =======
+=======
+>>>>>>> origin/master
         jLabel19 = new javax.swing.JLabel();
         boxMotivo = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
         jLabel21 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         obsContrato = new javax.swing.JTextArea();
         periodoDeContrato = new javax.swing.JTextField();
         periodoAteContrato = new javax.swing.JTextField();
+<<<<<<< HEAD
 <<<<<<< HEAD
         horaDeContrato = new javax.swing.JTextField();
         horaAteContrato = new javax.swing.JTextField();
@@ -79,6 +86,11 @@ public class CadastroContrato extends javax.swing.JFrame {
         dataContrato = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         data2Contrato = new javax.swing.JTextField();
+=======
+        boxAgencia = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        boxVaga = new javax.swing.JComboBox<>();
+>>>>>>> origin/master
 =======
         boxAgencia = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -198,6 +210,9 @@ public class CadastroContrato extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Motivo:");
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -216,6 +231,7 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("*Vaga:");
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         horaAteContrato.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
@@ -278,6 +294,9 @@ public class CadastroContrato extends javax.swing.JFrame {
 =======
         boxVaga.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 >>>>>>> origin/master
+=======
+        boxVaga.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+>>>>>>> origin/master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,10 +348,13 @@ public class CadastroContrato extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxVaga, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+<<<<<<< HEAD
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(agenciaContrato))
+=======
+>>>>>>> origin/master
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,6 +363,7 @@ public class CadastroContrato extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+<<<<<<< HEAD
 <<<<<<< HEAD
                         .addGap(112, 112, 112))
                     .addGroup(layout.createSequentialGroup()
@@ -389,6 +412,9 @@ public class CadastroContrato extends javax.swing.JFrame {
 =======
                         .addGap(112, 112, 112))))
 >>>>>>> origin/master
+=======
+                        .addGap(112, 112, 112))))
+>>>>>>> origin/master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,8 +429,11 @@ public class CadastroContrato extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(boxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 =======
+=======
+>>>>>>> origin/master
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -414,13 +443,19 @@ public class CadastroContrato extends javax.swing.JFrame {
 >>>>>>> origin/master
                     .addGroup(layout.createSequentialGroup()
 <<<<<<< HEAD
+<<<<<<< HEAD
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+=======
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel17)
+>>>>>>> origin/master
 =======
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel17)
 >>>>>>> origin/master
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+<<<<<<< HEAD
 <<<<<<< HEAD
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -456,6 +491,8 @@ public class CadastroContrato extends javax.swing.JFrame {
                                             .addComponent(horaAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE))
 =======
+=======
+>>>>>>> origin/master
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -469,6 +506,9 @@ public class CadastroContrato extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(boxAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,8 +828,11 @@ public class CadastroContrato extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel18;
 =======
+=======
+>>>>>>> origin/master
     private javax.swing.JLabel jLabel19;
 >>>>>>> origin/master
     private javax.swing.JLabel jLabel2;

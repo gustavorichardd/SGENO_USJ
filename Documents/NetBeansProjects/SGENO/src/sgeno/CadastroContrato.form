@@ -90,11 +90,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="boxVaga" max="32767" attributes="0"/>
                           </Group>
+<<<<<<< HEAD
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="agenciaContrato" max="32767" attributes="0"/>
                           </Group>
+=======
+>>>>>>> origin/master
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -107,6 +110,7 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
                   </Group>
                   <Group type="102" attributes="0">
@@ -167,6 +171,8 @@
                       <EmptySpace max="-2" attributes="0"/>
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> origin/master
                   </Group>
               </Group>
           </Group>
@@ -186,6 +192,7 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="boxEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
 <<<<<<< HEAD
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -260,11 +267,39 @@
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               <Component id="periodoDeContrato" min="-2" max="-2" attributes="0"/>
 >>>>>>> origin/master
+=======
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="boxVaga" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="periodoAteContrato" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+>>>>>>> origin/master
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                              <Component id="periodoDeContrato" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
                       <EmptySpace pref="108" max="32767" attributes="0"/>
 =======
+=======
+>>>>>>> origin/master
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -541,6 +576,9 @@
           <Font name="Arial" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Motivo:"/>
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
       </Properties>
     </Component>
@@ -598,6 +636,7 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
+<<<<<<< HEAD
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
@@ -606,14 +645,24 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="boxVaga">
+=======
+>>>>>>> origin/master
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="12" style="1"/>
+          <Font name="Arial" size="14" style="0"/>
         </Property>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        <Property name="text" type="java.lang.String" value="*Vaga:"/>
+>>>>>>> origin/master
       </Properties>
     </Component>
+<<<<<<< HEAD
     <Container class="javax.swing.JPanel" name="jPanel2">
+=======
+    <Component class="javax.swing.JComboBox" name="boxVaga">
+>>>>>>> origin/master
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -626,6 +675,7 @@
           <StringArray count="0"/>
 >>>>>>> origin/master
         </Property>
+<<<<<<< HEAD
       </Properties>
 <<<<<<< HEAD
 
@@ -739,6 +789,16 @@
       </SubComponents>
     </Container>
 =======
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+>>>>>>> origin/master
+=======
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

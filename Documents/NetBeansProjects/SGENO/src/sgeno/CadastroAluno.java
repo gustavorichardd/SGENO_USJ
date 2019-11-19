@@ -142,6 +142,11 @@ public class CadastroAluno extends javax.swing.JFrame {
                 matriculaAlunoActionPerformed(evt);
             }
         });
+        matriculaAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                matriculaAlunoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Nome Completo:");
@@ -516,6 +521,14 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void telefoneAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneAlunoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneAlunoActionPerformed
+
+    private void matriculaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_matriculaAlunoActionPerformed
+
+    private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
+
+    }//GEN-LAST:event_matriculaAlunoMouseClicked
 
     private void matriculaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaAlunoActionPerformed
         // TODO add your handling code here:
