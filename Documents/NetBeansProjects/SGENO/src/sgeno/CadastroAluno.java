@@ -137,16 +137,6 @@ public class CadastroAluno extends javax.swing.JFrame {
                 matriculaAlunoMouseClicked(evt);
             }
         });
-        matriculaAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaAlunoActionPerformed(evt);
-            }
-        });
-        matriculaAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaAlunoActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setText("Nome Completo:");
@@ -305,7 +295,6 @@ public class CadastroAluno extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
-<<<<<<< HEAD
                                 .addComponent(cursoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,38 +316,6 @@ public class CadastroAluno extends javax.swing.JFrame {
                             .addComponent(nomeAluno))
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
-=======
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cursoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(faseAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(telefoneAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(celularAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(emailAluno)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(sexoAluno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sexoAlunoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
->>>>>>> origin/master
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +379,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -494,6 +451,11 @@ public class CadastroAluno extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cursoAlunoActionPerformed
 
+    private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
+
+
+    }//GEN-LAST:event_matriculaAlunoMouseClicked
+
     private void nomeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nomeAlunoMouseClicked
 
     }//GEN-LAST:event_nomeAlunoMouseClicked
@@ -521,22 +483,6 @@ public class CadastroAluno extends javax.swing.JFrame {
     private void telefoneAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneAlunoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_telefoneAlunoActionPerformed
-
-    private void matriculaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaAlunoActionPerformed
-
-    private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
-
-    }//GEN-LAST:event_matriculaAlunoMouseClicked
-
-    private void matriculaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaAlunoActionPerformed
-
-    private void matriculaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_matriculaAlunoMouseClicked
-
-    }//GEN-LAST:event_matriculaAlunoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -602,3 +548,4 @@ public class CadastroAluno extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
+// teste
