@@ -118,6 +118,11 @@ public class BancoVagas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(705, 535));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -371,6 +376,45 @@ public class BancoVagas extends javax.swing.JFrame {
         this.dispose();
         new CadastroVaga().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+      
+         try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+            String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+            DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
+            model.setNumRows(0);
+
+            while (resultado.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultado.getString("DESC_VAGA"),
+                    resultado.getString("COD_EMPRESA"),
+                    resultado.getString("COD_CURSO"),
+                    resultado.getString("FASEMIN"),
+                    resultado.getString("VALOR"),});
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_formWindowActivated
     
     /**
      * @param args the command line arguments
