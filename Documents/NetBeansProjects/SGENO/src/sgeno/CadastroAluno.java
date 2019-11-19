@@ -372,7 +372,7 @@ public class CadastroAluno extends javax.swing.JFrame {
         telefoneAluno.setText("");
         celularAluno.setText("");
         emailAluno.setText("");
-        
+
         //teste
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -460,7 +460,7 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_telefoneAlunoMouseClicked
 
     private void celularAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_celularAlunoMouseClicked
-      telefoneAluno.setEnabled(false);
+        telefoneAluno.setEnabled(false);
     }//GEN-LAST:event_celularAlunoMouseClicked
 
     private void emailAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailAlunoMouseClicked

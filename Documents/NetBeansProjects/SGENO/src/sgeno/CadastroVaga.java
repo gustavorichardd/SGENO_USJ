@@ -427,6 +427,16 @@ public class CadastroVaga extends javax.swing.JFrame {
             //executa o comando
             stmt.executeUpdate();
             //Encerra o comando e a conexão
+            tituloVaga.setText("");
+            cursoVaga.setSelectedIndex(0);
+            boxEmpresa.setSelectedIndex(0);
+            faseVaga.setText("");
+            valorVaga.setText("");
+            horaAteVaga.setText("");
+            horaDeVaga.setText("");
+            turnoVaga.setText("");
+            chVaga.setText("");
+            obsVaga.setText("");
             stmt.close();
             con.close();
 
@@ -490,7 +500,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
         cursoVaga.updateUI();
-        
+
         //Teste
 
     }//GEN-LAST:event_formWindowActivated
