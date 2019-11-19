@@ -381,8 +381,8 @@ public class CadastroContrato extends javax.swing.JFrame {
             boxVga.close();
             boxVg.close();
            
-            stmt.setInt(4, 123);
-            stmt.setInt(5, 456);
+            stmt.setString(4, periodoDeContrato.getText());
+            stmt.setString(5, periodoAteContrato.getText());
 
             //Pegar o ADITIVO
             int codAdt = 0;
