@@ -21,11 +21,12 @@ public class Alunos extends javax.swing.JFrame {
 
     public Alunos() {
         initComponents();
+    
     }
 
     public void organizaTabelaAluno() {
 
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaAlunos.getModel();
         modelo.getDataVector().clear();
 
         for (Aluno a : listaAluno) {
@@ -47,17 +48,17 @@ public class Alunos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        TabelaAlunos = new javax.swing.JTable();
+        EXCLUIR = new javax.swing.JButton();
+        EDITAR = new javax.swing.JButton();
+        CADASTRAR = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -96,6 +97,8 @@ public class Alunos extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Centro Universitário Municipal de São José (USJ)");
+
+        jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ALUNOS");
@@ -160,7 +163,7 @@ public class Alunos extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -183,50 +186,43 @@ public class Alunos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(80);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(35);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
+        TabelaAlunos.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(TabelaAlunos);
+        if (TabelaAlunos.getColumnModel().getColumnCount() > 0) {
+            TabelaAlunos.getColumnModel().getColumn(0).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(0).setPreferredWidth(80);
+            TabelaAlunos.getColumnModel().getColumn(1).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(2).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(2).setPreferredWidth(40);
+            TabelaAlunos.getColumnModel().getColumn(3).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(3).setPreferredWidth(35);
+            TabelaAlunos.getColumnModel().getColumn(4).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(4).setPreferredWidth(50);
+            TabelaAlunos.getColumnModel().getColumn(5).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(5).setPreferredWidth(90);
+            TabelaAlunos.getColumnModel().getColumn(6).setResizable(false);
+            TabelaAlunos.getColumnModel().getColumn(6).setPreferredWidth(90);
+            TabelaAlunos.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        jButton2.setText("Excluir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        EXCLUIR.setText("Excluir");
+        EXCLUIR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                EXCLUIRActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        EDITAR.setText("Editar");
+        EDITAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                EDITARActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Cadastrar Novo");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        CADASTRAR.setText("Cadastrar Novo");
+        CADASTRAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Visualizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                CADASTRARActionPerformed(evt);
             }
         });
 
@@ -240,10 +236,9 @@ public class Alunos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(EDITAR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CADASTRAR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(EXCLUIR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -252,16 +247,14 @@ public class Alunos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -274,51 +267,44 @@ public class Alunos extends javax.swing.JFrame {
         new Inicial().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARActionPerformed
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_EDITARActionPerformed
 
     // Botão Excluir
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = (?)";
-            PreparedStatement stmt = con.prepareStatement(query);
-            /*
-            int linha = jTable1.getSelectedRow(); // retorna a linha selecionada pelo usuario
-            setText(jTable1.getValueAt(linha,0).toString());
-             */
-            int linha = jTable1.getSelectedRow();
-            //Seta os valores na query
-            stmt.setInt(1, Integer.valueOf(jTable1.getValueAt(linha, 0).toString()));
-            //Cria o comando para inserir no banco
-
-            //executa o comando
-            stmt.executeUpdate();
-            //Encerra o comando e a conexão
-            stmt.close();
-            con.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+    private void EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXCLUIRActionPerformed
+        //DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
+        
+        try{
+           try{
+               Class.forName("com.mysql.jdbc.Driver");
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);     
+           }
+          Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+          PreparedStatement stmt = null;
+          stmt = con.prepareStatement("DELETE FROM aluno WHERE MATRICULA= ?");
+          stmt.setString(1, TabelaAlunos.getModel().getValueAt(TabelaAlunos.getSelectedRow(), 0).toString());
+          
+          stmt.executeUpdate();
+          
+          stmt.close();
+          con.close();
+          
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "ERRO!!");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    // Botão Visualizar
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
+        
+        //ATUALIZA
+        
+         try {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
@@ -327,7 +313,7 @@ public class Alunos extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -350,13 +336,14 @@ public class Alunos extends javax.swing.JFrame {
             Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        
+        
+    }//GEN-LAST:event_EXCLUIRActionPerformed
 
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CADASTRARActionPerformed
         this.dispose();
         new CadastroAluno().setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_CADASTRARActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
@@ -366,7 +353,7 @@ public class Alunos extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
@@ -375,7 +362,7 @@ public class Alunos extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -437,11 +424,12 @@ public class Alunos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CADASTRAR;
+    private javax.swing.JButton EDITAR;
+    private javax.swing.JButton EXCLUIR;
+    private javax.swing.JTable TabelaAlunos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -451,6 +439,7 @@ public class Alunos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+   
 }
