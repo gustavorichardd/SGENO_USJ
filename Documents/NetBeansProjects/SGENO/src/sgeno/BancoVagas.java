@@ -273,16 +273,25 @@ public class BancoVagas extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (TabelaVagas.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
-
+        } else {
             try {
-
-                //procura a classe do Driver jdbc
                 Class.forName("com.mysql.jdbc.Driver");
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                /*String query = "UPDATE vaga set VAGA_STATUS = 'I' where COD_VAGA = ?";
+                PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
+                stmt.setInt(1, Integer.valueOf(TabelaVagas.getValueAt(TabelaVagas.getSelectedRow(), 0).toString()));*/
+
+                // carregar a visualização depois de apagar
+                //procura a classe do Driver jdbc
+                // QUALQUER COISA DA DE TIRAR Class.forName("com.mysql.jdbc.Driver");
                 //Cria uma variável do tipo conexão 
                 // Verificar usuário a senha do banco!!
-                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // QUALQUER COISA DA DE TIRAR Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
                 // Query para inserir os alunos no banco
-                String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+                String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
+                        + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
+                        + "inner join curso on vaga.cod_curso = curso.cod_curso\n"
+                        + "where vaga.status_vaga = 'A';";
                 //Cria o comando para inserir no banco
                 PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
                 stmt.execute(); // cria o vetor
@@ -295,11 +304,11 @@ public class BancoVagas extends javax.swing.JFrame {
                 while (resultado.next()) {
                     model.addRow(new Object[]{
                         //retorna os dados da tabela do BD, cada campo e um coluna.
-                        resultado.getString("DESC_VAGA"),
-                        resultado.getString("COD_EMPRESA"),
-                        resultado.getString("COD_CURSO"),
-                        resultado.getString("FASEMIN"),
-                        resultado.getString("VALOR"),});
+                        resultado.getString("VAGA.DESC_VAGA"),
+                        resultado.getString("EMPRESA.NOME"),
+                        resultado.getString("CURSO.DESC_CURSO"),
+                        resultado.getString("VAGA.FASEMIN"),
+                        resultado.getString("VAGA.VALOR"),});
                 }
                 stmt.close();
                 con.close();
@@ -307,9 +316,10 @@ public class BancoVagas extends javax.swing.JFrame {
                 System.out.println("o erro foi " + ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-            
+
     }//GEN-LAST:event_jButton2ActionPerformed
         }
+
     }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -327,7 +337,10 @@ public class BancoVagas extends javax.swing.JFrame {
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "SELECT DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR FROM vaga";
+            String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
+                    + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
+                    + "inner join curso on vaga.cod_curso = curso.cod_curso\n"
+                    + "where vaga.status_vaga = 'A';";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
@@ -340,11 +353,11 @@ public class BancoVagas extends javax.swing.JFrame {
             while (resultado.next()) {
                 model.addRow(new Object[]{
                     //retorna os dados da tabela do BD, cada campo e um coluna.
-                    resultado.getString("DESC_VAGA"),
-                    resultado.getString("COD_EMPRESA"),
-                    resultado.getString("COD_CURSO"),
-                    resultado.getString("FASEMIN"),
-                    resultado.getString("VALOR"),});
+                    resultado.getString("VAGA.DESC_VAGA"),
+                    resultado.getString("EMPRESA.NOME"),
+                    resultado.getString("CURSO.DESC_CURSO"),
+                    resultado.getString("VAGA.FASEMIN"),
+                    resultado.getString("VAGA.VALOR"),});
             }
             stmt.close();
             con.close();

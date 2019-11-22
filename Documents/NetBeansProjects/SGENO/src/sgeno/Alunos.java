@@ -21,18 +21,7 @@ public class Alunos extends javax.swing.JFrame {
 
     public Alunos() {
         initComponents();
-    
-    }
 
-    public void organizaTabelaAluno() {
-
-        DefaultTableModel modelo = (DefaultTableModel) TabelaAlunos.getModel();
-        modelo.getDataVector().clear();
-
-        for (Aluno a : listaAluno) {
-            modelo.addRow(new Object[]{a.getMatrícula(), a.getNome(), a.getCurso(), a.getFase(), a.getSexo(), a.getTelefone(), a.getCelular(), a.getEmail()});
-
-        }
     }
 
     /**
@@ -213,11 +202,6 @@ public class Alunos extends javax.swing.JFrame {
         });
 
         EDITAR.setText("Editar");
-        EDITAR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EDITARActionPerformed(evt);
-            }
-        });
 
         CADASTRAR.setText("Cadastrar Novo");
         CADASTRAR.addActionListener(new java.awt.event.ActionListener() {
@@ -267,37 +251,32 @@ public class Alunos extends javax.swing.JFrame {
         new Inicial().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARActionPerformed
-
-    }//GEN-LAST:event_EDITARActionPerformed
-
     // Botão Excluir
     private void EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXCLUIRActionPerformed
-        //DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
-        
-        try{
-           try{
-               Class.forName("com.mysql.jdbc.Driver");
-           } catch (ClassNotFoundException ex) {
-               Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);     
-           }
-          Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-          PreparedStatement stmt = con.prepareStatement("DELETE FROM aluno WHERE MATRICULA= ?");
-          stmt.setString(1, TabelaAlunos.getModel().getValueAt(TabelaAlunos.getSelectedRow(), 0).toString());
-          
-          stmt.executeUpdate();
-          
-          stmt.close();
-          con.close();
-          
+        DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
+
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
+            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(),0).toString()));
+
+            stmt.executeUpdate();
+            
+            stmt.close();
+            con.close();
+
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "ERRO!!");
             throw new RuntimeException("Erro na conexão com o banco", erro);
         }
-        
+
         //ATUALIZA
-        
-         try {
+        try {
 
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
@@ -305,14 +284,13 @@ public class Alunos extends javax.swing.JFrame {
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
+            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM aluno WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -335,8 +313,7 @@ public class Alunos extends javax.swing.JFrame {
             Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
-        
+
     }//GEN-LAST:event_EXCLUIRActionPerformed
 
     private void CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CADASTRARActionPerformed
@@ -440,5 +417,4 @@ public class Alunos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-   
 }

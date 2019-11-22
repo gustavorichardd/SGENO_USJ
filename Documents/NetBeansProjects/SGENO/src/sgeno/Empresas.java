@@ -69,7 +69,6 @@ public class Empresas extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -229,13 +228,6 @@ public class Empresas extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Visualizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -247,8 +239,7 @@ public class Empresas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,11 +249,9 @@ public class Empresas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,48 +355,6 @@ public class Empresas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "SELECT NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL FROM empresa WHERE EMPRESA_STATUS = 'A'";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
-            stmt.execute(); // cria o vetor
-
-            ResultSet resultado = stmt.executeQuery(query);
-
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.setNumRows(0);
-
-            while (resultado.next()) {
-                model.addRow(new Object[]{
-                    //retorna os dados da tabela do BD, cada campo e um coluna.
-                    resultado.getString("NOME"),
-                    resultado.getString("ENDERECO"),
-                    resultado.getString("RESPONSAVEL"),
-                    resultado.getString("TELEFONE"),
-                    resultado.getString("EMAIL"),});
-
-                //NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL
-            }
-            stmt.close();
-            con.close();
-
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroEmpresa().setVisible(true);
@@ -495,7 +442,6 @@ public class Empresas extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
