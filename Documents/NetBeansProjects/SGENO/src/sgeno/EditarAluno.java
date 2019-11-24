@@ -4,10 +4,19 @@
  * and open the template in the editor.
  */
 package sgeno;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import sgeno.Classes.Aluno;
 import sgeno.Classes.TodosArrays;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import sgeno.*;
 import static sgeno.Classes.TodosArrays.listaAluno;
 
@@ -17,55 +26,8 @@ import static sgeno.Classes.TodosArrays.listaAluno;
  */
 public class EditarAluno extends javax.swing.JFrame {
 
-int sobrepor;    
-    
-    public EditarAluno(int index) {
-                
-    }
-
-    private EditarAluno() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public void editarAluno(int index){
-        String curso = TodosArrays.listaAluno.get(index).getCurso();
-        
-        matriculaAluno.setText(TodosArrays.listaAluno.get(index).getMatrícula());
-        nomeAluno.setText(TodosArrays.listaAluno.get(index).getNome());
-        faseAluno.setText(Integer.toString(TodosArrays.listaAluno.get(index).getFase()));
-        telefoneAluno.setText(listaAluno.get(index).getTelefone());
-        celularAluno.setText(listaAluno.get(index).getCelular());
-        emailAluno.setText(listaAluno.get(index).getEmail());
-                
-        switch(curso){
-            case"ADM":
-        cursoAluno.setSelectedIndex(1);        
-                break;
-                
-            case"CC":
-        cursoAluno.setSelectedIndex(2);        
-                break;
-            
-            case"ADS":
-        cursoAluno.setSelectedIndex(3);        
-                break;
-             
-            case"PDG":
-        cursoAluno.setSelectedIndex(4);        
-                break;
-                
-            default:
-        cursoAluno.setSelectedIndex(0);  
-                break;
-        }
-        
-        if(TodosArrays.listaAluno.get(index).getSexo().equals("M")){
-            sexoM.setSelected(true);
-        }else{
-            sexoF.setSelected(true);
-        }
-        
-        
+    public EditarAluno() {
+        initComponents();
     }
 
     /**
@@ -104,9 +66,16 @@ int sobrepor;
         jPanel5 = new javax.swing.JPanel();
         sexoF = new javax.swing.JRadioButton();
         sexoM = new javax.swing.JRadioButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EDITAR ALUNO");
         setMinimumSize(new java.awt.Dimension(565, 468));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -114,11 +83,6 @@ int sobrepor;
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usj_300x110.png"))); // NOI18N
 
         jButton4.setText("Voltar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -330,6 +294,13 @@ int sobrepor;
                 .addGap(0, 13, Short.MAX_VALUE))
         );
 
+        jButton3.setText("Editar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -340,6 +311,8 @@ int sobrepor;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,7 +349,8 @@ int sobrepor;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -409,10 +383,14 @@ int sobrepor;
         // TODO add your handling code here:
     }//GEN-LAST:event_sexoMActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.dispose();
-        new Alunos().setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -458,6 +436,7 @@ int sobrepor;
     private javax.swing.JTextField faseAluno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

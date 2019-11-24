@@ -202,6 +202,11 @@ public class Alunos extends javax.swing.JFrame {
         });
 
         EDITAR.setText("Editar");
+        EDITAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EDITARActionPerformed(evt);
+            }
+        });
 
         CADASTRAR.setText("Cadastrar Novo");
         CADASTRAR.addActionListener(new java.awt.event.ActionListener() {
@@ -263,10 +268,10 @@ public class Alunos extends javax.swing.JFrame {
             }
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
-            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(),0).toString()));
+            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
 
             stmt.executeUpdate();
-            
+
             stmt.close();
             con.close();
 
@@ -362,6 +367,35 @@ public class Alunos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARActionPerformed
+        try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "INSERT INTO edita_aluno_temp (matricula_temp) values (?)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.dispose();
+        new CadastroAluno().setVisible(true);
+        
+        
+    }//GEN-LAST:event_EDITARActionPerformed
 
     /**
      * @param args the command line arguments
