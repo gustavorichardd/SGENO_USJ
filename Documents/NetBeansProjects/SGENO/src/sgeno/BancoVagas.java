@@ -60,7 +60,6 @@ public class BancoVagas extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -101,6 +100,7 @@ public class BancoVagas extends javax.swing.JFrame {
         jLabel3.setText("Centro Universitário Municipal de São José (USJ)");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CADASTRO DE VAGAS");
         setMinimumSize(new java.awt.Dimension(705, 535));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -220,8 +220,6 @@ public class BancoVagas extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Visualizar");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -232,8 +230,6 @@ public class BancoVagas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,8 +250,7 @@ public class BancoVagas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -279,41 +274,22 @@ public class BancoVagas extends javax.swing.JFrame {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-                /*String query = "UPDATE vaga set VAGA_STATUS = 'I' where COD_VAGA = ?";
-                PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
-                stmt.setInt(1, Integer.valueOf(TabelaVagas.getValueAt(TabelaVagas.getSelectedRow(), 0).toString()));*/
-
-                // carregar a visualização depois de apagar
-                //procura a classe do Driver jdbc
-                // QUALQUER COISA DA DE TIRAR Class.forName("com.mysql.jdbc.Driver");
-                //Cria uma variável do tipo conexão 
-                // Verificar usuário a senha do banco!!
-                // QUALQUER COISA DA DE TIRAR Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-                // Query para inserir os alunos no banco
-                String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
-                        + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
-                        + "inner join curso on vaga.cod_curso = curso.cod_curso\n"
-                        + "where vaga.status_vaga = 'A';";
-                //Cria o comando para inserir no banco
-                PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
-                stmt.execute(); // cria o vetor
-
-                ResultSet resultado = stmt.executeQuery(query);
-
-                DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
-                model.setNumRows(0);
-
-                while (resultado.next()) {
-                    model.addRow(new Object[]{
-                        //retorna os dados da tabela do BD, cada campo e um coluna.
-                        resultado.getString("VAGA.DESC_VAGA"),
-                        resultado.getString("EMPRESA.NOME"),
-                        resultado.getString("CURSO.DESC_CURSO"),
-                        resultado.getString("VAGA.FASEMIN"),
-                        resultado.getString("VAGA.VALOR"),});
+                String query = "UPDATE vaga set VAGA_STATUS = 'I' where COD_VAGA = ?";
+                PreparedStatement stmt = con.prepareStatement(query);
+                //pegar cod_vaga
+                int codEmp = 0;
+                PreparedStatement tabVag = con.prepareStatement("SELECT COD_VAGA FROM vaga WHERE DESC_VAGA = (?)");
+                tabVag.setString(1, TabelaVagas.getValueAt(TabelaVagas.getSelectedRow(), 0).toString());
+                ResultSet tabVagR = tabVag.executeQuery();
+                while (tabVagR.next()) {
+                    codEmp = Integer.parseInt(tabVagR.getString("COD_VAGA"));
                 }
-                stmt.close();
-                con.close();
+                stmt.setInt(1, codEmp);
+
+                tabVagR.close();
+                tabVag.close();
+
+                stmt.executeUpdate();
             } catch (SQLException ex) {
                 System.out.println("o erro foi " + ex);
             } catch (ClassNotFoundException ex) {
@@ -342,7 +318,7 @@ public class BancoVagas extends javax.swing.JFrame {
             String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
                     + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
                     + "inner join curso on vaga.cod_curso = curso.cod_curso\n"
-                    + "where vaga.status_vaga = 'A';";
+                    + "where vaga.vaga_status = 'A';";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
@@ -427,7 +403,6 @@ public class BancoVagas extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

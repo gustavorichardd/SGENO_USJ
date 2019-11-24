@@ -5,8 +5,15 @@
  */
 package sgeno;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import sgeno.Classes.Aluno;
 import java.time.Clock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -65,7 +72,6 @@ public class Contratos extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -107,6 +113,11 @@ public class Contratos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(705, 535));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -155,7 +166,7 @@ public class Contratos extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 396, Short.MAX_VALUE)
+                .addGap(0, 400, Short.MAX_VALUE)
                 .addComponent(jLabel4))
         );
         jPanel4Layout.setVerticalGroup(
@@ -227,13 +238,6 @@ public class Contratos extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Visualizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,9 +247,7 @@ public class Contratos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(406, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,8 +266,7 @@ public class Contratos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -279,62 +280,68 @@ public class Contratos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione um contrato na tabela.");
-        } else {
-            int index = jTable1.getSelectedRow();
-            String matriculaAluno = (String) jTable1.getValueAt(index, 0);
-            String nomeEmpresa = (String) jTable1.getValueAt(index, 1);
-            matriculaAluno = matriculaAluno.substring(0, 8);
-            this.dispose();
-            new EditarContrato(index, matriculaAluno, nomeEmpresa).setVisible(true);
 
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para excluir, selecione um contrato na tabela.");
+
     }//GEN-LAST:event_jButton2ActionPerformed
-        else {
-            int indexExcluir = jTable1.getSelectedRow();
-
-            Object[] options = {"Sim", "Não"};
-            int excluir = JOptionPane.showOptionDialog(null, "Você quer mesmo excluir este contrato?\nNome: " + listaAluno.get(indexExcluir).getNome() + "\nEmpresa: " + listaEmpresa.get(indexExcluir).getNome() + "\nEnredeço: " + listaEmpresa.get(indexExcluir).getEndereco(), "Aviso", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
-            switch (excluir) {
-                case 0:
-                    listaContrato.remove(indexExcluir);
-
-                    break;
-
-                case 1:
-
-                    break;
-
-                default:
-
-                    break;
-            }
-
-        }
-        organizaTabelaContrato();
-    }
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para visualizar, selecione um contrato na tabela.");
-
-        } else {
-            int row = jTable1.getSelectedRow();
-            JOptionPane.showMessageDialog(null, "Aluno: " + jTable1.getValueAt(row, 0).toString() + "\nEmpresa: " + jTable1.getValueAt(row, 1).toString() + "\nEndereço: " + jTable1.getValueAt(row, 2) + "\n\nTelefone: " + jTable1.getValueAt(row, 3) + "\nE-mail: " + jTable1.getValueAt(row, 4) + "\n\nPeríodo:\n " + jTable1.getValueAt(row, 5) + "\n\nHorário: " + jTable1.getValueAt(row, 6) + "\nCarga Horária: " + jTable1.getValueAt(row, 7) + "\nValor: " + jTable1.getValueAt(row, 8) + "\n\nAgência: " + jTable1.getValueAt(row, 9) + "\n\nAditivo:\n" + jTable1.getValueAt(row, 10));
-        }
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
+     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroContrato().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+ try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "select aluno.nome, empresa.nome, empresa.endereco, empresa.telefone, empresa.email, contrato.periodoate, vaga.horaate, vaga.cargahoraria,\n" +
+            "vaga.valor, agencia.DESC_agencia, aditivo.desc_aditivo from contrato\n" +
+            "inner join aluno on contrato.cod_aluno = aluno.matricula\n" +
+            "inner join empresa on contrato.cod_empresa = empresa.cod_empresa\n" +
+            "inner join vaga on contrato.cod_vaga = vaga.cod_vaga \n" +
+            "inner join aditivo on contrato.cod_aditivo = aditivo.cod_aditivo\n" +
+            "inner join agencia on contrato.cod_agencia = agencia.cod_agencia\n" +
+            "where contrato.contrato_status = 'A';";
+                        //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0);
+
+            while (resultado.next()) {
+                model.addRow(new Object[]{
+                    //retorna os dados da tabela do BD, cada campo e um coluna.
+                    resultado.getString("aluno.nome"),
+                    resultado.getString("empresa.nome"),
+                    resultado.getString("empresa.endereco"),
+                    resultado.getString("empresa.telefone"),
+                    resultado.getString("empresa.email"),
+                    resultado.getString("contrato.periodoate"),
+                    resultado.getString("vaga.horaate"),
+                    resultado.getString("vaga.cargahoraria"),
+                    resultado.getString("vaga.valor"),
+                    resultado.getString("agencia.desc_agencia"),
+                    resultado.getString("aditivo.desc_aditivo"),});
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -383,7 +390,6 @@ public class Contratos extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

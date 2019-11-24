@@ -287,7 +287,7 @@ public class Empresas extends javax.swing.JFrame {
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
+            // Query para alterar status da empresa
             String query = "UPDATE empresa SET EMPRESA_STATUS = 'I' WHERE COD_EMPRESA = (?)";
             PreparedStatement stmt = con.prepareStatement(query);
 

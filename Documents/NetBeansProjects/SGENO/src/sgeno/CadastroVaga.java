@@ -452,7 +452,7 @@ public class CadastroVaga extends javax.swing.JFrame {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
