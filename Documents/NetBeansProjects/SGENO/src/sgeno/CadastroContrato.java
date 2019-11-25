@@ -385,7 +385,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO contrato (COD_ALUNO, COD_EMPRESA, COD_VAGA, PERIODODE, PERIODOATE, COD_ADITIVO, COD_AGENCIA, OBSERVCONTRATO) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -485,7 +485,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM aluno where ALUNO_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -508,7 +508,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -531,7 +531,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_AGENCIA FROM agencia");
 
             ResultSet rs = stmt.executeQuery();
@@ -554,7 +554,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_ADITIVO FROM aditivo");
 
             ResultSet rs = stmt.executeQuery();
@@ -578,7 +578,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_VAGA FROM vaga");
 
             ResultSet rs = stmt.executeQuery();

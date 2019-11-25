@@ -362,7 +362,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO vaga (DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR, TURNO, HORADE, HORAATE, CARGAHORARIA,OBSERVVAGA) VALUES (?,?,?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -458,7 +458,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -481,7 +481,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
             PreparedStatement stmt = null;
             stmt = con.prepareStatement("SELECT DESC_CURSO FROM curso");
             ResultSet rs = stmt.executeQuery();
