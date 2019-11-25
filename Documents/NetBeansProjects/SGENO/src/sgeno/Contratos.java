@@ -39,7 +39,7 @@ public class Contratos extends javax.swing.JFrame {
 
     public void organizaTabelaContrato() {
 
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaContratoa.getModel();
         modelo.getDataVector().clear();
 
         for (Contrato c : listaContrato) {
@@ -68,7 +68,7 @@ public class Contratos extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaContratoa = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -174,7 +174,7 @@ public class Contratos extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaContratoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -197,24 +197,24 @@ public class Contratos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setHeaderValue("CH");
-            jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setResizable(false);
-            jTable1.getColumnModel().getColumn(10).setResizable(false);
+        TabelaContratoa.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(TabelaContratoa);
+        if (TabelaContratoa.getColumnModel().getColumnCount() > 0) {
+            TabelaContratoa.getColumnModel().getColumn(0).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(0).setPreferredWidth(150);
+            TabelaContratoa.getColumnModel().getColumn(1).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(1).setPreferredWidth(300);
+            TabelaContratoa.getColumnModel().getColumn(2).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(3).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(3).setPreferredWidth(90);
+            TabelaContratoa.getColumnModel().getColumn(4).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(5).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(6).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(7).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(7).setHeaderValue("CH");
+            TabelaContratoa.getColumnModel().getColumn(8).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(9).setResizable(false);
+            TabelaContratoa.getColumnModel().getColumn(10).setResizable(false);
         }
 
         jButton2.setText("Excluir");
@@ -272,6 +272,7 @@ public class Contratos extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -280,7 +281,8 @@ public class Contratos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        
+                        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -315,7 +317,7 @@ public class Contratos extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaContratoa.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -386,6 +388,7 @@ public class Contratos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaContratoa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -399,6 +402,5 @@ public class Contratos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

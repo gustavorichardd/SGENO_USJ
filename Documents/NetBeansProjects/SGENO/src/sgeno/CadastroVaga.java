@@ -334,6 +334,7 @@ public class CadastroVaga extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -396,7 +397,7 @@ public class CadastroVaga extends javax.swing.JFrame {
 
             stmt.setInt(4, Integer.valueOf(faseVaga.getText()));
             stmt.setInt(5, Integer.valueOf(valorVaga.getText()));
-            stmt.setInt(6, Integer.valueOf(turnoVaga.getText()));
+            stmt.setString(6, turnoVaga.getText());
 
             //Converter hora para inserir no banco
             String horaDeVg = horaDeVaga.getText();

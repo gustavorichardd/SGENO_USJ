@@ -69,7 +69,7 @@ public class EditarContrato extends javax.swing.JFrame {
         
     }
 
-    private EditarContrato() {
+    EditarContrato() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -567,6 +567,7 @@ public class EditarContrato extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
