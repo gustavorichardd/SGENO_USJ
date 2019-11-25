@@ -33,7 +33,7 @@ public class EditarEmpresa extends javax.swing.JFrame {
         
     }
 
-    private EditarEmpresa() {
+    EditarEmpresa() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -78,7 +78,9 @@ public class EditarEmpresa extends javax.swing.JFrame {
         emailEmpresa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EDIÇÃO DE EMPRESA");
         setMinimumSize(new java.awt.Dimension(565, 468));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -135,12 +137,12 @@ public class EditarEmpresa extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Nome da Empresa:");
+        jLabel4.setText("Nome da Empresa:");
 
         nomeEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel7.setText("*Endereço:");
+        jLabel7.setText("Endereço:");
 
         enderecoEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -166,7 +168,7 @@ public class EditarEmpresa extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("*Telefone:");
+        jLabel14.setText("Telefone:");
 
         try {
             telefoneEmpresa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########")));

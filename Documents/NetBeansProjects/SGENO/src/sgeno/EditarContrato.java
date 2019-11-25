@@ -205,7 +205,9 @@ public class EditarContrato extends javax.swing.JFrame {
         periodoAteContrato = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EDIÇÃO DE CONTRATO");
         setMinimumSize(new java.awt.Dimension(734, 472));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 

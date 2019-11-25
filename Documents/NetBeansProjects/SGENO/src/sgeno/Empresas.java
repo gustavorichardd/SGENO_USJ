@@ -37,7 +37,7 @@ public class Empresas extends javax.swing.JFrame {
 
     public void organizaTabelaEmpresa() {
 
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaEmpresas.getModel();
         modelo.getDataVector().clear();
 
         for (Empresa a : listaEmpresa) {
@@ -65,7 +65,7 @@ public class Empresas extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabelaEmpresas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -111,6 +111,7 @@ public class Empresas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EMPRESAS");
         setMinimumSize(new java.awt.Dimension(705, 535));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -171,7 +172,7 @@ public class Empresas extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaEmpresas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -194,17 +195,17 @@ public class Empresas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(90);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
+        TabelaEmpresas.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(TabelaEmpresas);
+        if (TabelaEmpresas.getColumnModel().getColumnCount() > 0) {
+            TabelaEmpresas.getColumnModel().getColumn(0).setResizable(false);
+            TabelaEmpresas.getColumnModel().getColumn(0).setPreferredWidth(150);
+            TabelaEmpresas.getColumnModel().getColumn(1).setResizable(false);
+            TabelaEmpresas.getColumnModel().getColumn(1).setPreferredWidth(300);
+            TabelaEmpresas.getColumnModel().getColumn(2).setResizable(false);
+            TabelaEmpresas.getColumnModel().getColumn(3).setResizable(false);
+            TabelaEmpresas.getColumnModel().getColumn(3).setPreferredWidth(90);
+            TabelaEmpresas.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton2.setText("Excluir");
@@ -271,12 +272,56 @@ public class Empresas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (jTable1.getSelectionModel().isSelectionEmpty()) {
+        if (TabelaEmpresas.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para editar, selecione uma empresa na tabela.");
         } else {
-            int index = jTable1.getSelectedRow();
+           
+             try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+                String query = "DELETE FROM EDITA_EMPRESA_TEMP";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+            String query = "INSERT INTO edita_empresa_temp (cod_empresa_temp) values (?)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, Integer.valueOf(TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString()));
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
             this.dispose();
-            new EditarEmpresa(index).setVisible(true);
+            new EditarEmpresa().setVisible(true);
 
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -292,10 +337,10 @@ public class Empresas extends javax.swing.JFrame {
             String query = "UPDATE empresa SET EMPRESA_STATUS = 'I' WHERE COD_EMPRESA = (?)";
             PreparedStatement stmt = con.prepareStatement(query);
 
-            int linha = jTable1.getSelectedRow();
+            int linha = TabelaEmpresas.getSelectedRow();
             int codEmp = 0;
             PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
-            boxE.setString(1, jTable1.getValueAt(linha, 0).toString());
+            boxE.setString(1, TabelaEmpresas.getValueAt(linha, 0).toString());
             ResultSet boxERs = boxE.executeQuery();
             while (boxERs.next()) {
                 codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
@@ -330,7 +375,7 @@ public class Empresas extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaEmpresas.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -377,7 +422,7 @@ public class Empresas extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaEmpresas.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -439,6 +484,7 @@ public class Empresas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabelaEmpresas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -452,6 +498,5 @@ public class Empresas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

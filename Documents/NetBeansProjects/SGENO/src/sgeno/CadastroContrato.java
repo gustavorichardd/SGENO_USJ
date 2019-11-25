@@ -72,6 +72,7 @@ public class CadastroContrato extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CADASTRO DE CONTRATOS");
         setMinimumSize(new java.awt.Dimension(734, 472));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -157,7 +158,7 @@ public class CadastroContrato extends javax.swing.JFrame {
         boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Vaga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
-        jPanel5.setToolTipText("");
+        jPanel5.setToolTipText("CADASTRO DE CONTRATO");
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Agência:");

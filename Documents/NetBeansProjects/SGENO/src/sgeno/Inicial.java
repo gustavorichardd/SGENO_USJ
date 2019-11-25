@@ -46,6 +46,7 @@ public class Inicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("USJ SGENO");
         setMinimumSize(new java.awt.Dimension(410, 350));
+        setResizable(false);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/i2_ALUNOS.png"))); // NOI18N
         jButton1.setRequestFocusEnabled(false);

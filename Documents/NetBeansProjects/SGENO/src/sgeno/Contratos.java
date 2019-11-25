@@ -112,7 +112,9 @@ public class Contratos extends javax.swing.JFrame {
         jLabel3.setText("Centro Universitário Municipal de São José (USJ)");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CONTRATOS");
         setMinimumSize(new java.awt.Dimension(705, 535));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);

@@ -147,7 +147,9 @@ public class EditarVaga extends javax.swing.JFrame {
         horaAteVaga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("EDIÇÃO DE VAGAS");
         setMinimumSize(new java.awt.Dimension(734, 472));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -204,10 +206,10 @@ public class EditarVaga extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("*Título da Vaga:");
+        jLabel3.setText("Título da Vaga:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Empresa:");
+        jLabel4.setText("Empresa:");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -224,10 +226,10 @@ public class EditarVaga extends javax.swing.JFrame {
         });
 
         boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione..." }));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("*Valor (R$):");
+        jLabel14.setText("Valor (R$):");
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Observação:");
