@@ -382,7 +382,7 @@ public class CadastroAluno extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO aluno (MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -402,7 +402,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Campo da fase do aluno vazio");
                         faseAluno.requestFocus();
                     } else {
-                        if (telefoneAluno.getText().equals("") || celularAluno.getText().equals("")) {
+                        if (telefoneAluno.getText().equals("") && celularAluno.getText().equals("")) {
                             JOptionPane.showMessageDialog(null, "Campo de telefone vazio");
                             telefoneAluno.requestFocus();
                             JOptionPane.showMessageDialog(null, "Campo de celular vazio");
@@ -414,7 +414,7 @@ public class CadastroAluno extends javax.swing.JFrame {
                             } else {
                                 stmt.setString(1, matriculaAluno.getText());
                                 stmt.setString(2, nomeAluno.getText());
-                                stmt.setString(3, sexoAlunoCombo.getSelectedItem().toString());
+                                stmt.setString(3, cursoAluno.getSelectedItem().toString());
                                 stmt.setInt(4, Integer.valueOf(faseAluno.getText()));
                                 stmt.setString(5, sexoAlunoCombo.getSelectedItem().toString());
                                 stmt.setString(6, telefoneAluno.getText());
@@ -455,11 +455,11 @@ public class CadastroAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_cursoAlunoActionPerformed
 
     private void telefoneAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_telefoneAlunoMouseClicked
-        celularAluno.setEnabled(false);
+        
     }//GEN-LAST:event_telefoneAlunoMouseClicked
 
     private void celularAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_celularAlunoMouseClicked
-        telefoneAluno.setEnabled(false);
+       
     }//GEN-LAST:event_celularAlunoMouseClicked
 
     private void emailAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailAlunoMouseClicked

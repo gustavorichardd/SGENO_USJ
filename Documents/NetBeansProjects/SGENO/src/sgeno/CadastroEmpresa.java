@@ -107,12 +107,12 @@ public class CadastroEmpresa extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Nome da Empresa:");
+        jLabel4.setText("Nome da Empresa:");
 
         nomeEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel7.setText("*Endereço:");
+        jLabel7.setText("Endereço:");
 
         enderecoEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -138,7 +138,7 @@ public class CadastroEmpresa extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contatos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("*Telefone:");
+        jLabel14.setText("Telefone:");
 
         try {
             telefoneEmpresa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)########")));
@@ -171,12 +171,13 @@ public class CadastroEmpresa extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(telefoneEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(emailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(emailEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14)
+                        .addComponent(telefoneEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -255,7 +256,7 @@ public class CadastroEmpresa extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO empresa (NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL) VALUES (?,?,?,?,?)";
             //Cria o comando para inserir no banco

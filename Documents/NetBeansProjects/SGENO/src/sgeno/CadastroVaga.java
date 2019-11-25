@@ -44,33 +44,21 @@ public class CadastroVaga extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         obsVaga = new javax.swing.JTextArea();
-        valorVaga = new javax.swing.JTextField();
         tituloVaga = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cursoVaga = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
-        faseVaga = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        horaDeVaga = new javax.swing.JTextField();
-        try{
-            javax.swing.text.MaskFormatter horaDeVga= new javax.swing.text.MaskFormatter("##:##:##");
-            horaDeVaga = new javax.swing.JFormattedTextField(horaDeVga);
-        }
-        catch (Exception e){
-        }
         jLabel13 = new javax.swing.JLabel();
-        horaAteVaga = new javax.swing.JTextField();
-        try{
-            javax.swing.text.MaskFormatter horaAteVga= new javax.swing.text.MaskFormatter("##:##:##");
-            horaAteVaga = new javax.swing.JFormattedTextField(horaAteVga);
-        }
-        catch (Exception e){
-        }
         jLabel7 = new javax.swing.JLabel();
         chVaga = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
+        TurnoTexto = new javax.swing.JLabel();
         turnoVaga = new javax.swing.JTextField();
+        horaDeVaga = new javax.swing.JFormattedTextField();
+        horaAteVaga = new javax.swing.JFormattedTextField();
+        faseVaga = new javax.swing.JFormattedTextField();
+        valorVaga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CADASTRO DE VAGAS");
@@ -137,10 +125,10 @@ public class CadastroVaga extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("*Título da Vaga:");
+        jLabel3.setText("Título da Vaga:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Empresa:");
+        jLabel4.setText("Empresa:");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +147,7 @@ public class CadastroVaga extends javax.swing.JFrame {
         boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("*Valor (R$):");
+        jLabel14.setText("Valor (R$):");
 
         jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel21.setText("Observação:");
@@ -169,8 +157,6 @@ public class CadastroVaga extends javax.swing.JFrame {
         obsVaga.setRows(5);
         obsVaga.setMaximumSize(new java.awt.Dimension(164, 94));
         jScrollPane1.setViewportView(obsVaga);
-
-        valorVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         tituloVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
@@ -187,55 +173,63 @@ public class CadastroVaga extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("A partida da fase:");
 
-        faseVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setText("De:");
 
-        horaDeVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
         jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel13.setText("Até:");
-
-        horaAteVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setText("Carga Horária (Semanal):");
 
         chVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel15.setText("Turno:");
+        TurnoTexto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        TurnoTexto.setText("Turno:");
 
         turnoVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        try {
+            horaDeVaga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        horaDeVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        try {
+            horaAteVaga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        horaAteVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horaDeVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(horaDeVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(chVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(TurnoTexto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(turnoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(horaAteVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(turnoVaga, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(horaAteVaga))
                 .addGap(0, 14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -245,16 +239,25 @@ public class CadastroVaga extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(chVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
+                    .addComponent(TurnoTexto)
                     .addComponent(turnoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horaDeVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(horaAteVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
+                    .addComponent(jLabel12)
+                    .addComponent(horaDeVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(horaAteVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        try {
+            faseVaga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        faseVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        valorVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,18 +269,9 @@ public class CadastroVaga extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
                             .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,14 +281,22 @@ public class CadastroVaga extends javax.swing.JFrame {
                             .addComponent(faseVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jLabel14)
-                            .addGap(114, 114, 114)))
-                    .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(valorVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(boxEmpresa, javax.swing.GroupLayout.Alignment.LEADING, 0, 709, Short.MAX_VALUE)
+                        .addComponent(tituloVaga, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(valorVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(boxEmpresa, javax.swing.GroupLayout.Alignment.LEADING, 0, 675, Short.MAX_VALUE)
-                            .addComponent(tituloVaga, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel21)))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,15 +308,15 @@ public class CadastroVaga extends javax.swing.JFrame {
                 .addComponent(tituloVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(boxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cursoVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(faseVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14)
+                    .addComponent(faseVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(valorVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -358,7 +360,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO vaga (DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR, TURNO, HORADE, HORAATE, CARGAHORARIA,OBSERVVAGA) VALUES (?,?,?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -443,6 +445,9 @@ public class CadastroVaga extends javax.swing.JFrame {
     }//GEN-LAST:event_cursoVagaActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+
+
         //Carregar combobox das Empresas cadastradas
         boxEmpresa.removeAllItems();
         try {
@@ -451,7 +456,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -474,7 +479,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = null;
             stmt = con.prepareStatement("SELECT DESC_CURSO FROM curso");
             ResultSet rs = stmt.executeQuery();
@@ -508,13 +513,14 @@ public class CadastroVaga extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TurnoTexto;
     private javax.swing.JComboBox boxEmpresa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField chVaga;
     private javax.swing.JComboBox cursoVaga;
-    private javax.swing.JTextField faseVaga;
-    private javax.swing.JTextField horaAteVaga;
-    private javax.swing.JTextField horaDeVaga;
+    private javax.swing.JFormattedTextField faseVaga;
+    private javax.swing.JFormattedTextField horaAteVaga;
+    private javax.swing.JFormattedTextField horaDeVaga;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -522,7 +528,6 @@ public class CadastroVaga extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;

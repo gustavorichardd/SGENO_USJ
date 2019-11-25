@@ -299,7 +299,7 @@ public class Contratos extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "select aluno.nome, empresa.nome, empresa.endereco, empresa.telefone, empresa.email, contrato.periodoate, vaga.horaate, vaga.cargahoraria,\n" +
             "vaga.valor, agencia.DESC_agencia, aditivo.desc_aditivo from contrato\n" +

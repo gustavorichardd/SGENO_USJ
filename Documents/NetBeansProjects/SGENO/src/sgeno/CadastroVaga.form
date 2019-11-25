@@ -40,21 +40,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="253" max="-2" attributes="0"/>
-                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jButton2" min="-2" pref="125" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="125" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
+                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="cursoVaga" min="-2" pref="177" max="-2" attributes="0"/>
@@ -64,19 +52,29 @@
                           <Component id="faseVaga" min="-2" pref="111" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="valorVaga" min="-2" pref="119" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="boxEmpresa" alignment="0" pref="709" max="32767" attributes="0"/>
+                      <Component id="tituloVaga" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="valorVaga" alignment="1" min="-2" pref="105" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="boxEmpresa" alignment="0" pref="675" max="32767" attributes="0"/>
-                          <Component id="tituloVaga" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jButton2" min="-2" pref="125" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="125" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane1" min="-2" pref="253" max="-2" attributes="0"/>
+                              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,15 +88,15 @@
               <Component id="tituloVaga" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="boxEmpresa" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cursoVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="faseVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="faseVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="valorVaga" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
@@ -223,7 +221,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*T&#xed;tulo da Vaga:"/>
+        <Property name="text" type="java.lang.String" value="T&#xed;tulo da Vaga:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -231,7 +229,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*Empresa:"/>
+        <Property name="text" type="java.lang.String" value="Empresa:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -268,7 +266,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="*Valor (R$):"/>
+        <Property name="text" type="java.lang.String" value="Valor (R$):"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel21">
@@ -300,13 +298,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="valorVaga">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="12" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="tituloVaga">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -346,13 +337,6 @@
         <Property name="text" type="java.lang.String" value="A partida da fase:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="faseVaga">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Arial" size="12" style="0"/>
-        </Property>
-      </Properties>
-    </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -367,32 +351,31 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="horaDeVaga" min="-2" pref="175" max="-2" attributes="0"/>
+                          <Component id="horaDeVaga" min="-2" pref="108" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="chVaga" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                      <Component id="TurnoTexto" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="turnoVaga" min="-2" pref="108" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="horaAteVaga" min="-2" pref="113" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="turnoVaga" pref="108" max="32767" attributes="0"/>
+                      <Component id="horaAteVaga" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="14" max="32767" attributes="0"/>
               </Group>
@@ -405,15 +388,15 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chVaga" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TurnoTexto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="turnoVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="horaDeVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="horaAteVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaDeVaga" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="horaAteVaga" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -429,16 +412,6 @@
             <Property name="text" type="java.lang.String" value="De:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="horaDeVaga">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;javax.swing.text.MaskFormatter horaDeVga= new javax.swing.text.MaskFormatter(&quot;##:##:##&quot;);&#xd;&#xa;horaDeVaga = new javax.swing.JFormattedTextField(horaDeVga);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -446,16 +419,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="At&#xe9;:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="horaAteVaga">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="12" style="0"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{&#xd;&#xa;javax.swing.text.MaskFormatter horaAteVga= new javax.swing.text.MaskFormatter(&quot;##:##:##&quot;);&#xd;&#xa;horaAteVaga = new javax.swing.JFormattedTextField(horaAteVga);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -472,7 +435,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel15">
+        <Component class="javax.swing.JLabel" name="TurnoTexto">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="0"/>
@@ -487,7 +450,44 @@
             </Property>
           </Properties>
         </Component>
+        <Component class="javax.swing.JFormattedTextField" name="horaDeVaga">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="##:##:##" subtype="-1" type="5"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="horaAteVaga">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="##:##:##" subtype="-1" type="5"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="0"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JFormattedTextField" name="faseVaga">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="#" subtype="-1" type="5"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="valorVaga">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

@@ -266,7 +266,7 @@ public class Alunos extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
             stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
 
@@ -287,7 +287,7 @@ public class Alunos extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM aluno WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
@@ -334,7 +334,7 @@ public class Alunos extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM ALUNO WHERE ALUNO_STATUS = 'A'";
             //Cria o comando para inserir no banco
@@ -369,13 +369,36 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARActionPerformed
+
         try {
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
 
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+                String query = "DELETE FROM EDITA_ALUNO_TEMP";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO edita_aluno_temp (matricula_temp) values (?)";
             //Cria o comando para inserir no banco
@@ -392,7 +415,7 @@ public class Alunos extends javax.swing.JFrame {
         }
         
         this.dispose();
-        new CadastroAluno().setVisible(true);
+        new EditarAluno().setVisible(true);
         
         
     }//GEN-LAST:event_EDITARActionPerformed

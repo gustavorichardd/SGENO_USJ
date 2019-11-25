@@ -58,10 +58,10 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         boxVaga = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        periodoDeContrato = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        periodoAteContrato = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        periodoDeContrato = new javax.swing.JFormattedTextField();
+        periodoAteContrato = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         boxMotivo = new javax.swing.JComboBox<>();
@@ -133,10 +133,10 @@ public class CadastroContrato extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("*Aluno:");
+        jLabel3.setText("Aluno:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Empresa:");
+        jLabel4.setText("Empresa:");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -152,9 +152,9 @@ public class CadastroContrato extends javax.swing.JFrame {
             }
         });
 
-        boxAluno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        boxAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        boxEmpresa.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Vaga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
         jPanel5.setToolTipText("");
@@ -162,22 +162,34 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setText("Agência:");
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel5.setText("*Vaga:");
+        boxAgencia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        boxVaga.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Vaga:");
+
+        boxVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Período", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
-        periodoDeContrato.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel10.setText("*De:");
-
-        periodoAteContrato.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setText("De:");
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setText("*Até:");
+        jLabel11.setText("Até:");
+
+        try {
+            periodoDeContrato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        periodoDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        try {
+            periodoAteContrato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        periodoAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -189,23 +201,23 @@ public class CadastroContrato extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(periodoAteContrato))
+                .addGap(48, 48, 48))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aditivo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
@@ -213,7 +225,7 @@ public class CadastroContrato extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Motivo:");
 
-        boxMotivo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        boxMotivo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -223,7 +235,7 @@ public class CadastroContrato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxMotivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boxMotivo, 0, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -236,7 +248,7 @@ public class CadastroContrato extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel21.setText("Observação:");
 
         obsContrato.setColumns(20);
@@ -259,12 +271,12 @@ public class CadastroContrato extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(boxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(boxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -315,14 +327,15 @@ public class CadastroContrato extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(352, 352, 352))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(47, Short.MAX_VALUE))))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -370,7 +383,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO contrato (COD_ALUNO, COD_EMPRESA, COD_VAGA, PERIODODE, PERIODOATE, COD_ADITIVO, COD_AGENCIA, OBSERVCONTRATO) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -470,7 +483,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM aluno where ALUNO_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -493,7 +506,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -516,7 +529,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_AGENCIA FROM agencia");
 
             ResultSet rs = stmt.executeQuery();
@@ -539,7 +552,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_ADITIVO FROM aditivo");
 
             ResultSet rs = stmt.executeQuery();
@@ -563,7 +576,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_VAGA FROM vaga");
 
             ResultSet rs = stmt.executeQuery();
@@ -643,8 +656,8 @@ public class CadastroContrato extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea obsContrato;
-    private javax.swing.JTextField periodoAteContrato;
-    private javax.swing.JTextField periodoDeContrato;
+    private javax.swing.JFormattedTextField periodoAteContrato;
+    private javax.swing.JFormattedTextField periodoDeContrato;
     // End of variables declaration//GEN-END:variables
 }
 

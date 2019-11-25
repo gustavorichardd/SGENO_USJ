@@ -40,6 +40,7 @@ public class EditarAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jSpinner1 = new javax.swing.JSpinner();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -60,13 +61,11 @@ public class EditarAluno extends javax.swing.JFrame {
         emailAluno = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        cursoAluno = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         faseAluno = new javax.swing.JTextField();
+        cursoAluno = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        sexoF = new javax.swing.JRadioButton();
-        sexoM = new javax.swing.JRadioButton();
-        jButton3 = new javax.swing.JButton();
+        Sexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EDITAR ALUNO");
@@ -74,6 +73,9 @@ public class EditarAluno extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
 
@@ -83,6 +85,11 @@ public class EditarAluno extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usj_300x110.png"))); // NOI18N
 
         jButton4.setText("Voltar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,7 +100,7 @@ public class EditarAluno extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +131,12 @@ public class EditarAluno extends javax.swing.JFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Editar");
+        jButton1.setText("Salvar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -191,7 +203,7 @@ public class EditarAluno extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(celularAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                        .addComponent(celularAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
                     .addComponent(emailAluno))
                 .addContainerGap())
         );
@@ -216,13 +228,12 @@ public class EditarAluno extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setText("*Curso:");
 
-        cursoAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cursoAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar...", "ADM", "CC", "ADS", "PDG" }));
-
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setText("*Fase:");
 
         faseAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        cursoAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -230,16 +241,16 @@ public class EditarAluno extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cursoAluno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cursoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(faseAluno)))
-                .addContainerGap())
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,49 +268,25 @@ public class EditarAluno extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sexo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
-        buttonGroup1.add(sexoF);
-        sexoF.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        sexoF.setText("F");
-        sexoF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoFActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(sexoM);
-        sexoM.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        sexoM.setText("M");
-        sexoM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoMActionPerformed(evt);
-            }
-        });
+        Sexo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        Sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sexoF)
-                    .addComponent(sexoM))
-                .addGap(0, 57, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(sexoF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sexoM)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
-
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -311,8 +298,6 @@ public class EditarAluno extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -349,8 +334,7 @@ public class EditarAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -363,34 +347,104 @@ public class EditarAluno extends javax.swing.JFrame {
         nomeAluno.setText("");
         faseAluno.setText("");
         emailAluno.setText("");
-        cursoAluno.setSelectedIndex(0);
-        sexoF.setSelected(false);
-        sexoM.setSelected(false);
+        cursoAluno.setText("");
         telefoneAluno.setText("");
         celularAluno.setText("");
         emailAluno.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                try {
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
 
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+            String query = "UPDATE aluno SET NOME = ?, TELEFONE = ?, CELULAR = ?, EMAIL = ?, FASE = ? WHERE MATRICULA = (SELECT MATRICULA_TEMP FROM EDITA_ALUNO_TEMP)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            stmt.setString(1, nomeAluno.getText());
+            stmt.setString(2, telefoneAluno.getText());
+            stmt.setString(3, celularAluno.getText());
+            stmt.setString(4, emailAluno.getText());
+            stmt.setString(5, faseAluno.getText());
+            
+            stmt.executeUpdate();
+            stmt.close();
+            con.close();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+              dispose();
+              new Alunos().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void sexoFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoFActionPerformed
-
-    private void sexoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoMActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
+        matriculaAluno.setEnabled(false);
+        cursoAluno.setEnabled(false);
+
+        
+        try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
+            // Query para inserir os alunos no banco
+            String query = "SELECT MATRICULA, NOME, SEXO, TELEFONE, CELULAR, EMAIL, CURSO, FASE FROM ALUNO WHERE MATRICULA = (SELECT MATRICULA_TEMP FROM EDITA_ALUNO_TEMP)";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute(); // cria o vetor
+
+            ResultSet resultado = stmt.executeQuery(query);
+
+          
+
+            while (resultado.next()) {
+               
+                 matriculaAluno.setText(resultado.getString("MATRICULA"));
+                 nomeAluno.setText(resultado.getString("NOME"));
+                 if(resultado.getString("SEXO") == "M"){
+                     Sexo.setSelectedItem("M");
+                 }
+                 telefoneAluno.setText(resultado.getString("TELEFONE"));
+                 celularAluno.setText(resultado.getString("CELULAR"));
+                 emailAluno.setText(resultado.getString("EMAIL"));
+                 cursoAluno.setText(resultado.getString("CURSO"));
+                 faseAluno.setText(resultado.getString("FASE"));
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       
+        
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+     dispose();
+     new Alunos().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,14 +483,14 @@ public class EditarAluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Sexo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JFormattedTextField celularAluno;
-    private javax.swing.JComboBox<String> cursoAluno;
+    private javax.swing.JTextField cursoAluno;
     private javax.swing.JTextField emailAluno;
     private javax.swing.JTextField faseAluno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -452,10 +506,9 @@ public class EditarAluno extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField matriculaAluno;
     private javax.swing.JTextField nomeAluno;
-    private javax.swing.JRadioButton sexoF;
-    private javax.swing.JRadioButton sexoM;
     private javax.swing.JFormattedTextField telefoneAluno;
     // End of variables declaration//GEN-END:variables
 }

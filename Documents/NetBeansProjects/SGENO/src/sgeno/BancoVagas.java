@@ -273,7 +273,7 @@ public class BancoVagas extends javax.swing.JFrame {
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
                 String query = "UPDATE vaga set VAGA_STATUS = 'I' where COD_VAGA = ?";
                 PreparedStatement stmt = con.prepareStatement(query);
                 //pegar cod_vaga
@@ -313,7 +313,7 @@ public class BancoVagas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "060100");
             // Query para inserir os alunos no banco
             String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
                     + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
