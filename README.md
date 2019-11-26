@@ -2,7 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
-
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 
