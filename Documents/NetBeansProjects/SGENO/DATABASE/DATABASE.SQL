@@ -65,7 +65,7 @@ CREATE TABLE AGENCIA (
 COD_AGENCIA INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 DESC_AGENCIA VARCHAR(25)
 );
-insert into agencia (desc_agencia) VALUES ('FEPESE'), ('CIEE');
+insert into agencia (desc_agencia) VALUES ('USJ'),('CIEE'),('FEPESE');
 
 
 
