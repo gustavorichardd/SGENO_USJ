@@ -261,65 +261,67 @@ public class Alunos extends javax.swing.JFrame {
     // Botão Excluir
     private void EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EXCLUIRActionPerformed
         DefaultTableModel model = (DefaultTableModel) TabelaAlunos.getModel();
-
-        try {
+        if (TabelaAlunos.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Para exclusão, selecione um aluno.");
+        } else {
             try {
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
+                stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
+
+                stmt.executeUpdate();
+
+                stmt.close();
+                con.close();
+
+            } catch (SQLException erro) {
+                JOptionPane.showMessageDialog(null, "ERRO!!");
+                throw new RuntimeException("Erro na conexão com o banco", erro);
+            }
+
+            //ATUALIZA
+            try {
+
+                //procura a classe do Driver jdbc
                 Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM aluno WHERE ALUNO_STATUS = 'A'";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+                stmt.execute(); // cria o vetor
+
+                ResultSet resultado = stmt.executeQuery(query);
+
+                model.setNumRows(0);
+
+                while (resultado.next()) {
+                    model.addRow(new Object[]{
+                        //retorna os dados da tabela do BD, cada campo e um coluna.
+                        resultado.getString("MATRICULA"),
+                        resultado.getString("NOME"),
+                        resultado.getString("CURSO"),
+                        resultado.getString("FASE"),
+                        resultado.getString("SEXO"),
+                        resultado.getString("TELEFONE"),
+                        resultado.getString("CELULAR"),
+                        resultado.getString("EMAIL"),});
+                }
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("o erro foi " + ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            PreparedStatement stmt = con.prepareStatement("UPDATE aluno SET ALUNO_STATUS = 'I' WHERE MATRICULA = ?");
-            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
-
-            stmt.executeUpdate();
-
-            stmt.close();
-            con.close();
-
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "ERRO!!");
-            throw new RuntimeException("Erro na conexão com o banco", erro);
         }
-
-        //ATUALIZA
-        try {
-
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "SELECT MATRICULA, NOME, CURSO, FASE, SEXO, TELEFONE, CELULAR, EMAIL FROM aluno WHERE ALUNO_STATUS = 'A'";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
-            stmt.execute(); // cria o vetor
-
-            ResultSet resultado = stmt.executeQuery(query);
-
-            model.setNumRows(0);
-
-            while (resultado.next()) {
-                model.addRow(new Object[]{
-                    //retorna os dados da tabela do BD, cada campo e um coluna.
-                    resultado.getString("MATRICULA"),
-                    resultado.getString("NOME"),
-                    resultado.getString("CURSO"),
-                    resultado.getString("FASE"),
-                    resultado.getString("SEXO"),
-                    resultado.getString("TELEFONE"),
-                    resultado.getString("CELULAR"),
-                    resultado.getString("EMAIL"),});
-            }
-            stmt.close();
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
 
     }//GEN-LAST:event_EXCLUIRActionPerformed
 
@@ -371,55 +373,56 @@ public class Alunos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDITARActionPerformed
+        if (TabelaAlunos.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Para editar, selecione um aluno.");
+        } else {
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
 
-        try {
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
                 String query = "DELETE FROM EDITA_ALUNO_TEMP";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.executeUpdate();
-            stmt.close();
-            con.close();
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.executeUpdate();
+                stmt.close();
+                con.close();
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "INSERT INTO edita_aluno_temp (matricula_temp) values (?)";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
+                stmt.executeUpdate();
+                stmt.close();
+                con.close();
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            this.dispose();
+            new EditarAluno().setVisible(true);
+
         }
-
-
-        try {
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "INSERT INTO edita_aluno_temp (matricula_temp) values (?)";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1, Integer.valueOf(TabelaAlunos.getValueAt(TabelaAlunos.getSelectedRow(), 0).toString()));
-            stmt.executeUpdate();
-            stmt.close();
-            con.close();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        this.dispose();
-        new EditarAluno().setVisible(true);
-        
-        
     }//GEN-LAST:event_EDITARActionPerformed
 
     /**

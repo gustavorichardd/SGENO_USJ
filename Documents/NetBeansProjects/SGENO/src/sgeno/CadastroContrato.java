@@ -156,6 +156,11 @@ public class CadastroContrato extends javax.swing.JFrame {
         boxAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        boxEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxEmpresaActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Vaga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
         jPanel5.setToolTipText("CADASTRO DE CONTRATO");
@@ -385,7 +390,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "INSERT INTO contrato (COD_ALUNO, COD_EMPRESA, COD_VAGA, PERIODODE, PERIODOATE, COD_ADITIVO, COD_AGENCIA, OBSERVCONTRATO) VALUES (?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
@@ -427,7 +432,7 @@ public class CadastroContrato extends javax.swing.JFrame {
 
             boxVga.close();
             boxVg.close();
-           
+
             stmt.setString(4, periodoDeContrato.getText());
             stmt.setString(5, periodoAteContrato.getText());
 
@@ -455,10 +460,25 @@ public class CadastroContrato extends javax.swing.JFrame {
             boxERs.close();
             boxE.close();
             stmt.setString(8, obsContrato.getText());
-
-            //executa o comando
             stmt.executeUpdate();
-            //Encerra o comando e a conexão
+            //executa o comando
+
+            
+            //Alterar o status do ALUNO para "E"
+            String stsA = "UPDATE aluno SET ALUNO_STATUS = 'E' WHERE MATRICULA = (?) ";
+            PreparedStatement statusA = con.prepareStatement(stsA);
+            statusA.setInt(1, matAlu);
+            statusA.executeUpdate();
+            statusA.close();
+            
+            //Alterar o status da VAGA para "E"
+            String stsV = "UPDATE vaga SET VAGA_STATUS = 'E' WHERE COD_VAGA = (?) ";
+            PreparedStatement statusV = con.prepareStatement(stsV);
+            statusV.setInt(1, codVga);   
+            statusV.executeUpdate();
+            statusV.close();
+            
+            //Limpa os campos
             boxAluno.setSelectedIndex(0);
             boxEmpresa.setSelectedIndex(0);
             boxMotivo.setSelectedIndex(0);
@@ -466,6 +486,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             periodoDeContrato.setText("");
             obsContrato.setText("");
             boxAgencia.setSelectedIndex(0);
+            //Encerra o comando e a conexão
             stmt.close();
             con.close();
 
@@ -485,7 +506,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM aluno where ALUNO_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -508,7 +529,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -531,7 +552,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_AGENCIA FROM agencia");
 
             ResultSet rs = stmt.executeQuery();
@@ -554,7 +575,7 @@ public class CadastroContrato extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("SELECT DESC_ADITIVO FROM aditivo");
 
             ResultSet rs = stmt.executeQuery();
@@ -571,15 +592,29 @@ public class CadastroContrato extends javax.swing.JFrame {
         boxMotivo.updateUI();
 
         //Carregar combobox dos VAGAS
-        boxVaga.removeAllItems();
+
+    }//GEN-LAST:event_formWindowActivated
+
+    private void boxEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxEmpresaActionPerformed
+       boxVaga.removeAllItems();
+
         try {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            Class.forName("com.mysql.jdbc.Driver");
+
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_VAGA FROM vaga where VAGA_status = 'A' and COD_EMPRESA = (?);");
+
+            int codEmp = 0;
+            PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
+            boxE.setString(1, boxEmpresa.getSelectedItem().toString());
+            ResultSet boxERs = boxE.executeQuery();
+            while (boxERs.next()) {
+                codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
-            PreparedStatement stmt = con.prepareStatement("SELECT DESC_VAGA FROM vaga");
+            boxERs.close();
+            boxE.close();
+            
+            stmt.setInt(1, codEmp);
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -591,9 +626,11 @@ public class CadastroContrato extends javax.swing.JFrame {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
             throw new RuntimeException("Erro na conexão com o banco", erro);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroContrato.class.getName()).log(Level.SEVERE, null, ex);
         }
         boxVaga.updateUI();
-    }//GEN-LAST:event_formWindowActivated
+    }//GEN-LAST:event_boxEmpresaActionPerformed
 
     /**
      * @param args the command line arguments

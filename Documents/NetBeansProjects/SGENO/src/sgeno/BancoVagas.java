@@ -263,7 +263,7 @@ public class BancoVagas extends javax.swing.JFrame {
 
     private void EditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditaActionPerformed
         if (tabelaVagas.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione uma empresa na tabela.");
+            JOptionPane.showMessageDialog(null, "Para editar, selecione uma vaga.");
         } else {
 
             try {
@@ -312,7 +312,7 @@ public class BancoVagas extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (tabelaVagas.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
+            JOptionPane.showMessageDialog(null, "Para exclusão, selecione uma vaga.");
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");

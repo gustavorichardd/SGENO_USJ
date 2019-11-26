@@ -39,7 +39,7 @@ public class Contratos extends javax.swing.JFrame {
 
     public void organizaTabelaContrato() {
 
-        DefaultTableModel modelo = (DefaultTableModel) TabelaContratoa.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) TabelaContratos.getModel();
         modelo.getDataVector().clear();
 
         for (Contrato c : listaContrato) {
@@ -68,8 +68,7 @@ public class Contratos extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaContratoa = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        TabelaContratos = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
@@ -176,16 +175,16 @@ public class Contratos extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        TabelaContratoa.setModel(new javax.swing.table.DefaultTableModel(
+        TabelaContratos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Aluno", "Empresa", "Endereço", "Telefone", "E-mail", "Período", "Horário", "CH", "Valor", "Agência", "Aditivo"
+                "Aluno", "Empresa", "Vaga", "Endereço", "Telefone", "E-mail", "Período", "Horário", "CH", "Valor", "Aditivo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false
@@ -199,32 +198,21 @@ public class Contratos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabelaContratoa.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(TabelaContratoa);
-        if (TabelaContratoa.getColumnModel().getColumnCount() > 0) {
-            TabelaContratoa.getColumnModel().getColumn(0).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(0).setPreferredWidth(150);
-            TabelaContratoa.getColumnModel().getColumn(1).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(1).setPreferredWidth(300);
-            TabelaContratoa.getColumnModel().getColumn(2).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(3).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(3).setPreferredWidth(90);
-            TabelaContratoa.getColumnModel().getColumn(4).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(5).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(6).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(7).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(7).setHeaderValue("CH");
-            TabelaContratoa.getColumnModel().getColumn(8).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(9).setResizable(false);
-            TabelaContratoa.getColumnModel().getColumn(10).setResizable(false);
+        TabelaContratos.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(TabelaContratos);
+        if (TabelaContratos.getColumnModel().getColumnCount() > 0) {
+            TabelaContratos.getColumnModel().getColumn(0).setPreferredWidth(150);
+            TabelaContratos.getColumnModel().getColumn(1).setPreferredWidth(300);
+            TabelaContratos.getColumnModel().getColumn(3).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(4).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(4).setPreferredWidth(90);
+            TabelaContratos.getColumnModel().getColumn(5).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(6).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(7).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(8).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(9).setResizable(false);
+            TabelaContratos.getColumnModel().getColumn(10).setResizable(false);
         }
-
-        jButton2.setText("Excluir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jButton3.setText("Editar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -251,10 +239,8 @@ public class Contratos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -266,7 +252,6 @@ public class Contratos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -283,43 +268,84 @@ public class Contratos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-                        
+        if (TabelaContratos.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Para editar, selecione um contrato.");
+        } else {
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                //Executa a limpeza da tabela EDITA_EMPRESA_TEMP
+                PreparedStatement cleanT = con.prepareStatement("DELETE FROM edita_contrato_temp");
+                cleanT.executeUpdate();
+                cleanT.close();
+                //System.out.println(TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString());
+                int codCont = 0;
+                PreparedStatement cont = con.prepareStatement("SELECT contrato.COD_CONTRATO FROM contrato \n"
+                        + "INNER JOIN ALUNO ON contrato.COD_ALUNO = aluno.MATRICULA\n"
+                        + "INNER JOIN EMPRESA ON contrato.COD_EMPRESA = EMPRESA.COD_EMPRESA\n"
+                        + "INNER JOIN vaga ON contrato.COD_vaga = vaga.cod_vaga\n"
+                        + "WHERE ALUNO.NOME = (?) and empresa.nome = (?) and vaga.desc_vaga = (?);");
+                cont.setString(1, (TabelaContratos.getValueAt(TabelaContratos.getSelectedRow(), 0).toString()));
+                cont.setString(2, (TabelaContratos.getValueAt(TabelaContratos.getSelectedRow(), 1).toString()));
+                cont.setString(3, (TabelaContratos.getValueAt(TabelaContratos.getSelectedRow(), 2).toString()));
+                
+                ResultSet conT = cont.executeQuery();
+                while (conT.next()) {
+                    codCont = (conT.getInt("COD_CONTRATO"));
+                }
+
+                conT.close();
+                cont.close();
+
+                PreparedStatement edtC = con.prepareStatement("INSERT INTO edita_contrato_temp (cod_contrato_temp) values (?)");
+                edtC.setInt(1, codCont);
+                edtC.executeUpdate();
+                edtC.close();
+                con.close();
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+            new EditarContrato().setVisible(true);
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
         new CadastroContrato().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
- try {
-
+        try {
             //procura a classe do Driver jdbc
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "select aluno.nome, empresa.nome, empresa.endereco, empresa.telefone, empresa.email, contrato.periodoate, vaga.horaate, vaga.cargahoraria,\n" +
-            "vaga.valor, agencia.DESC_agencia, aditivo.desc_aditivo from contrato\n" +
-            "inner join aluno on contrato.cod_aluno = aluno.matricula\n" +
-            "inner join empresa on contrato.cod_empresa = empresa.cod_empresa\n" +
-            "inner join vaga on contrato.cod_vaga = vaga.cod_vaga \n" +
-            "inner join aditivo on contrato.cod_aditivo = aditivo.cod_aditivo\n" +
-            "inner join agencia on contrato.cod_agencia = agencia.cod_agencia\n" +
-            "where contrato.contrato_status = 'A';";
-                        //Cria o comando para inserir no banco
+            String query = "select aluno.nome, empresa.nome, empresa.endereco, vaga.desc_vaga, empresa.telefone, empresa.email, contrato.periodoate, vaga.horaate, vaga.cargahoraria,\n"
+                    + "vaga.valor, aditivo.desc_aditivo from contrato\n"
+                    + "inner join aluno on contrato.cod_aluno = aluno.matricula\n"
+                    + "inner join empresa on contrato.cod_empresa = empresa.cod_empresa\n"
+                    + "inner join vaga on contrato.cod_vaga = vaga.cod_vaga \n"
+                    + "inner join aditivo on contrato.cod_aditivo = aditivo.cod_aditivo\n"
+                    + "inner join agencia on contrato.cod_agencia = agencia.cod_agencia\n"
+                    + "where contrato.contrato_status = 'A';";
+            //Cria o comando para inserir no banco
             PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
             stmt.execute(); // cria o vetor
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) TabelaContratoa.getModel();
+            DefaultTableModel model = (DefaultTableModel) TabelaContratos.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -327,6 +353,7 @@ public class Contratos extends javax.swing.JFrame {
                     //retorna os dados da tabela do BD, cada campo e um coluna.
                     resultado.getString("aluno.nome"),
                     resultado.getString("empresa.nome"),
+                    resultado.getString("vaga.desc_vaga"),
                     resultado.getString("empresa.endereco"),
                     resultado.getString("empresa.telefone"),
                     resultado.getString("empresa.email"),
@@ -334,15 +361,16 @@ public class Contratos extends javax.swing.JFrame {
                     resultado.getString("vaga.horaate"),
                     resultado.getString("vaga.cargahoraria"),
                     resultado.getString("vaga.valor"),
-                    resultado.getString("agencia.desc_agencia"),
                     resultado.getString("aditivo.desc_aditivo"),});
             }
             stmt.close();
             con.close();
         } catch (SQLException ex) {
             System.out.println("o erro foi " + ex);
+
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Alunos.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_formWindowActivated
@@ -361,16 +389,24 @@ public class Contratos extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contratos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contratos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contratos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Contratos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Contratos.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -390,9 +426,8 @@ public class Contratos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaContratoa;
+    private javax.swing.JTable TabelaContratos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

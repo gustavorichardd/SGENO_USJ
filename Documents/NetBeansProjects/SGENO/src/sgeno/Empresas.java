@@ -273,44 +273,43 @@ public class Empresas extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (TabelaEmpresas.getSelectionModel().isSelectionEmpty()) {
-            JOptionPane.showMessageDialog(null, "Para editar, selecione uma empresa na tabela.");
+            JOptionPane.showMessageDialog(null, "Para editar, selecione uma empresa.");
         } else {
-           
-             try {
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
 
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            //Executa a limpeza da tabela EDITA_EMPRESA_TEMP
-            PreparedStatement cleanT = con.prepareStatement("DELETE FROM edita_empresa_temp");
-            cleanT.executeUpdate();
-            cleanT.close();
-            //System.out.println(TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString());
-            int codEmp = 0;
-            PreparedStatement empr = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
-            empr.setString(1, (TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString()));
-            ResultSet empR = empr.executeQuery();
-            while (empR.next()) {
-                codEmp = (empR.getInt("COD_EMPRESA"));
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                //Executa a limpeza da tabela EDITA_EMPRESA_TEMP
+                PreparedStatement cleanT = con.prepareStatement("DELETE FROM edita_empresa_temp");
+                cleanT.executeUpdate();
+                cleanT.close();
+                //System.out.println(TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString());
+                int codEmp = 0;
+                PreparedStatement empr = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
+                empr.setString(1, (TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString()));
+                ResultSet empR = empr.executeQuery();
+                while (empR.next()) {
+                    codEmp = (empR.getInt("COD_EMPRESA"));
+                }
+                empR.close();
+                empr.close();
+
+                PreparedStatement edtE = con.prepareStatement("INSERT INTO edita_empresa_temp (cod_empresa_temp) values (?)");
+                edtE.setInt(1, codEmp);
+                edtE.executeUpdate();
+                edtE.close();
+                con.close();
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            empR.close();
-            empr.close();
 
-            
-            PreparedStatement edtE = con.prepareStatement("INSERT INTO edita_empresa_temp (cod_empresa_temp) values (?)");
-            edtE.setInt(1, codEmp);
-            edtE.executeUpdate();
-            edtE.close();            
-            con.close();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
             this.dispose();
             new EditarEmpresa().setVisible(true);
 
@@ -318,77 +317,80 @@ public class Empresas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
+        if (TabelaEmpresas.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Para exclusão, selecione uma empresa.");
+        } else {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
 
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para alterar status da empresa
-            String query = "UPDATE empresa SET EMPRESA_STATUS = 'I' WHERE COD_EMPRESA = (?)";
-            PreparedStatement stmt = con.prepareStatement(query);
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para alterar status da empresa
+                String query = "UPDATE empresa SET EMPRESA_STATUS = 'I' WHERE COD_EMPRESA = (?)";
+                PreparedStatement stmt = con.prepareStatement(query);
 
-            int linha = TabelaEmpresas.getSelectedRow();
-            int codEmp = 0;
-            PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
-            boxE.setString(1, TabelaEmpresas.getValueAt(linha, 0).toString());
-            ResultSet boxERs = boxE.executeQuery();
-            while (boxERs.next()) {
-                codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
+                int linha = TabelaEmpresas.getSelectedRow();
+                int codEmp = 0;
+                PreparedStatement boxE = con.prepareStatement("SELECT COD_EMPRESA FROM empresa WHERE NOME = (?)");
+                boxE.setString(1, TabelaEmpresas.getValueAt(linha, 0).toString());
+                ResultSet boxERs = boxE.executeQuery();
+                while (boxERs.next()) {
+                    codEmp = Integer.parseInt(boxERs.getString("COD_EMPRESA"));
+                }
+                stmt.setInt(1, codEmp);
+
+                boxERs.close();
+                boxE.close();
+
+                stmt.executeUpdate();
+
+                //Encerra o comando e a conexão
+                stmt.close();
+                con.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            stmt.setInt(1, codEmp);
+            try {
 
-            boxERs.close();
-            boxE.close();
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "SELECT NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL FROM empresa WHERE EMPRESA_STATUS = 'A'";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+                stmt.execute(); // cria o vetor
 
-            stmt.executeUpdate();
+                ResultSet resultado = stmt.executeQuery(query);
 
-            //Encerra o comando e a conexão
-            stmt.close();
-            con.close();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
+                DefaultTableModel model = (DefaultTableModel) TabelaEmpresas.getModel();
+                model.setNumRows(0);
 
-            //procura a classe do Driver jdbc
-            Class.forName("com.mysql.jdbc.Driver");
-            //Cria uma variável do tipo conexão 
-            // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
-            // Query para inserir os alunos no banco
-            String query = "SELECT NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL FROM empresa WHERE EMPRESA_STATUS = 'A'";
-            //Cria o comando para inserir no banco
-            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
-            stmt.execute(); // cria o vetor
+                while (resultado.next()) {
+                    model.addRow(new Object[]{
+                        //retorna os dados da tabela do BD, cada campo e um coluna.
+                        resultado.getString("NOME"),
+                        resultado.getString("ENDERECO"),
+                        resultado.getString("RESPONSAVEL"),
+                        resultado.getString("TELEFONE"),
+                        resultado.getString("EMAIL"),});
 
-            ResultSet resultado = stmt.executeQuery(query);
+                    //NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL
+                }
+                stmt.close();
+                con.close();
 
-            DefaultTableModel model = (DefaultTableModel) TabelaEmpresas.getModel();
-            model.setNumRows(0);
-
-            while (resultado.next()) {
-                model.addRow(new Object[]{
-                    //retorna os dados da tabela do BD, cada campo e um coluna.
-                    resultado.getString("NOME"),
-                    resultado.getString("ENDERECO"),
-                    resultado.getString("RESPONSAVEL"),
-                    resultado.getString("TELEFONE"),
-                    resultado.getString("EMAIL"),});
-
-                //NOME, ENDERECO, RESPONSAVEL, TELEFONE, EMAIL
+            } catch (SQLException ex) {
+                System.out.println("o erro foi " + ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            stmt.close();
-            con.close();
-
-        } catch (SQLException ex) {
-            System.out.println("o erro foi " + ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

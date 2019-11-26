@@ -4,20 +4,19 @@
  * and open the template in the editor.
  */
 package sgeno;
-import sgeno.Classes.Aluno;
-import java.util.Arrays;
-import java.util.Date;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import sgeno.Classes.Contrato;
-import sgeno.Classes.Empresa;
-import sgeno.Classes.TodosArrays;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaContrato;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
-import static sgeno.Classes.TodosArrays.listaVaga;
-import sgeno.Classes.Vaga;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,132 +27,10 @@ public class EditarContrato extends javax.swing.JFrame {
     /**
      * Creates new form CadastroAluno
      */
-    int sobrepor;
-    String matricula;
-    String empresa;
-    int indexAluno;
-    int indexEmpresa;
-    
-    public EditarContrato(int index, String matriculaAluno, String nomeEmpresa) {
+    public EditarContrato() {
         initComponents();
-        organizaBoxAluno();
-        organizaBoxEmpresa();
-        organizaBoxMotivo();
-        empresa = nomeEmpresa;
-        sobrepor = index;
-        matricula = matriculaAluno;
-        pesquisaIndexAluno(matricula);
-        pesquisaIndexEmpresa(empresa);
-        editarContrato(index, matricula);
-       
-        
-    }
-    
-    public void pesquisaIndexAluno(String matricula){
-        
-        for(Aluno a: listaAluno){
-            if(a.getMatrícula().equals(matricula)){
-               indexAluno = listaAluno.indexOf(a)+1;
-            }
-        }
-        
-    }
-    
-    public void pesquisaIndexEmpresa(String empresa){
-        
-        for(Empresa e: listaEmpresa){
-            if(e.getNome().equals(empresa)){
-               indexEmpresa = listaEmpresa.indexOf(e)+1;
-            }
-        }
-        
-    }
 
-    EditarContrato() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void editarContrato(int index, String matricula){
-        
-        
-        
-        String aditivo = listaContrato.get(index).getAditivo();
-        
-        
-        
-        boxAluno.setSelectedIndex(indexAluno);
-        boxEmpresa.setSelectedIndex(indexEmpresa);
-        valorContrato.setText(Float.toString(listaContrato.get(index).getValor()));
-        periodoDeContrato.setText(listaContrato.get(index).getPeriodode());
-        periodoAteContrato.setText(listaContrato.get(index).getPeriodoate());
-        horaDeContrato.setText(listaContrato.get(index).getHorariode());
-        horaAteContrato.setText(listaContrato.get(index).getHorarioate());
-        chContrato.setText(Integer.toString(listaContrato.get(index).getCh()));
-        agenciaContrato.setText(listaContrato.get(index).getAgencia());
-        dataContrato.setText(listaContrato.get(index).getData());
-        data2Contrato.setText(listaContrato.get(index).getData2());
-        obsContrato.setText(listaContrato.get(index).getObs());
-        
-        
-        switch(aditivo){
-            case"Nenhum":
-        boxMotivo.setSelectedIndex(0);        
-                break;
-                
-            case"Alteração Salário":
-        boxMotivo.setSelectedIndex(1);        
-                break;
-            
-            case"Recisão":
-        boxMotivo.setSelectedIndex(2);        
-                break;
-             
-            case"Alteração Carga Horária":
-        boxMotivo.setSelectedIndex(3);        
-                break;
-                
-             case"Alteração Contrato":
-        boxMotivo.setSelectedIndex(4);        
-                break;
-            
-             default:
-        
-                break;
-        }
-        
-    }
-    
-    public void organizaBoxAluno(){
-        boxAluno.removeAllItems();
-        
-        boxAluno.addItem("Selecionar...");
-        
-        for (Aluno a: listaAluno){
-        boxAluno.addItem(a.getMatrícula()+" - "+a.getNome());
-        }
-    }
-    
-    public void organizaBoxEmpresa(){
-        boxEmpresa.removeAllItems();
-        
-        boxEmpresa.addItem("Selecionar...");
-        
-        for (Empresa e: listaEmpresa){
-        boxEmpresa.addItem(e.getNome()+" - "+e.getEndereco());
-        }
-    }
-    
-    public void organizaBoxMotivo(){
-        boxMotivo.removeAllItems();
-        
-        boxMotivo.addItem("Nenhum");
-        boxMotivo.addItem("Alteração Salário");
-        boxMotivo.addItem("Recisão");
-        boxMotivo.addItem("Alteração Carga Horária");
-        boxMotivo.addItem("Alteração Contrato");
-    }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,38 +53,32 @@ public class EditarContrato extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         boxAluno = new javax.swing.JComboBox<>();
         boxEmpresa = new javax.swing.JComboBox<>();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        boxAgencia = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        boxVaga = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        periodoDeContrato = new javax.swing.JFormattedTextField();
+        periodoAteContrato = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         boxMotivo = new javax.swing.JComboBox<>();
-        jLabel16 = new javax.swing.JLabel();
-        dataContrato = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        data2Contrato = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         obsContrato = new javax.swing.JTextArea();
-        jLabel8 = new javax.swing.JLabel();
-        agenciaContrato = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        valorContrato = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        horaDeContrato = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        horaAteContrato = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        chContrato = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        periodoDeContrato = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        periodoAteContrato = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("EDIÇÃO DE CONTRATO");
+        setTitle("CADASTRO DE CONTRATOS");
         setMinimumSize(new java.awt.Dimension(734, 472));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(40, 132, 194));
 
@@ -227,7 +98,7 @@ public class EditarContrato extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
@@ -264,10 +135,10 @@ public class EditarContrato extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setText("*Aluno:");
+        jLabel3.setText("Aluno:");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel4.setText("*Empresa:");
+        jLabel4.setText("Empresa:");
 
         jButton1.setText("Salvar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -284,39 +155,82 @@ public class EditarContrato extends javax.swing.JFrame {
         });
 
         boxAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        boxAluno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        boxAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boxAlunoActionPerformed(evt);
-            }
-        });
+        boxAluno.setEnabled(false);
 
         boxEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        boxEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxEmpresa.setEnabled(false);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Vaga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Vaga", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+        jPanel5.setToolTipText("CADASTRO DE CONTRATO");
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setText("Agência:");
+
+        boxAgencia.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        boxAgencia.setEnabled(false);
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setText("Vaga:");
+
+        boxVaga.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Período", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel10.setText("De:");
+
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel11.setText("Até:");
+
+        try {
+            periodoDeContrato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        periodoDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        try {
+            periodoAteContrato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        periodoAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(periodoAteContrato))
+                .addGap(48, 48, 48))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aditivo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel15.setText("Motivo:");
 
-        boxMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel16.setText("Data:");
-
-        dataContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        dataContrato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataContratoActionPerformed(evt);
-            }
-        });
-
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel20.setText("Data 2:");
-
-        data2Contrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        boxMotivo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -324,19 +238,9 @@ public class EditarContrato extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(boxMotivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(data2Contrato)))
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxMotivo, 0, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -346,184 +250,67 @@ public class EditarContrato extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(boxMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(dataContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20)
-                    .addComponent(data2Contrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel21.setText("Observação:");
 
         obsContrato.setColumns(20);
-        obsContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        obsContrato.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         obsContrato.setRows(5);
         obsContrato.setMaximumSize(new java.awt.Dimension(164, 94));
         jScrollPane1.setViewportView(obsContrato);
-
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel8.setText("Agência:");
-
-        agenciaContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel14.setText("*Valor (R$):");
-
-        valorContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Horário", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
-
-        horaDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel12.setText("*De:");
-
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel13.setText("*Até:");
-
-        horaAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel7.setText("*Carga Horária (Semanal):");
-
-        chContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chContrato))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horaDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(horaAteContrato)))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(chContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(horaDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
-                    .addComponent(horaAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Período", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 18))); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel10.setText("*De:");
-
-        periodoDeContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel11.setText("*Até:");
-
-        periodoAteContrato.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addGap(9, 9, 9)
-                .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boxAgencia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(boxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel21)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(periodoAteContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(periodoDeContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(agenciaContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(valorContrato, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(20, 20, 20))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(agenciaContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(valorContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(boxAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(boxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -533,38 +320,47 @@ public class EditarContrato extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(boxEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(boxAluno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(352, 352, 352))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(boxAluno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boxEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(boxAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(3, 3, 3)
-                .addComponent(boxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel4)
+                .addGap(4, 4, 4)
+                .addComponent(boxEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -578,113 +374,270 @@ public class EditarContrato extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        boxAluno.setSelectedIndex(0);
         boxEmpresa.setSelectedIndex(0);
         boxMotivo.setSelectedIndex(0);
-        valorContrato.setText("");
-        horaAteContrato.setText("");
-        horaDeContrato.setText("");
         periodoAteContrato.setText("");
         periodoDeContrato.setText("");
-        data2Contrato.setText("");
-        dataContrato.setText("");
         obsContrato.setText("");
-        chContrato.setText("");
-        agenciaContrato.setText("");
+        boxAgencia.setSelectedIndex(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    // Botão salvar
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Contrato contrato = new Contrato();
-        int indexAluno, indexEmpresa;
-        String[] camposObrig = new String[7];
+        System.out.println((boxMotivo.getSelectedItem() == "RECISÃO"));
+        if ("RECISÃO".equals(boxMotivo.getSelectedItem().toString())) {
+            System.out.println("Entro no iff");
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "UPDATE contrato SET CONTRATO_STATUS = 'I' WHERE COD_CONTRATO = (select COD_CONTRATO_TEMP from EDITA_contrato_TEMP);";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.executeUpdate();
+                stmt.close();
                 
-        if(boxAluno.getSelectedIndex()==0){
-            camposObrig[0] = "Aluno";
-        }else{
-            camposObrig[0] = "...";
-        }
-        if(boxEmpresa.getSelectedIndex()==0){
-            camposObrig[1] = "Empresa";
-        }else{
-            camposObrig[1] = "...";
-        }
-        if(valorContrato.getText().isEmpty()){
-            camposObrig[2] = "Valor";
-        }else{
-            camposObrig[2] = "...";
-        if(periodoDeContrato.getText().isEmpty()){
-            camposObrig[3] = "Período De";
-        }else{
-            camposObrig[3] = "...";
-        }    
-        if(periodoAteContrato.getText().isEmpty()){
-            camposObrig[4] = "Período Até";
-        }else{
-            camposObrig[4] = "...";
-        }
-        if(horaDeContrato.getText().isEmpty()){
-            camposObrig[5] = "Hora De";
-        }else{
-            camposObrig[5] = "...";
-        }
-        if(horaAteContrato.getText().isEmpty()){
-            camposObrig[6] = "Hora Até";
-        }else{
-            camposObrig[6] = "...";
-        }
-        
-        if(boxAluno.getSelectedItem().equals(0) | boxEmpresa.getSelectedItem().equals(0) | valorContrato.getText().isEmpty() | periodoDeContrato.getText().isEmpty() | periodoAteContrato.getText().isEmpty() | horaDeContrato.getText().isEmpty() | horaAteContrato.getText().isEmpty()){
-           JOptionPane.showMessageDialog(null, "Por favor preencha os campos abaixo:\n"+Arrays.toString(camposObrig));
-        }else{
-        
-        indexAluno = boxAluno.getSelectedIndex();
-        indexEmpresa = boxEmpresa.getSelectedIndex();
-            
-        contrato.setAluno(listaAluno.get(indexAluno-1));
-        contrato.setEmpresa(listaEmpresa.get(indexEmpresa-1));
-        contrato.setPeriodode(periodoDeContrato.getText());
-        contrato.setPeriodoate(periodoAteContrato.getText());
-        contrato.setHorariode(horaDeContrato.getText());
-        contrato.setHorarioate(horaAteContrato.getText());
-        contrato.setValor(Float.parseFloat(valorContrato.getText()));
-        contrato.setCh(Integer.parseInt(chContrato.getText()));
-        contrato.setAgencia(agenciaContrato.getText());
-        contrato.setData(dataContrato.getText());
-        contrato.setData2(data2Contrato.getText());
-        contrato.setObs(obsContrato.getText());
-        contrato.setAditivo(boxMotivo.getSelectedItem().toString());
-        
-        Object[] options = { "Sim", "Não" };
-        int cadastrar = JOptionPane.showOptionDialog(null, "Confirma o cadastro do novo Contrato?\n\nAluno: "+boxAluno.getSelectedItem().toString()+"\nEmpresa: "+boxEmpresa.getSelectedItem().toString()+"\nValor: "+valorContrato.getText()+"\nPeríodo:\nDe: "+periodoDeContrato.getText()+" Até: "+periodoDeContrato.getText()+"\nHorário:\nDe: "+horaDeContrato.getText()+" Até: "+horaAteContrato.getText()+"\nCarga horária: "+chContrato.getText()+"\n\nAditivo:\nMotivo: "+boxMotivo.getSelectedItem().toString()+"\nData:\nDe: "+dataContrato.getText()+" Até: "+data2Contrato.getText(),"Aviso",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, options[0]);
-        
-          
-            switch(cadastrar){
-                case 0:
-                listaContrato.set(sobrepor,contrato);
-                this.dispose();
-                new Contratos().setVisible(true);
-                    break;
+                //Alterar o status do ALUNO para "A"
                 
-                case 1:
-                    
-                    break;
-                                
-                default:
-                    
-                    break;
-             
+                String stsA = "UPDATE aluno SET ALUNO_STATUS = 'A' WHERE MATRICULA = (SELECT COD_ALUNO FROM CONTRATO WHERE COD_CONTRATO = (select COD_CONTRATO_TEMP from edita_contrato_temp))";
+                PreparedStatement statusA = con.prepareStatement(stsA);
+                statusA.executeUpdate();
+                statusA.close();
+
+                //Alterar o status da VAGA para "E"
+                String stsV = "UPDATE vaga SET VAGA_STATUS = 'A' WHERE COD_VAGA = (SELECT COD_VAGA FROM CONTRATO WHERE COD_CONTRATO = (select COD_CONTRATO_TEMP from edita_contrato_temp))";
+                PreparedStatement statusV = con.prepareStatement(stsV);
+                statusV.executeUpdate();
+                statusV.close();
+                con.close();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditarContrato.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(EditarContrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "UPDATE contrato SET COD_VAGA = ?, PERIODODE = ?, PERIODOATE = ?, COD_ADITIVO = ?, OBSERVCONTRATO = ? WHERE CONTRATO.COD_CONTRATO = (select COD_CONTRATO_TEMP from EDITA_contrato_TEMP);";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = con.prepareStatement(query);
+
+                //Pegar o COD_VAGA
+                int codVga = 0;
+                PreparedStatement boxVg = con.prepareStatement("SELECT COD_VAGA FROM vaga WHERE DESC_VAGA = (?)");
+                boxVg.setString(1, boxVaga.getSelectedItem().toString());
+                ResultSet boxVga = boxVg.executeQuery();
+                while (boxVga.next()) {
+                    codVga = Integer.parseInt(boxVga.getString("COD_VAGA"));
+                }
+                stmt.setInt(1, codVga);
+
+                boxVga.close();
+                boxVg.close();
+
+                stmt.setString(2, periodoDeContrato.getText());
+                stmt.setString(3, periodoAteContrato.getText());
+
+                //Pegar o ADITIVO
+                int codAdt = 0;
+                PreparedStatement boxAd = con.prepareStatement("SELECT COD_ADITIVO FROM aditivo WHERE DESC_ADITIVO = (?)");
+                boxAd.setString(1, boxMotivo.getSelectedItem().toString());
+                ResultSet boxAdt = boxAd.executeQuery();
+                while (boxAdt.next()) {
+                    codAdt = Integer.parseInt(boxAdt.getString("COD_ADITIVO"));
+                }
+                stmt.setInt(4, codAdt);
+                boxAdt.close();
+                boxAd.close();
+
+                stmt.setString(5, obsContrato.getText());
+
+                //executa o comando
+                stmt.executeUpdate();
+                //Encerra o comando e a conexão
+                boxAluno.setSelectedIndex(0);
+                boxEmpresa.setSelectedIndex(0);
+                boxMotivo.setSelectedIndex(0);
+                periodoAteContrato.setText("");
+                periodoDeContrato.setText("");
+                obsContrato.setText("");
+                boxAgencia.setSelectedIndex(0);
+                stmt.close();
+                con.close();
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-            
-        }}
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void boxAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_boxAlunoActionPerformed
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
-    private void dataContratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataContratoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dataContratoActionPerformed
+//Carregar combobox dos ALUNOS
+        boxAluno.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM aluno");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxAluno.addItem(rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxAluno.updateUI();
+//Carregar combobox das Empresas cadastradas
+        boxEmpresa.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxEmpresa.addItem(rs.getString("NOME"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxEmpresa.updateUI();
+//Carregar combobox das AGENCIAS
+        boxAgencia.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_AGENCIA FROM agencia");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxAgencia.addItem(rs.getString("DESC_AGENCIA"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxAgencia.updateUI();
+//Carregar combobox dos ADITIVOS
+        boxMotivo.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_ADITIVO FROM aditivo");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxMotivo.addItem(rs.getString("DESC_ADITIVO"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxMotivo.updateUI();
+
+        //Carregar combobox dos VAGAS
+        boxVaga.removeAllItems();
+        try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            PreparedStatement stmt = con.prepareStatement("SELECT DESC_VAGA FROM vaga");
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                boxVaga.addItem(rs.getString("DESC_VAGA"));
+            }
+            rs.close();
+            stmt.close();
+            con.close();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Ao logar no servidor.");
+            throw new RuntimeException("Erro na conexão com o banco", erro);
+        }
+        boxVaga.updateUI();
+
+        try {
+
+            //procura a classe do Driver jdbc
+            Class.forName("com.mysql.jdbc.Driver");
+            //Cria uma variável do tipo conexão 
+            // Verificar usuário a senha do banco!!
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+            // Query para inserir os alunos no banco
+            String query = "SELECT ALUNO.NOME, EMPRESA.NOME, VAGA.DESC_VAGA, CONTRATO.PERIODODE, CONTRATO.PERIODOATE, ADITIVO.DESC_ADITIVO, AGENCIA.DESC_AGENCIA, "
+                    + "CONTRATO.OBSERVCONTRATO FROM contrato\n"
+                    + "INNER JOIN ALUNO ON ALUNO.MATRICULA = CONTRATO.COD_ALUNO\n"
+                    + "INNER JOIN EMPRESA ON EMPRESA.COD_EMPRESA = CONTRATO.COD_EMPRESA\n"
+                    + "INNER JOIN VAGA ON VAGA.COD_VAGA = CONTRATO.COD_VAGA\n"
+                    + "INNER JOIN ADITIVO ON ADITIVO.COD_ADITIVO = CONTRATO.COD_ADITIVO\n"
+                    + "INNER JOIN AGENCIA ON AGENCIA.COD_AGENCIA = CONTRATO.COD_AGENCIA\n"
+                    + "WHERE CONTRATO.COD_CONTRATO = (select COD_CONTRATO_TEMP from EDITA_contrato_TEMP);";
+            //Cria o comando para inserir no banco
+            PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+            stmt.execute();
+            ResultSet resultado = stmt.executeQuery(query);
+            while (resultado.next()) {
+                boxAluno.setSelectedItem(resultado.getString("ALUNO.NOME"));
+                boxEmpresa.setSelectedItem(resultado.getString("EMPRESA.NOME"));
+                boxVaga.setSelectedItem(resultado.getString("VAGA.DESC_VAGA"));
+                periodoDeContrato.setText(resultado.getString("CONTRATO.PERIODODE"));
+                periodoAteContrato.setText(resultado.getString("CONTRATO.PERIODOATE"));
+                boxMotivo.setSelectedItem(resultado.getString("ADITIVO.DESC_ADITIVO"));
+                boxAgencia.setSelectedItem(resultado.getString("AGENCIA.DESC_AGENCIA"));
+                obsContrato.setText(resultado.getString("CONTRATO.OBSERVCONTRATO"));
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException ex) {
+            System.out.println("o erro foi " + ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -725,44 +678,33 @@ public class EditarContrato extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField agenciaContrato;
+    private javax.swing.JComboBox<String> boxAgencia;
     private javax.swing.JComboBox<String> boxAluno;
     private javax.swing.JComboBox<String> boxEmpresa;
     private javax.swing.JComboBox<String> boxMotivo;
+    private javax.swing.JComboBox<String> boxVaga;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField chContrato;
-    private javax.swing.JTextField data2Contrato;
-    private javax.swing.JTextField dataContrato;
-    private javax.swing.JTextField horaAteContrato;
-    private javax.swing.JTextField horaDeContrato;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea obsContrato;
-    private javax.swing.JTextField periodoAteContrato;
-    private javax.swing.JTextField periodoDeContrato;
-    private javax.swing.JTextField valorContrato;
+    private javax.swing.JFormattedTextField periodoAteContrato;
+    private javax.swing.JFormattedTextField periodoDeContrato;
     // End of variables declaration//GEN-END:variables
 }
