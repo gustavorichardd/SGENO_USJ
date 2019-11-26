@@ -17,10 +17,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sgeno.Classes.Contrato;
 import sgeno.Classes.Empresa;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaContrato;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
-import static sgeno.Classes.TodosArrays.listaVaga;
 import sgeno.Classes.Vaga;
 
 /**
@@ -56,7 +52,7 @@ public class BancoVagas extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaVagas = new javax.swing.JTable();
+        tabelaVagas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         Edita = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -163,7 +159,7 @@ public class BancoVagas extends javax.swing.JFrame {
             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, Short.MAX_VALUE)
         );
 
-        TabelaVagas.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -186,18 +182,18 @@ public class BancoVagas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        TabelaVagas.setMaximumSize(new java.awt.Dimension(2000, 2000));
-        jScrollPane1.setViewportView(TabelaVagas);
-        if (TabelaVagas.getColumnModel().getColumnCount() > 0) {
-            TabelaVagas.getColumnModel().getColumn(0).setResizable(false);
-            TabelaVagas.getColumnModel().getColumn(0).setPreferredWidth(150);
-            TabelaVagas.getColumnModel().getColumn(1).setResizable(false);
-            TabelaVagas.getColumnModel().getColumn(1).setPreferredWidth(300);
-            TabelaVagas.getColumnModel().getColumn(2).setResizable(false);
-            TabelaVagas.getColumnModel().getColumn(2).setPreferredWidth(50);
-            TabelaVagas.getColumnModel().getColumn(3).setResizable(false);
-            TabelaVagas.getColumnModel().getColumn(3).setPreferredWidth(35);
-            TabelaVagas.getColumnModel().getColumn(4).setResizable(false);
+        tabelaVagas.setMaximumSize(new java.awt.Dimension(2000, 2000));
+        jScrollPane1.setViewportView(tabelaVagas);
+        if (tabelaVagas.getColumnModel().getColumnCount() > 0) {
+            tabelaVagas.getColumnModel().getColumn(0).setResizable(false);
+            tabelaVagas.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tabelaVagas.getColumnModel().getColumn(1).setResizable(false);
+            tabelaVagas.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tabelaVagas.getColumnModel().getColumn(2).setResizable(false);
+            tabelaVagas.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tabelaVagas.getColumnModel().getColumn(3).setResizable(false);
+            tabelaVagas.getColumnModel().getColumn(3).setPreferredWidth(35);
+            tabelaVagas.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton2.setText("Excluir");
@@ -266,27 +262,67 @@ public class BancoVagas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditaActionPerformed
-       
-        
-        this.dispose();
-        new EditarVaga().setVisible(true);
-        
-        
+        if (tabelaVagas.getSelectionModel().isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Para editar, selecione uma empresa na tabela.");
+        } else {
+
+            try {
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                //Executa a limpeza da tabela EDITA_EMPRESA_TEMP
+                PreparedStatement cleanT = con.prepareStatement("DELETE FROM edita_vaga_temp");
+                cleanT.executeUpdate();
+                cleanT.close();
+                //System.out.println(TabelaEmpresas.getValueAt(TabelaEmpresas.getSelectedRow(), 0).toString());
+                int codVag = 0;
+                PreparedStatement vaga = con.prepareStatement("SELECT COD_VAGA FROM vaga \n"
+                        + "INNER JOIN EMPRESA ON VAGA.COD_EMPRESA = EMPRESA.COD_EMPRESA\n"
+                        + "WHERE vaga.DESC_VAGA = (?) and empresa.nome = (?);");
+                vaga.setString(1, (tabelaVagas.getValueAt(tabelaVagas.getSelectedRow(), 0).toString()));
+                vaga.setString(2, (tabelaVagas.getValueAt(tabelaVagas.getSelectedRow(), 1).toString()));
+
+                ResultSet vagA = vaga.executeQuery();
+                while (vagA.next()) {
+                    codVag = (vagA.getInt("COD_VAGA"));
+                }
+                vagA.close();
+                vaga.close();
+
+                PreparedStatement edtV = con.prepareStatement("INSERT INTO edita_vaga_temp (cod_vaga_temp) values (?)");
+                edtV.setInt(1, codVag);
+                edtV.executeUpdate();
+                edtV.close();
+                con.close();
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.dispose();
+            new EditarVaga().setVisible(true);
+        }
+
+
     }//GEN-LAST:event_EditaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (TabelaVagas.getSelectionModel().isSelectionEmpty()) {
+        if (tabelaVagas.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Para excluir, selecione uma vaga na tabela.");
         } else {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
                 String query = "UPDATE vaga set VAGA_STATUS = 'I' where COD_VAGA = ?";
                 PreparedStatement stmt = con.prepareStatement(query);
                 //pegar cod_vaga
                 int codEmp = 0;
                 PreparedStatement tabVag = con.prepareStatement("SELECT COD_VAGA FROM vaga WHERE DESC_VAGA = (?)");
-                tabVag.setString(1, TabelaVagas.getValueAt(TabelaVagas.getSelectedRow(), 0).toString());
+                tabVag.setString(1, tabelaVagas.getValueAt(tabelaVagas.getSelectedRow(), 0).toString());
                 ResultSet tabVagR = tabVag.executeQuery();
                 while (tabVagR.next()) {
                     codEmp = Integer.parseInt(tabVagR.getString("COD_VAGA"));
@@ -302,7 +338,46 @@ public class BancoVagas extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
 
+
     }//GEN-LAST:event_jButton2ActionPerformed
+            try {
+
+                //procura a classe do Driver jdbc
+                Class.forName("com.mysql.jdbc.Driver");
+                //Cria uma variável do tipo conexão 
+                // Verificar usuário a senha do banco!!
+                Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
+                // Query para inserir os alunos no banco
+                String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
+                        + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
+                        + "inner join curso on vaga.cod_curso = curso.cod_curso\n"
+                        + "where vaga.vaga_status = 'A';";
+                //Cria o comando para inserir no banco
+                PreparedStatement stmt = (PreparedStatement) con.prepareStatement(query);
+                stmt.execute(); // cria o vetor
+
+                ResultSet resultado = stmt.executeQuery(query);
+
+                DefaultTableModel model = (DefaultTableModel) tabelaVagas.getModel();
+                model.setNumRows(0);
+
+                while (resultado.next()) {
+                    model.addRow(new Object[]{
+                        //retorna os dados da tabela do BD, cada campo e um coluna.
+                        resultado.getString("VAGA.DESC_VAGA"),
+                        resultado.getString("EMPRESA.NOME"),
+                        resultado.getString("CURSO.DESC_CURSO"),
+                        resultado.getString("VAGA.FASEMIN"),
+                        resultado.getString("VAGA.VALOR"),});
+                }
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("o erro foi " + ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Alunos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
 
     }
@@ -320,7 +395,7 @@ public class BancoVagas extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "select VAGA.DESC_VAGA, EMPRESA.NOME, CURSO.DESC_CURSO, VAGA.FASEMIN, VAGA.VALOR FROM vaga\n"
                     + "inner join empresa on empresa.cod_empresa = vaga.cod_empresa\n"
@@ -332,7 +407,7 @@ public class BancoVagas extends javax.swing.JFrame {
 
             ResultSet resultado = stmt.executeQuery(query);
 
-            DefaultTableModel model = (DefaultTableModel) TabelaVagas.getModel();
+            DefaultTableModel model = (DefaultTableModel) tabelaVagas.getModel();
             model.setNumRows(0);
 
             while (resultado.next()) {
@@ -406,7 +481,6 @@ public class BancoVagas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Edita;
-    private javax.swing.JTable TabelaVagas;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -419,6 +493,7 @@ public class BancoVagas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaVagas;
     // End of variables declaration//GEN-END:variables
 
 }

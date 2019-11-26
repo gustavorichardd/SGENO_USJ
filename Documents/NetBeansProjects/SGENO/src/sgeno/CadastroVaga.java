@@ -362,9 +362,9 @@ public class CadastroVaga extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
-            String query = "INSERT INTO vaga (DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR, TURNO, HORADE, HORAATE, CARGAHORARIA,OBSERVVAGA) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO vaga (DESC_VAGA, COD_EMPRESA, COD_CURSO, FASEMIN, VALOR, CARGAHORARIA,TURNO, HORADE, HORAATE, OBSERVVAGA) VALUES (?,?,?,?,?,?,?,?,?,?)";
             //Cria o comando para inserir no banco
             PreparedStatement stmt = con.prepareStatement(query);
             //Seta os valores na query
@@ -398,23 +398,23 @@ public class CadastroVaga extends javax.swing.JFrame {
 
             stmt.setInt(4, Integer.valueOf(faseVaga.getText()));
             stmt.setInt(5, Integer.valueOf(valorVaga.getText()));
-            stmt.setString(6, turnoVaga.getText());
+            stmt.setInt(6, Integer.valueOf(chVaga.getText()));
+            stmt.setString(7, turnoVaga.getText());
 
             //Converter hora para inserir no banco
             String horaDeVg = horaDeVaga.getText();
             SimpleDateFormat formHoraDeVg = new SimpleDateFormat("HH:mm:ss");
             Date dataDeVg = formHoraDeVg.parse(horaDeVg);
             Time timeDeVg = new Time(dataDeVg.getTime());
-            stmt.setTime(7, timeDeVg);
+            stmt.setTime(8, timeDeVg);
 
             //Converter hora para inserir no banco
             String horaAteVg = horaAteVaga.getText();
             SimpleDateFormat formHoraAteVg = new SimpleDateFormat("HH:mm:ss");
             Date dataAteVg = formHoraAteVg.parse(horaAteVg);
             Time timeAteVg = new Time(dataAteVg.getTime());
-            stmt.setTime(8, timeAteVg);
+            stmt.setTime(9, timeAteVg);
 
-            stmt.setInt(9, Integer.valueOf(chVaga.getText()));
             stmt.setString(10, obsVaga.getText());
 
             //executa o comando
@@ -458,7 +458,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = con.prepareStatement("SELECT NOME FROM empresa WHERE EMPRESA_STATUS = 'A'");
 
             ResultSet rs = stmt.executeQuery();
@@ -481,7 +481,7 @@ public class CadastroVaga extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(CadastroVaga.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             PreparedStatement stmt = null;
             stmt = con.prepareStatement("SELECT DESC_CURSO FROM curso");
             ResultSet rs = stmt.executeQuery();
