@@ -362,7 +362,7 @@ public class EditarAluno extends javax.swing.JFrame {
 
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "UPDATE aluno SET NOME = ?, TELEFONE = ?, CELULAR = ?, EMAIL = ?, FASE = ? WHERE MATRICULA = (SELECT MATRICULA_TEMP FROM EDITA_ALUNO_TEMP)";
             //Cria o comando para inserir no banco
@@ -400,7 +400,7 @@ public class EditarAluno extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             //Cria uma variável do tipo conexão 
             // Verificar usuário a senha do banco!!
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "entrar");
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sgeno?autoReconnect=true&useSSL=false", "root", "masterkey");
             // Query para inserir os alunos no banco
             String query = "SELECT MATRICULA, NOME, SEXO, TELEFONE, CELULAR, EMAIL, CURSO, FASE FROM ALUNO WHERE MATRICULA = (SELECT MATRICULA_TEMP FROM EDITA_ALUNO_TEMP)";
             //Cria o comando para inserir no banco
