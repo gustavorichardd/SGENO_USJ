@@ -11,14 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import sgeno.Classes.Aluno;
-import sgeno.Classes.TodosArrays;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sgeno.*;
-import static sgeno.Classes.TodosArrays.listaAluno;
 
 /**
  *

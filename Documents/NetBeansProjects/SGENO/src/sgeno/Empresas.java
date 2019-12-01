@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import sgeno.Classes.Aluno;
 import java.time.Clock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sgeno.Classes.Empresa;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
+
 
 /**
  *
@@ -32,19 +30,9 @@ public class Empresas extends javax.swing.JFrame {
      */
     public Empresas() {
         initComponents();
-        organizaTabelaEmpresa();
     }
 
-    public void organizaTabelaEmpresa() {
 
-        DefaultTableModel modelo = (DefaultTableModel) TabelaEmpresas.getModel();
-        modelo.getDataVector().clear();
-
-        for (Empresa a : listaEmpresa) {
-            modelo.addRow(new Object[]{a.getNome(), a.getEndereco(), a.getResponsavel(), a.getTelefone(), a.getEmail()});
-
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

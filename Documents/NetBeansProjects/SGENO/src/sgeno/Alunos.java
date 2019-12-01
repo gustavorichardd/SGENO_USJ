@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import sgeno.Classes.Aluno;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import static sgeno.Classes.TodosArrays.listaAluno;
+
 
 public class Alunos extends javax.swing.JFrame {
 

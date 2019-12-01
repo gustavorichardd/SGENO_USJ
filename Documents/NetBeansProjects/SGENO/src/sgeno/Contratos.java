@@ -19,9 +19,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import sgeno.Classes.Contrato;
 import sgeno.Classes.Empresa;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaContrato;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
 
 /**
  *
@@ -34,20 +31,8 @@ public class Contratos extends javax.swing.JFrame {
      */
     public Contratos() {
         initComponents();
-        organizaTabelaContrato();
     }
 
-    public void organizaTabelaContrato() {
-
-        DefaultTableModel modelo = (DefaultTableModel) TabelaContratos.getModel();
-        modelo.getDataVector().clear();
-
-        for (Contrato c : listaContrato) {
-            modelo.addRow(new Object[]{c.getAluno().getMatrícula() + " - " + c.getAluno().getNome(), c.getEmpresa().getNome(), c.getEmpresa().getEndereco(), c.getEmpresa().getTelefone(), c.getEmpresa().getEmail(), c.getPeriodode() + " - " + c.getPeriodoate(), c.getHorariode() + " - " + c.getHorarioate(), c.getCh(), c.getValor(), c.getAgencia(), c.getAditivo() + " " + c.getData() + "-" + c.getData2() + " " + c.getObs()});
-
-        }
-
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

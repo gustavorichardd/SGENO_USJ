@@ -13,8 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import sgeno.*;
 import sgeno.Classes.Empresa;
-import static sgeno.Classes.TodosArrays.listaAluno;
-import static sgeno.Classes.TodosArrays.listaEmpresa;
 
 public class EditarEmpresa extends javax.swing.JFrame {
 
